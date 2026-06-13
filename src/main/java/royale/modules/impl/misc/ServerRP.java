@@ -3,11 +3,15 @@ package royale.modules.impl.misc;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.FileAttribute;
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.common.ResourcePackStatusC2SPacket;
 import net.minecraft.network.packet.s2c.common.ResourcePackSendS2CPacket;
@@ -23,15 +27,9 @@ import royale.util.config.impl.consolelogger.Logger;
 import royale.util.timer.TimerUtil;
 
 /**
- * ServerRP - automatically accepts and caches server resource packs.
- *
- * Optimisations:
- *   - If the pack is already cached (hash match), the ResourcePackSendS2CPacket is
- *     cancelled so Minecraft never re-downloads or re-applies the pack (no resource
- *     reload, render thread not touched). A synthetic status response is sent to the
- *     server using the same state-machine pattern as ServerRPSpoofer.
- *   - If the pack is not cached, normal Minecraft handling proceeds; a background
- *     thread saves a copy to disk for the next join.
+ * ServerRP accepts server resource packs without letting vanilla download/apply
+ * them on the render thread. Packs are cached in the background and repeated
+ * joins answer from cache without another download or resource reload.
  */
 public class ServerRP extends ModuleStructure {
 
@@ -39,57 +37,75 @@ public class ServerRP extends ModuleStructure {
         (new BooleanSetting("Сохранять ресурспак", "Сохранять серверный ресурспак локально"))
             .setValue(true);
 
-    // ── status machine (mirrors ServerRPSpoofer) ──────────────────────────────
     private enum PackAction { IDLE, SEND_ACCEPTED, SEND_DOWNLOADED, SEND_SUCCESS }
+
+    private final TimerUtil counter = TimerUtil.create();
+    private final Set<Path> activeDownloads = ConcurrentHashMap.newKeySet();
+
     private PackAction pendingAction = PackAction.IDLE;
-    private UUID       pendingPackId = null;
-    private final TimerUtil counter  = TimerUtil.create();
+    private UUID pendingPackId = null;
+    private volatile Path pendingTargetFile = null;
+    private volatile boolean pendingDownloadComplete = true;
 
     public ServerRP() {
-        super("ServerRP", "Автоматически принимает и сохраняет серверные ресурспаки", ModuleCategory.MISC);
+        super("ServerRP", "Автоматически принимает и сохраняет серверные ресурспаки без фризов", ModuleCategory.MISC);
         settings(new Setting[]{ cacheResourcePack });
     }
-
-    // ── packet intercept ──────────────────────────────────────────────────────
 
     @EventHandler
     public void onPacket(PacketEvent event) {
         if (event.getType() != PacketEvent.Type.RECEIVE) return;
-        Packet<?> p = event.getPacket();
-        if (!(p instanceof ResourcePackSendS2CPacket packet)) return;
+        Packet<?> packetRaw = event.getPacket();
+        if (!(packetRaw instanceof ResourcePackSendS2CPacket packet)) return;
         if (isSpooferEnabled()) return;
         if (!cacheResourcePack.isValue()) return;
 
-        String url  = packet.url();
+        String url = packet.url();
         String hash = packet.hash();
         if (url == null || url.isBlank()) return;
 
         String serverName = resolveServerName();
         if (serverName.isBlank()) serverName = "unknown";
 
-        Path targetDir  = getResourcePackRoot().resolve(serverName);
-        String fileName = resolveFileName(url, hash);
-        Path targetFile = targetDir.resolve(fileName);
+        Path targetDir = getResourcePackRoot().resolve(serverName);
+        Path targetFile = targetDir.resolve(resolveFileName(url, hash));
+        boolean cached = Files.isRegularFile(targetFile);
 
-        if (Files.exists(targetFile)) {
-            // Pack already cached: cancel MC download+reload, respond manually
-            event.cancel();
-            pendingPackId  = packet.id();
-            pendingAction  = PackAction.SEND_ACCEPTED;
-            counter.resetCounter();
+        event.cancel();
+        pendingPackId = packet.id();
+        pendingTargetFile = targetFile;
+        pendingDownloadComplete = cached;
+        pendingAction = PackAction.SEND_ACCEPTED;
+        counter.resetCounter();
+
+        if (cached) {
             Logger.info("ServerRP: serving from cache -> " + targetFile.getFileName());
+            return;
+        }
+
+        if (activeDownloads.add(targetFile)) {
+            CompletableFuture.runAsync(() -> downloadPack(url, targetDir, targetFile))
+                .whenComplete((ignored, throwable) -> {
+                    activeDownloads.remove(targetFile);
+                    if (targetFile.equals(pendingTargetFile)) {
+                        pendingDownloadComplete = true;
+                    }
+                    if (throwable != null) {
+                        Logger.error("ServerRP: async download crashed - " + throwable.getMessage());
+                    }
+                });
         } else {
-            // Not cached: let MC handle it (download + apply); also save async copy
-            CompletableFuture.runAsync(() -> downloadPack(url, targetDir, targetFile));
+            Logger.info("ServerRP: download already in progress -> " + targetFile.getFileName());
         }
     }
-
-    // ── tick: drain status machine ────────────────────────────────────────────
 
     @EventHandler
     public void onTick(TickEvent event) {
         if (pendingAction == PackAction.IDLE || pendingPackId == null) return;
-        if (mc.getNetworkHandler() == null) { reset(); return; }
+        if (mc.getNetworkHandler() == null) {
+            reset();
+            return;
+        }
         processStatusMachine();
     }
 
@@ -102,7 +118,7 @@ public class ServerRP extends ModuleStructure {
                 counter.resetCounter();
             }
             case SEND_DOWNLOADED -> {
-                if (!counter.isReached(25L)) return;
+                if (!pendingDownloadComplete || !counter.isReached(25L)) return;
                 mc.getNetworkHandler().sendPacket(
                     (Packet<?>) new ResourcePackStatusC2SPacket(pendingPackId, ResourcePackStatusC2SPacket.Status.DOWNLOADED));
                 pendingAction = PackAction.SEND_SUCCESS;
@@ -119,11 +135,17 @@ public class ServerRP extends ModuleStructure {
     }
 
     @Override
-    public void deactivate() { reset(); super.deactivate(); }
+    public void deactivate() {
+        reset();
+        super.deactivate();
+    }
 
-    private void reset() { pendingAction = PackAction.IDLE; pendingPackId = null; }
-
-    // ── helpers ───────────────────────────────────────────────────────────────
+    private void reset() {
+        pendingAction = PackAction.IDLE;
+        pendingPackId = null;
+        pendingTargetFile = null;
+        pendingDownloadComplete = true;
+    }
 
     private boolean isSpooferEnabled() {
         if (Initialization.getInstance() == null ||
@@ -143,14 +165,17 @@ public class ServerRP extends ModuleStructure {
                 Logger.error("ServerRP: unsupported url scheme");
                 return;
             }
+
             HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
             conn.setConnectTimeout(3000);
             conn.setReadTimeout(8000);
             conn.setRequestProperty("User-Agent", "Royale-ServerRP");
-            conn.setUseCaches(false);
+            conn.setUseCaches(true);
             conn.setInstanceFollowRedirects(true);
             try (InputStream stream = conn.getInputStream()) {
                 Files.copy(stream, targetFile, StandardCopyOption.REPLACE_EXISTING);
+            } finally {
+                conn.disconnect();
             }
             Logger.info("ServerRP: saved pack -> " + targetFile.getFileName());
         } catch (Exception ex) {
@@ -176,7 +201,8 @@ public class ServerRP extends ModuleStructure {
     private String resolveFileName(String url, String hash) {
         if (hash != null && !hash.isBlank()) return hash + ".zip";
         String raw = url;
-        int q = raw.indexOf("?"); if (q >= 0) raw = raw.substring(0, q);
+        int q = raw.indexOf("?");
+        if (q >= 0) raw = raw.substring(0, q);
         int s = raw.lastIndexOf("/");
         String name = (s >= 0) ? raw.substring(s + 1) : "server-pack";
         if (name.isBlank()) name = "server-pack";

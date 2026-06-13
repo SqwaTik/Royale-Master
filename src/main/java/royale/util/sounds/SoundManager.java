@@ -26,6 +26,7 @@ public static SoundEvent ON = SoundEvent.of(Identifier.of("royale:on"));
 public static SoundEvent CRIME = SoundEvent.of(Identifier.of("royale:crime"));
 public static SoundEvent METALLIC = SoundEvent.of(Identifier.of("royale:metallic"));
 public static SoundEvent WELCOME = SoundEvent.of(Identifier.of("royale:welcome"));
+public static SoundEvent GAZAN67 = SoundEvent.of(Identifier.of("royale:gazan67"));
 public static void init() {
 Registry.register(Registries.SOUND_EVENT, KOLOKOLNIA_KILL.id(), KOLOKOLNIA_KILL);
 Registry.register(Registries.SOUND_EVENT, MOAN1.id(), MOAN1);
@@ -39,6 +40,7 @@ Registry.register(Registries.SOUND_EVENT, ON.id(), ON);
 Registry.register(Registries.SOUND_EVENT, CRIME.id(), CRIME);
 Registry.register(Registries.SOUND_EVENT, METALLIC.id(), METALLIC);
 Registry.register(Registries.SOUND_EVENT, WELCOME.id(), WELCOME);
+Registry.register(Registries.SOUND_EVENT, GAZAN67.id(), GAZAN67);
 }
 public static void playSound(SoundEvent sound) {
 playSound(sound, 1.0F, 1.0F);
