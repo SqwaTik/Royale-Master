@@ -55,8 +55,13 @@
     ]
   },
   "welcome": {
-  "sounds": [
-    "royale:welcome"
-  ]
-}
+    "sounds": [
+      "royale:welcome"
+    ]
+  },
+  "gazan67": {
+    "sounds": [
+      "royale:gazan67"
+    ]
+  }
 }
