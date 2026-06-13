@@ -9,47 +9,38 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.FileAttribute;
 import java.util.Locale;
 import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.c2s.common.ResourcePackStatusC2SPacket;
 import net.minecraft.network.packet.s2c.common.ResourcePackSendS2CPacket;
 import royale.Initialization;
 import royale.events.api.EventHandler;
 import royale.events.impl.PacketEvent;
-import royale.events.impl.TickEvent;
 import royale.modules.module.ModuleStructure;
 import royale.modules.module.category.ModuleCategory;
 import royale.modules.module.setting.Setting;
 import royale.modules.module.setting.implement.BooleanSetting;
 import royale.util.config.impl.consolelogger.Logger;
-import royale.util.timer.TimerUtil;
 
 /**
- * ServerRP accepts server resource packs without letting vanilla download/apply
- * them on the render thread. Packs are cached in the background and repeated
- * joins answer from cache without another download or resource reload.
+ * Safe server resource-pack helper. Vanilla still receives the packet and
+ * applies textures normally; this module only saves a background cache copy.
  */
 public class ServerRP extends ModuleStructure {
 
     public final BooleanSetting cacheResourcePack =
-        (new BooleanSetting("Сохранять ресурспак", "Сохранять серверный ресурспак локально"))
+        (new BooleanSetting("Сохранять ресурспак", "Сохранять серверный ресурспак локально в фоне"))
             .setValue(true);
 
-    private enum PackAction { IDLE, SEND_ACCEPTED, SEND_DOWNLOADED, SEND_SUCCESS }
+    public final BooleanSetting safeApply =
+        (new BooleanSetting("Безопасная загрузка", "Не подменять статусы ресурспака, чтобы текстуры не становились черными"))
+            .setValue(true);
 
-    private final TimerUtil counter = TimerUtil.create();
     private final Set<Path> activeDownloads = ConcurrentHashMap.newKeySet();
 
-    private PackAction pendingAction = PackAction.IDLE;
-    private UUID pendingPackId = null;
-    private volatile Path pendingTargetFile = null;
-    private volatile boolean pendingDownloadComplete = true;
-
     public ServerRP() {
-        super("ServerRP", "Автоматически принимает и сохраняет серверные ресурспаки без фризов", ModuleCategory.MISC);
-        settings(new Setting[]{ cacheResourcePack });
+        super("ServerRP", "Сохраняет серверные ресурспаки в фоне и не ломает загрузку текстур", ModuleCategory.MISC);
+        settings(new Setting[]{ cacheResourcePack, safeApply });
     }
 
     @EventHandler
@@ -58,93 +49,45 @@ public class ServerRP extends ModuleStructure {
         Packet<?> packetRaw = event.getPacket();
         if (!(packetRaw instanceof ResourcePackSendS2CPacket packet)) return;
         if (isSpooferEnabled()) return;
-        if (!cacheResourcePack.isValue()) return;
 
         String url = packet.url();
         String hash = packet.hash();
         if (url == null || url.isBlank()) return;
 
+        if (cacheResourcePack.isValue()) {
+            cacheAsync(url, hash);
+        }
+
+        if (safeApply.isValue()) {
+            return;
+        }
+
+        Logger.info("ServerRP: unsafe status spoof is disabled to prevent black textures");
+    }
+
+    private void cacheAsync(String url, String hash) {
         String serverName = resolveServerName();
         if (serverName.isBlank()) serverName = "unknown";
 
         Path targetDir = getResourcePackRoot().resolve(serverName);
         Path targetFile = targetDir.resolve(resolveFileName(url, hash));
-        boolean cached = Files.isRegularFile(targetFile);
-
-        event.cancel();
-        pendingPackId = packet.id();
-        pendingTargetFile = targetFile;
-        pendingDownloadComplete = cached;
-        pendingAction = PackAction.SEND_ACCEPTED;
-        counter.resetCounter();
-
-        if (cached) {
-            Logger.info("ServerRP: serving from cache -> " + targetFile.getFileName());
+        if (Files.isRegularFile(targetFile)) {
+            Logger.info("ServerRP: cache already exists -> " + targetFile.getFileName());
             return;
         }
 
-        if (activeDownloads.add(targetFile)) {
-            CompletableFuture.runAsync(() -> downloadPack(url, targetDir, targetFile))
-                .whenComplete((ignored, throwable) -> {
-                    activeDownloads.remove(targetFile);
-                    if (targetFile.equals(pendingTargetFile)) {
-                        pendingDownloadComplete = true;
-                    }
-                    if (throwable != null) {
-                        Logger.error("ServerRP: async download crashed - " + throwable.getMessage());
-                    }
-                });
-        } else {
+        if (!activeDownloads.add(targetFile)) {
             Logger.info("ServerRP: download already in progress -> " + targetFile.getFileName());
-        }
-    }
-
-    @EventHandler
-    public void onTick(TickEvent event) {
-        if (pendingAction == PackAction.IDLE || pendingPackId == null) return;
-        if (mc.getNetworkHandler() == null) {
-            reset();
             return;
         }
-        processStatusMachine();
-    }
 
-    private void processStatusMachine() {
-        switch (pendingAction) {
-            case SEND_ACCEPTED -> {
-                mc.getNetworkHandler().sendPacket(
-                    (Packet<?>) new ResourcePackStatusC2SPacket(pendingPackId, ResourcePackStatusC2SPacket.Status.ACCEPTED));
-                pendingAction = PackAction.SEND_DOWNLOADED;
-                counter.resetCounter();
-            }
-            case SEND_DOWNLOADED -> {
-                if (!pendingDownloadComplete || !counter.isReached(25L)) return;
-                mc.getNetworkHandler().sendPacket(
-                    (Packet<?>) new ResourcePackStatusC2SPacket(pendingPackId, ResourcePackStatusC2SPacket.Status.DOWNLOADED));
-                pendingAction = PackAction.SEND_SUCCESS;
-                counter.resetCounter();
-            }
-            case SEND_SUCCESS -> {
-                if (!counter.isReached(25L)) return;
-                mc.getNetworkHandler().sendPacket(
-                    (Packet<?>) new ResourcePackStatusC2SPacket(pendingPackId, ResourcePackStatusC2SPacket.Status.SUCCESSFULLY_LOADED));
-                reset();
-            }
-            default -> {}
-        }
-    }
-
-    @Override
-    public void deactivate() {
-        reset();
-        super.deactivate();
-    }
-
-    private void reset() {
-        pendingAction = PackAction.IDLE;
-        pendingPackId = null;
-        pendingTargetFile = null;
-        pendingDownloadComplete = true;
+        CompletableFuture.runAsync(() -> downloadPack(url, targetDir, targetFile))
+            .whenComplete((ignored, throwable) -> {
+                activeDownloads.remove(targetFile);
+                if (throwable != null) {
+                    Logger.error("ServerRP: async download crashed - " + throwable.getMessage());
+                }
+            });
     }
 
     private boolean isSpooferEnabled() {
@@ -157,6 +100,7 @@ public class ServerRP extends ModuleStructure {
     }
 
     private void downloadPack(String url, Path targetDir, Path targetFile) {
+        Path tempFile = targetFile.resolveSibling(targetFile.getFileName() + ".tmp");
         try {
             Files.createDirectories(targetDir, (FileAttribute<?>[]) new FileAttribute[0]);
             URI uri = URI.create(url);
@@ -168,18 +112,23 @@ public class ServerRP extends ModuleStructure {
 
             HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
             conn.setConnectTimeout(3000);
-            conn.setReadTimeout(8000);
+            conn.setReadTimeout(12000);
             conn.setRequestProperty("User-Agent", "Royale-ServerRP");
             conn.setUseCaches(true);
             conn.setInstanceFollowRedirects(true);
             try (InputStream stream = conn.getInputStream()) {
-                Files.copy(stream, targetFile, StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(stream, tempFile, StandardCopyOption.REPLACE_EXISTING);
             } finally {
                 conn.disconnect();
             }
+            Files.move(tempFile, targetFile, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
             Logger.info("ServerRP: saved pack -> " + targetFile.getFileName());
         } catch (Exception ex) {
             Logger.error("ServerRP: failed to download pack - " + ex.getMessage());
+            try {
+                Files.deleteIfExists(tempFile);
+            } catch (Exception ignored) {
+            }
         }
     }
 

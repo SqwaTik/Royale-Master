@@ -1,6 +1,7 @@
 package royale.modules.impl.misc;
 import royale.events.api.EventHandler;
 import royale.events.impl.ModuleToggleEvent;
+import royale.modules.impl.combat.Gazan67;
 import royale.modules.module.ModuleStructure;
 import royale.modules.module.category.ModuleCategory;
 import royale.modules.module.setting.Setting;
@@ -25,7 +26,7 @@ settings(new Setting[] { (Setting)this.soundType, (Setting)this.volume });
 @EventHandler
 public void onModuleToggle(ModuleToggleEvent event) {
 if (mc.player == null || mc.world == null)
-return;  if (event.getModule() == this)
+return;  if (event.getModule() == this || event.getModule() instanceof Gazan67)
 return; 
 playToggleSound(event.isEnabled());
 }

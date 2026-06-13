@@ -7,6 +7,7 @@ import org.joml.Quaternionfc;
 import royale.events.api.EventHandler;
 import royale.events.impl.HandAnimationEvent;
 import royale.events.impl.TickEvent;
+import royale.events.api.types.Priority;
 import royale.modules.module.ModuleStructure;
 import royale.modules.module.category.ModuleCategory;
 import royale.modules.module.setting.Setting;
@@ -66,7 +67,7 @@ public class Gazan67 extends ModuleStructure {
         }
     }
 
-    @EventHandler
+    @EventHandler(Priority.LOWEST)
     public void onHandAnimation(HandAnimationEvent event) {
         if (mc.player == null || this.startTime == 0L) {
             return;

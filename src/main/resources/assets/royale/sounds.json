@@ -61,7 +61,10 @@
   },
   "gazan67": {
     "sounds": [
-      "royale:gazan67"
+      {
+        "name": "royale:gazan67",
+        "stream": true
+      }
     ]
   }
 }
