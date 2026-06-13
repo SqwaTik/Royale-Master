@@ -87,7 +87,7 @@ public class Gazan67 extends ModuleStructure {
         matrices.translate(x, y, z);
         matrices.scale(1.12F, 1.12F, 1.12F);
         matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * yaw));
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(side * roll));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(roll));
         matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_X.rotationDegrees(pitch));
         matrices.translate(0.0F, -0.08F, 0.02F);
     }
