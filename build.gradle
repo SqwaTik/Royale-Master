@@ -1,0 +1,128 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.guardsquare:proguard-gradle:7.8.2'
+    }
+}
+
+plugins {
+    id 'fabric-loom' version '1.15.4'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven {
+        name = 'JitPack'
+        url = 'https://jitpack.io'
+    }
+}
+
+def protectedJarPath = layout.buildDirectory.file("libs/${project.archives_base_name}-${project.version}-protected.jar")
+def protectedMapPath = layout.buildDirectory.file("reports/proguard/${project.archives_base_name}-${project.version}.map")
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+    implementation include('io.netty:netty-handler-proxy:4.1.82.Final')
+    implementation include('io.netty:netty-codec-socks:4.1.82.Final')
+
+    implementation 'net.java.dev.jna:jna:5.14.0'
+    implementation 'net.java.dev.jna:jna-platform:5.14.0'
+    implementation include('com.github.JnCrMx:discord-game-sdk4j:v1.0.0')
+}
+
+sourceSets {
+    main {
+        java.setSrcDirs(['src/main/java'])
+        resources.setSrcDirs(['src/main/resources'])
+    }
+}
+
+loom {
+    accessWidenerPath = file('src/main/resources/accesswidener')
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    filesMatching('fabric.mod.json') {
+        expand('version': project.version)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = 'UTF-8'
+    it.options.release = 21
+}
+
+java {
+    withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+    from('LICENSE') {
+        rename { "${it}_${project.base.archivesName.get()}" }
+    }
+}
+
+tasks.register('obfuscateRemappedJar', proguard.gradle.ProGuardTask) {
+    dependsOn tasks.named('remapJar')
+    doNotTrackState("ProGuard uses dynamic classpath and JDK module inputs.")
+
+    def remappedJar = tasks.named('remapJar').get().archiveFile.get().asFile
+    def protectedJar = protectedJarPath.get().asFile
+    def protectedMap = protectedMapPath.get().asFile
+
+    injars remappedJar
+    outjars protectedJar
+    configuration 'proguard.pro'
+    printmapping protectedMap
+
+    doFirst {
+        protectedJar.parentFile.mkdirs()
+        protectedMap.parentFile.mkdirs()
+    }
+
+    def javaHome = System.getProperty('java.home')
+    def libraryInputs = new LinkedHashSet<File>()
+    libraryInputs.addAll(fileTree("${javaHome}/jmods").matching { include '*.jmod' }.files)
+    libraryInputs.addAll(configurations.compileClasspath.files)
+    libraryInputs.addAll(configurations.runtimeClasspath.files)
+
+    libraryInputs.each { dependency ->
+        if (dependency.exists()) {
+            libraryjars dependency
+        }
+    }
+}
+
+tasks.register('protectedJar') {
+    dependsOn tasks.named('obfuscateRemappedJar')
+}
+
+tasks.named('build') {
+    dependsOn tasks.named('obfuscateRemappedJar')
+}

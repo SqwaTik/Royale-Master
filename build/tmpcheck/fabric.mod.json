@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "copyright",
+  "version": "1.0.04",
+  "name": "Royal-Go",
+  "description": "Custom Minecraft client with shader-based rendering",
+  "authors": [
+    "You"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/royale/textures/capes/cape.png",
+  "environment": "client",
+  "jars": [
+    {
+      "file": "META-INF/jars/viafabricplus-4.4.8.jar"
+    },
+    {
+      "file": "META-INF/jars/discord-game-sdk4j-v1.0.0.jar"
+    },
+    {
+      "file": "META-INF/jars/netty-codec-socks-4.1.82.Final.jar"
+    },
+    {
+      "file": "META-INF/jars/netty-handler-proxy-4.1.82.Final.jar"
+    }
+  ],
+  "entrypoints": {
+    "preLaunch": [
+      "royale.util.mods.config.wave.WaveCapesConfigOverride"
+    ],
+    "client": [
+      "royale.Initialization"
+    ]
+  },
+  "mixins": [
+    "mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "\u003e\u003d0.18.4",
+    "fabric-api": "*",
+    "minecraft": "~1.21.11",
+    "java": "\u003e\u003d21"
+  },
+  "accessWidener": "accesswidener"
+}

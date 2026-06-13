@@ -1,0 +1,34 @@
+﻿{
+    "schemaVersion":  1,
+    "id":  "copyright",
+    "version":  "${version}",
+    "name":  "Royale Master",
+    "description":  "Royale Master client mod for Minecraft",
+    "authors":  [
+                    "You"
+                ],
+    "contact":  {
+
+                },
+    "license":  "MIT",
+    "icon":  "assets/royale/textures/capes/cape.png",
+    "environment":  "client",
+    "entrypoints":  {
+                        "preLaunch":  [
+                                          "royale.util.mods.config.wave.WaveCapesConfigOverride"
+                                      ],
+                        "client":  [
+                                       "royale.Initialization"
+                                   ]
+                    },
+    "mixins":  [
+                   "mixins.json"
+               ],
+    "depends":  {
+                    "fabricloader":  "\u003e=0.18.4",
+                    "fabric-api":  "*",
+                    "minecraft":  "~1.21.11",
+                    "java":  "\u003e=21"
+                },
+    "accessWidener":  "accesswidener"
+}

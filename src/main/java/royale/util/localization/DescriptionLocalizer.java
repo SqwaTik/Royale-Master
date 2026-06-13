@@ -1,0 +1,216 @@
+package royale.util.localization;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+public final class DescriptionLocalizer {
+    private static final Map<String, String> MODULE_FALLBACKS = Map.ofEntries(
+            Map.entry("hud", "Рисует HUD клиента"),
+            Map.entry("custombar", "Меняет хотбар и полосы"),
+            Map.entry("boxes", "Подсвечивает игроков и предметы"),
+            Map.entry("blockoverlay", "Подсвечивает блок под прицелом"),
+            Map.entry("fullbright", "Осветляет темные зоны"),
+            Map.entry("rpc", "Показывает статус в Discord"),
+            Map.entry("brand", "Меняет brand клиента"),
+            Map.entry("gifmanager", "Меняет анимации ClickGUI"),
+            Map.entry("client", "Меняет цвет клиента"),
+            Map.entry("targetesp", "Выделяет текущую цель"),
+            Map.entry("zoom", "Приближает камеру"),
+            Map.entry("freelook", "Позволяет осматриваться отдельно"),
+            Map.entry("autorespawn", "Возрождает после смерти")
+    );
+
+    private static final Map<String, String> SETTING_FALLBACKS = Map.ofEntries(
+            Map.entry("режим", "Меняет режим работы"),
+            Map.entry("тип", "Меняет тип отображения"),
+            Map.entry("цвет", "Меняет цвет элемента"),
+            Map.entry("прозрачность", "Меняет прозрачность"),
+            Map.entry("клиент", "Меняет client brand"),
+            Map.entry("аватар", "Меняет аниме-аватар"),
+            Map.entry("фон", "Меняет фон ClickGUI"),
+            Map.entry("скорость аватара", "Меняет скорость аватара"),
+            Map.entry("скорость фона", "Меняет скорость фона"),
+            Map.entry("показывать хотбар", "Включает кастомный хотбар"),
+            Map.entry("показывать hp bar", "Включает блок здоровья"),
+            Map.entry("показывать food bar", "Включает блок сытости"),
+            Map.entry("кастомный бренд", "Задает свое значение brand")
+    );
+
+    private static final Charset WINDOWS_1251 = Charset.forName("windows-1251");
+    private static final Pattern SPACE_PATTERN = Pattern.compile("\\s+");
+    private static final Pattern MOJIBAKE_RUN_PATTERN = Pattern.compile("(?:[ГђГ‘ГѓГ‚Р ][^\\s]){3,}");
+
+    private DescriptionLocalizer() {
+    }
+
+    public static String sanitizeDisplay(String value) {
+        return tryFixMojibake(normalizeSpaces(value));
+    }
+
+    public static String localizeModule(String moduleName, String description) {
+        return localize(description, buildModuleFallback(moduleName));
+    }
+
+    public static String localizeSetting(String settingName, String description) {
+        return localize(description, buildSettingFallback(settingName));
+    }
+
+    private static String localize(String description, String fallback) {
+        String value = normalizeSpaces(description);
+        if (value.isEmpty()) {
+            return fallback;
+        }
+
+        String repaired = tryFixMojibake(value);
+        if (repaired.isEmpty() || looksLikeMojibake(repaired)) {
+            return fallback;
+        }
+        return repaired;
+    }
+
+    private static String tryFixMojibake(String value) {
+        Set<String> candidates = new LinkedHashSet<>();
+        candidates.add(normalizeSpaces(value));
+
+        String cp1251 = decode(value, WINDOWS_1251);
+        String latin1 = decode(value, StandardCharsets.ISO_8859_1);
+        candidates.add(normalizeSpaces(cp1251));
+        candidates.add(normalizeSpaces(latin1));
+        candidates.add(normalizeSpaces(decode(cp1251, WINDOWS_1251)));
+        candidates.add(normalizeSpaces(decode(latin1, StandardCharsets.ISO_8859_1)));
+        candidates.add(normalizeSpaces(decode(cp1251, StandardCharsets.ISO_8859_1)));
+        candidates.add(normalizeSpaces(decode(latin1, WINDOWS_1251)));
+
+        List<String> ordered = new ArrayList<>(candidates);
+        String best = "";
+        int bestScore = Integer.MIN_VALUE;
+        for (String candidate : ordered) {
+            int score = scoreText(candidate);
+            if (score > bestScore) {
+                bestScore = score;
+                best = candidate;
+            }
+        }
+        return normalizeSpaces(best);
+    }
+
+    private static String decode(String value, Charset sourceCharset) {
+        try {
+            return new String(value.getBytes(sourceCharset), StandardCharsets.UTF_8);
+        } catch (Exception ignored) {
+            return value;
+        }
+    }
+
+    private static boolean looksLikeMojibake(String value) {
+        if (value == null || value.isEmpty()) {
+            return false;
+        }
+
+        if (MOJIBAKE_RUN_PATTERN.matcher(value).find()) {
+            return true;
+        }
+
+        int letters = 0;
+        for (int i = 0; i < value.length(); i++) {
+            char ch = value.charAt(i);
+            if (Character.isLetter(ch)) {
+                letters++;
+            }
+        }
+        int suspicious = countOccurrences(value, "Гђ")
+                + countOccurrences(value, "Г‘")
+                + countOccurrences(value, "Гѓ")
+                + countOccurrences(value, "Г‚")
+                + countOccurrences(value, "Р ");
+
+        return letters > 0 && suspicious * 100 / letters > 35;
+    }
+
+    private static int scoreText(String value) {
+        if (value == null || value.isEmpty()) {
+            return Integer.MIN_VALUE / 4;
+        }
+
+        int score = 0;
+        for (int i = 0; i < value.length(); i++) {
+            char ch = value.charAt(i);
+            if (ch >= '\u0400' && ch <= '\u04FF') {
+                score += 4;
+            } else if (Character.isLetterOrDigit(ch)) {
+                score += 2;
+            } else if (Character.isWhitespace(ch) || ",.!?:;()-_[]{}'\"/\\".indexOf(ch) >= 0) {
+                score += 1;
+            } else if (ch == '\uFFFD') {
+                score -= 8;
+            } else if (Character.isISOControl(ch)) {
+                score -= 6;
+            }
+        }
+
+        if (looksLikeMojibake(value)) {
+            score -= 120;
+        }
+        return score;
+    }
+
+    private static String normalizeSpaces(String value) {
+        if (value == null) {
+            return "";
+        }
+        return SPACE_PATTERN.matcher(value.replace('\u00A0', ' ')).replaceAll(" ").trim();
+    }
+
+    private static String safeName(String value) {
+        String name = sanitizeDisplay(value);
+        return name.isEmpty() ? "модуля" : name;
+    }
+
+    private static String buildModuleFallback(String moduleName) {
+        String normalized = normalizeKey(moduleName);
+        String fallback = MODULE_FALLBACKS.get(normalized);
+        if (fallback != null && !fallback.isBlank()) {
+            return fallback;
+        }
+        return "Управляет " + safeName(moduleName);
+    }
+
+    private static String buildSettingFallback(String settingName) {
+        String normalized = normalizeKey(settingName);
+        String fallback = SETTING_FALLBACKS.get(normalized);
+        if (fallback != null && !fallback.isBlank()) {
+            return fallback;
+        }
+        return "Настраивает " + safeName(settingName);
+    }
+
+    private static String normalizeKey(String value) {
+        return sanitizeDisplay(value)
+                .toLowerCase(Locale.ROOT)
+                .replace('_', ' ')
+                .replace('-', ' ')
+                .replaceAll("\\s+", " ")
+                .trim();
+    }
+
+    private static int countOccurrences(String value, String token) {
+        if (value == null || value.isEmpty() || token == null || token.isEmpty()) {
+            return 0;
+        }
+
+        int count = 0;
+        int index = 0;
+        while ((index = value.indexOf(token, index)) >= 0) {
+            count++;
+            index += token.length();
+        }
+        return count;
+    }
+}

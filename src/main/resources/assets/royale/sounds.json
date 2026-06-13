@@ -1,0 +1,62 @@
+{
+  "kolokolnia_kill": {
+    "sounds": [
+      "royale:kolokolnia_kill"
+    ]
+  },
+  "moan1": {
+    "sounds": [
+      "royale:moan1"
+    ]
+  },
+  "moan2": {
+    "sounds": [
+      "royale:moan2"
+    ]
+  },
+  "moan3": {
+    "sounds": [
+      "royale:moan3"
+    ]
+  },
+  "moan4": {
+    "sounds": [
+      "royale:moan4"
+    ]
+  },
+  "module_disable": {
+    "sounds": [
+      "royale:module_disable"
+    ]
+  },
+  "module_enable": {
+    "sounds": [
+      "royale:module_enable"
+    ]
+  },
+  "off": {
+    "sounds": [
+      "royale:off"
+    ]
+  },
+  "on": {
+    "sounds": [
+      "royale:on"
+    ]
+  },
+  "crime": {
+    "sounds": [
+      "royale:crime"
+    ]
+  },
+  "metallic": {
+    "sounds": [
+      "royale:metallic"
+    ]
+  },
+  "welcome": {
+  "sounds": [
+    "royale:welcome"
+  ]
+}
+}
