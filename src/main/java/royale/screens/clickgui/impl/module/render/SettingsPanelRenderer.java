@@ -14,7 +14,6 @@ import royale.util.interfaces.AbstractSettingComponent;
 import royale.util.render.Render2D;
 import royale.util.render.font.Fonts;
 import royale.util.render.shader.Scissor;
-import royale.util.theme.ClientTheme;
 
 public class SettingsPanelRenderer {
     private static final float SETTINGS_PANEL_CORNER_RADIUS = 7.0F;
@@ -50,7 +49,7 @@ public class SettingsPanelRenderer {
                 width,
                 height,
                 0.5F,
-                ClientTheme.blendWithAccentAndAlpha((new Color(55, 55, 55, 255)).getRGB(), 0.2F, outlineAlpha),
+                (new Color(55, 55, 55, outlineAlpha)).getRGB(),
                 SETTINGS_PANEL_CORNER_RADIUS
         );
 

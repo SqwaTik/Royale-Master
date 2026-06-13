@@ -87,7 +87,7 @@ float scaledHeight = 22.0F * scale;
 float animX = x + 3.0F + offsetX + itemAnimOffset + posAnimOffset;
 boolean selected = (interactive && module == selectedModule);
 boolean isHighlighted = (interactive && module == animHandler.getHighlightedModule() && animHandler.getHighlightAnimation() > 0.01F);
-float hoverAnim = interactive ? ((Float)animHandler.getHoverAnimations().getOrDefault(module, Float.valueOf(0.0F))).floatValue() : 0.0F;
+float hoverAnim = 0.0F;
 float stateAnim = interactive ? ((Float)animHandler.getStateAnimations().getOrDefault(module, Float.valueOf(module.isState() ? 1.0F : 0.0F))).floatValue() : (module.isState() ? 1.0F : 0.0F);
 float selectedIconAnim = interactive ? ((Float)animHandler.getSelectedIconAnimations().getOrDefault(module, Float.valueOf(0.0F))).floatValue() : 0.0F;
 float favoriteAnim = interactive ? ((Float)animHandler.getFavoriteAnimations().getOrDefault(module, Float.valueOf(0.0F))).floatValue() : 0.0F;
@@ -106,17 +106,10 @@ bgColor = (new Color(gray, gray, gray, bgAlpha)).getRGB();
 float scaledWidth = (width - 6.0F) * scale;
 Render2D.rect(animX, scaledModY, scaledWidth, scaledHeight, bgColor, 5.0F);
 if (selected) {
-float pulseValue = (float)(Math.sin(animHandler.getSelectedPulseAnimation()) * 0.5D + 0.5D);
 float highlightBoost = isHighlighted ? (animHandler.getHighlightAnimation() * 0.5F) : 0.0F;
-int baseOutlineAlpha = (int)(80.0F + 80.0F * highlightBoost);
-int pulseOutlineAlpha = (int)(40.0F + 40.0F * highlightBoost);
-int outlineAlpha = (int)((baseOutlineAlpha + pulseOutlineAlpha * pulseValue) * combinedAlpha);
-int baseColorValue = (int)(80.0F + 50.0F * highlightBoost);
-int outlineColorValue = (int)(baseColorValue + 30.0F * pulseValue);
-int outlineG = (int)(80.0F + 20.0F * pulseValue + 40.0F * highlightBoost);
-int outlineB = (int)(80.0F + 20.0F * pulseValue + 40.0F * highlightBoost);
-Render2D.outline(animX, scaledModY, scaledWidth, scaledHeight, 0.5F, (new Color(
-Math.min(255, outlineColorValue), Math.min(255, outlineG), Math.min(255, outlineB), outlineAlpha)).getRGB(), 5.0F);
+int outlineAlpha = (int)((90.0F + 70.0F * highlightBoost) * combinedAlpha);
+int outlineGray = (int)(105.0F + 35.0F * highlightBoost);
+Render2D.outline(animX, scaledModY, scaledWidth, scaledHeight, 0.5F, (new Color(outlineGray, outlineGray, outlineGray, outlineAlpha)).getRGB(), 5.0F);
 } else if (hoverAnim > 0.01F) {
 int outlineAlpha = (int)(60.0F * hoverAnim * combinedAlpha);
 Render2D.outline(animX, scaledModY, scaledWidth, scaledHeight, 0.5F, (new Color(120, 120, 120, outlineAlpha))

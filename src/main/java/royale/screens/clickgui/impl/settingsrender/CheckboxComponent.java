@@ -65,7 +65,7 @@ public class CheckboxComponent extends AbstractSettingComponent {
     }
 
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (isHover(mouseX, mouseY) && button == 0) {
+        if (isSwitchHover(mouseX, mouseY) && button == 0) {
             this.booleanSetting.setValue(!this.booleanSetting.isValue());
             return true;
         }
@@ -76,5 +76,13 @@ public class CheckboxComponent extends AbstractSettingComponent {
 
     public boolean isHover(double mouseX, double mouseY) {
         return mouseX >= this.x && mouseX <= this.x + this.width && mouseY >= this.y && mouseY <= this.y + this.height;
+    }
+
+    private boolean isSwitchHover(double mouseX, double mouseY) {
+        float switchHeight = 10.0F;
+        float switchWidth = 16.0F;
+        float switchX = this.x + this.width - switchWidth - 2.0F;
+        float switchY = this.y + this.height / 2.0F - switchHeight / 2.0F;
+        return mouseX >= switchX && mouseX <= switchX + switchWidth && mouseY >= switchY && mouseY <= switchY + switchHeight;
     }
 }

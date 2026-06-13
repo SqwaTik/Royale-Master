@@ -9,6 +9,7 @@ import royale.modules.impl.misc.Client;
 import royale.modules.impl.misc.ClientSounds;
 import royale.modules.impl.misc.ChatHelper;
 import royale.modules.impl.misc.Debug;
+import royale.modules.impl.misc.Gazan67;
 import royale.modules.impl.misc.GifManager;
 import royale.modules.impl.misc.Rpc;
 import royale.modules.impl.misc.ServerRP;
@@ -76,6 +77,7 @@ public class ModuleRepository {
                 .add(new Client())
                 .add(new Brand())
                 .add(new Debug())
+                .add(new Gazan67())
                 .add(new GifManager())
                 .add(new ChatHelper())
                 .add(new TargetESP())
