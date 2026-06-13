@@ -76,13 +76,19 @@ public class Gazan67 extends ModuleStructure {
         float lift = getLift(hand);
         float rest = lift > 0.0F ? 0.0F : 0.04F;
         int side = hand == Hand.MAIN_HAND ? 1 : -1;
-        float x = hand == Hand.MAIN_HAND ? -0.16F + lift * 0.02F : -0.22F + lift * 0.02F;
+        float baseX = hand == Hand.MAIN_HAND ? -0.34F : -0.22F;
+        float x = baseX + lift * 0.02F;
+        float y = -0.36F + lift * 0.46F + rest;
+        float z = -0.38F + lift * 0.02F;
+        float yaw = 20.0F - lift * 5.0F;
+        float roll = 4.0F + lift * 66.0F;
+        float pitch = -42.0F + lift * 82.0F;
 
-        matrices.translate(x, -0.36F + lift * 0.46F + rest, -0.38F + lift * 0.02F);
+        matrices.translate(x, y, z);
         matrices.scale(1.12F, 1.12F, 1.12F);
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * (20.0F - lift * 5.0F)));
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(side * (4.0F + lift * 66.0F)));
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_X.rotationDegrees(-42.0F + lift * 82.0F));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * yaw));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(side * roll));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_X.rotationDegrees(pitch));
         matrices.translate(0.0F, -0.08F, 0.02F);
     }
 

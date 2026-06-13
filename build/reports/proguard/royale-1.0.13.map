@@ -1368,10 +1368,10 @@ royale.modules.impl.combat.Gazan67 -> royale.modules.impl.a.b:
     49:51:void deactivate() -> deactivate
     55:63:void onTick(royale.events.impl.TickEvent) -> a
     67:73:void onHandAnimation(royale.events.impl.HandAnimationEvent) -> a
-    76:87:void applyArmAnimation(net.minecraft.class_4587,net.minecraft.class_1268) -> a
-    90:99:float getLift(net.minecraft.class_1268) -> a
-    103:104:float smoothLift(float) -> a
-    108:112:void stopLoopSound() -> o
+    76:93:void applyArmAnimation(net.minecraft.class_4587,net.minecraft.class_1268) -> a
+    96:105:float getLift(net.minecraft.class_1268) -> a
+    109:110:float smoothLift(float) -> a
+    114:118:void stopLoopSound() -> o
 royale.modules.impl.combat.HitSound -> royale.modules.impl.a.c:
 # {"fileName":"HitSound.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SelectSetting soundType -> a
