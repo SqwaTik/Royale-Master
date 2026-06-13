@@ -87,11 +87,12 @@ public class Gazan67 extends ModuleStructure {
         float rest = activeHand ? 0.0F : 0.05F;
         int side = hand == Hand.MAIN_HAND ? 1 : -1;
 
-        matrices.translate(side * (0.46F - lift * 0.04F), -0.68F + lift * 0.72F + rest, -0.82F + lift * 0.18F);
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * (46.0F - lift * 18.0F)));
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(side * (14.0F + lift * 92.0F)));
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_X.rotationDegrees(-78.0F + lift * 112.0F));
-        matrices.translate(0.0F, -0.14F, 0.08F);
+        matrices.translate(side * (0.42F - lift * 0.05F), -0.54F + lift * 0.54F + rest, -0.56F + lift * 0.06F);
+        matrices.scale(1.08F, 1.08F, 1.08F);
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * (38.0F - lift * 12.0F)));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(side * (8.0F + lift * 74.0F)));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_X.rotationDegrees(-62.0F + lift * 88.0F));
+        matrices.translate(0.0F, -0.10F, 0.04F);
     }
 
     private float smoothLift(float progress) {

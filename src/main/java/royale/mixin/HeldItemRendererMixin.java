@@ -48,8 +48,21 @@ if (event.getOffHand() != this.offHand) {
 this.offHand = event.getOffHand();
 }
 }
-@Inject(method = {"renderItem(FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/network/ClientPlayerEntity;I)V"}, at = {@At("HEAD")})
+@Inject(method = {"renderItem(FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/network/ClientPlayerEntity;I)V"}, at = {@At("HEAD")}, cancellable = true)
 private void onRenderItemPre(float tickProgress, MatrixStack matrices, OrderedRenderCommandQueue orderedRenderCommandQueue, ClientPlayerEntity player, int light, CallbackInfo ci) {
+Gazan67 gazan67 = Gazan67.getInstance();
+if (gazan67 != null && gazan67.isState()) {
+matrices.push();
+gazan67.applyArmAnimation(matrices, Hand.MAIN_HAND);
+invokeRenderArm(matrices, orderedRenderCommandQueue, light, player.getMainArm());
+matrices.pop();
+matrices.push();
+gazan67.applyArmAnimation(matrices, Hand.OFF_HAND);
+invokeRenderArm(matrices, orderedRenderCommandQueue, light, player.getMainArm().getOpposite());
+matrices.pop();
+ci.cancel();
+return;
+}
 GlassHands glassHands = GlassHands.getInstance();
 if (glassHands != null && glassHands.isState()) {
 GlassHandsRenderEvent event = new GlassHandsRenderEvent(GlassHandsRenderEvent.Phase.PRE, matrices, tickProgress);
@@ -62,13 +75,6 @@ GlassHands glassHands = GlassHands.getInstance();
 if (glassHands != null && glassHands.isState()) {
 GlassHandsRenderEvent event = new GlassHandsRenderEvent(GlassHandsRenderEvent.Phase.POST, matrices, tickProgress);
 EventManager.callEvent((Event)event);
-}
-Gazan67 gazan67 = Gazan67.getInstance();
-if (gazan67 != null && gazan67.isState() && player.getOffHandStack().isEmpty()) {
-matrices.push();
-gazan67.applyArmAnimation(matrices, Hand.OFF_HAND);
-invokeRenderArm(matrices, orderedRenderCommandQueue, light, player.getMainArm().getOpposite());
-matrices.pop();
 }
 }
 @WrapOperation(method = {"renderItem(FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/network/ClientPlayerEntity;I)V"}, at = {@At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/HeldItemRenderer;renderFirstPersonItem(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/util/Hand;FLnet/minecraft/item/ItemStack;FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;I)V")})

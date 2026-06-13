@@ -1061,12 +1061,12 @@ royale.mixin.HeldItemRendererMixin -> royale.mixin.HeldItemRendererMixin:
     30:36:void <init>() -> <init>
     void invokeRenderArm(net.minecraft.class_4587,net.minecraft.class_11659,int,net.minecraft.class_1306) -> invokeRenderArm
     42:50:void onUpdateHeldItems(org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onUpdateHeldItems
-    53:58:void onRenderItemPre(float,net.minecraft.class_4587,net.minecraft.class_11659,net.minecraft.class_746,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onRenderItemPre
-    61:73:void onRenderItemPost(float,net.minecraft.class_4587,net.minecraft.class_11659,net.minecraft.class_746,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onRenderItemPost
-    76:79:void itemRenderHook(net.minecraft.class_759,net.minecraft.class_742,float,float,net.minecraft.class_1268,float,net.minecraft.class_1799,float,net.minecraft.class_4587,net.minecraft.class_11659,int,com.llamalad7.mixinextras.injector.wrapoperation.Operation) -> itemRenderHook
-    82:88:void renderFirstPersonItemHook(net.minecraft.class_742,float,float,net.minecraft.class_1268,float,net.minecraft.class_1799,float,net.minecraft.class_4587,net.minecraft.class_11659,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> renderFirstPersonItemHook
-    91:105:void wrapApplyEquipOffset(net.minecraft.class_759,net.minecraft.class_4587,net.minecraft.class_1306,float,com.llamalad7.mixinextras.injector.wrapoperation.Operation,net.minecraft.class_742,net.minecraft.class_1268,float,net.minecraft.class_1799) -> wrapApplyEquipOffset
-    108:112:void wrapSwingArm(net.minecraft.class_759,float,net.minecraft.class_4587,int,net.minecraft.class_1306,com.llamalad7.mixinextras.injector.wrapoperation.Operation) -> wrapSwingArm
+    53:71:void onRenderItemPre(float,net.minecraft.class_4587,net.minecraft.class_11659,net.minecraft.class_746,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onRenderItemPre
+    74:79:void onRenderItemPost(float,net.minecraft.class_4587,net.minecraft.class_11659,net.minecraft.class_746,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onRenderItemPost
+    82:85:void itemRenderHook(net.minecraft.class_759,net.minecraft.class_742,float,float,net.minecraft.class_1268,float,net.minecraft.class_1799,float,net.minecraft.class_4587,net.minecraft.class_11659,int,com.llamalad7.mixinextras.injector.wrapoperation.Operation) -> itemRenderHook
+    88:94:void renderFirstPersonItemHook(net.minecraft.class_742,float,float,net.minecraft.class_1268,float,net.minecraft.class_1799,float,net.minecraft.class_4587,net.minecraft.class_11659,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> renderFirstPersonItemHook
+    97:111:void wrapApplyEquipOffset(net.minecraft.class_759,net.minecraft.class_4587,net.minecraft.class_1306,float,com.llamalad7.mixinextras.injector.wrapoperation.Operation,net.minecraft.class_742,net.minecraft.class_1268,float,net.minecraft.class_1799) -> wrapApplyEquipOffset
+    114:118:void wrapSwingArm(net.minecraft.class_759,float,net.minecraft.class_4587,int,net.minecraft.class_1306,com.llamalad7.mixinextras.injector.wrapoperation.Operation) -> wrapSwingArm
 royale.mixin.IClientWorld -> royale.mixin.IClientWorld:
 # {"fileName":"IClientWorld.java","id":"sourceFile"}
     net.minecraft.class_7202 client$pending() -> client$pending
@@ -1366,10 +1366,10 @@ royale.modules.impl.combat.Gazan67 -> royale.modules.impl.a.b:
     48:51:void deactivate() -> deactivate
     55:67:void onTick(royale.events.impl.TickEvent) -> a
     71:77:void onHandAnimation(royale.events.impl.HandAnimationEvent) -> a
-    80:95:void applyArmAnimation(net.minecraft.class_4587,net.minecraft.class_1268) -> a
-    98:99:float smoothLift(float) -> a
-    103:108:void swingHands() -> o
-    111:115:void stopLoopSound() -> p
+    80:96:void applyArmAnimation(net.minecraft.class_4587,net.minecraft.class_1268) -> a
+    99:100:float smoothLift(float) -> a
+    104:109:void swingHands() -> o
+    112:116:void stopLoopSound() -> p
 royale.modules.impl.combat.HitSound -> royale.modules.impl.a.c:
 # {"fileName":"HitSound.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SelectSetting soundType -> a
