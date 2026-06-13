@@ -19,7 +19,6 @@ public final class DescriptionLocalizer {
             Map.entry("fullbright", "Осветляет темные зоны"),
             Map.entry("rpc", "Показывает статус в Discord"),
             Map.entry("brand", "Меняет brand клиента"),
-            Map.entry("gifmanager", "Меняет анимации ClickGUI"),
             Map.entry("client", "Меняет цвет клиента"),
             Map.entry("targetesp", "Выделяет текущую цель"),
             Map.entry("zoom", "Приближает камеру"),

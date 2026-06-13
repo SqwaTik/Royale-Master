@@ -5752,23 +5752,23 @@ royale.util.localization.DescriptionLocalizer -> royale.util.j.a:
     java.nio.charset.Charset WINDOWS_1251 -> a
     java.util.regex.Pattern SPACE_PATTERN -> h
     java.util.regex.Pattern MOJIBAKE_RUN_PATTERN -> i
-    64:65:void <init>() -> <init>
-    68:68:java.lang.String sanitizeDisplay(java.lang.String) -> t
-    72:72:java.lang.String localizeModule(java.lang.String,java.lang.String) -> b
-    76:76:java.lang.String localizeSetting(java.lang.String,java.lang.String) -> c
-    80:89:java.lang.String localize(java.lang.String,java.lang.String) -> d
-    93:115:java.lang.String tryFixMojibake(java.lang.String) -> u
-    120:122:java.lang.String decode(java.lang.String,java.nio.charset.Charset) -> a
-    127:141:boolean looksMostlyEnglish(java.lang.String) -> z
-    145:166:boolean looksLikeMojibake(java.lang.String) -> A
-    170:193:int scoreText(java.lang.String) -> b
-    197:200:java.lang.String normalizeSpaces(java.lang.String) -> o
-    204:205:java.lang.String safeName(java.lang.String) -> v
-    209:214:java.lang.String buildModuleFallback(java.lang.String) -> w
-    218:223:java.lang.String buildSettingFallback(java.lang.String) -> x
-    227:232:java.lang.String normalizeKey(java.lang.String) -> y
-    236:246:int countOccurrences(java.lang.String,java.lang.String) -> a
-    14:62:void <clinit>() -> <clinit>
+    63:64:void <init>() -> <init>
+    67:67:java.lang.String sanitizeDisplay(java.lang.String) -> t
+    71:71:java.lang.String localizeModule(java.lang.String,java.lang.String) -> b
+    75:75:java.lang.String localizeSetting(java.lang.String,java.lang.String) -> c
+    79:88:java.lang.String localize(java.lang.String,java.lang.String) -> d
+    92:114:java.lang.String tryFixMojibake(java.lang.String) -> u
+    119:121:java.lang.String decode(java.lang.String,java.nio.charset.Charset) -> a
+    126:140:boolean looksMostlyEnglish(java.lang.String) -> z
+    144:165:boolean looksLikeMojibake(java.lang.String) -> A
+    169:192:int scoreText(java.lang.String) -> b
+    196:199:java.lang.String normalizeSpaces(java.lang.String) -> o
+    203:204:java.lang.String safeName(java.lang.String) -> v
+    208:213:java.lang.String buildModuleFallback(java.lang.String) -> w
+    217:222:java.lang.String buildSettingFallback(java.lang.String) -> x
+    226:231:java.lang.String normalizeKey(java.lang.String) -> y
+    235:245:int countOccurrences(java.lang.String,java.lang.String) -> a
+    14:61:void <clinit>() -> <clinit>
 royale.util.math.FrameRateCounter -> royale.util.k.a:
 # {"fileName":"FrameRateCounter.java","id":"sourceFile"}
     royale.util.math.FrameRateCounter INSTANCE -> a
