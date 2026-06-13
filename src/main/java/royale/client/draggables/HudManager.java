@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.gui.DrawContext;
 import royale.events.impl.PacketEvent;
+import royale.modules.impl.misc.Debug;
 import royale.modules.impl.render.Hud;
 import royale.screens.hud.CoolDowns;
 import royale.screens.hud.CropTimerOverlay;
@@ -73,11 +74,14 @@ public class HudManager {
         out.clear();
 
         Hud hud = Hud.getInstance();
-        if (hud != null && hud.isState()) {
-            for (HudElement element : this.elements) {
-                if (hud.interfaceSettings.isSelected(element.getName())) {
-                    out.add(element);
-                }
+        Debug debug = Debug.getInstance();
+        boolean debugStandalone = debug != null && debug.isState();
+
+        for (HudElement element : this.elements) {
+            boolean hudEnabled = hud != null && hud.isState() && hud.interfaceSettings.isSelected(element.getName());
+            boolean standaloneDebugOverlay = debugStandalone && element instanceof DebugOverlay;
+            if (hudEnabled || standaloneDebugOverlay) {
+                out.add(element);
             }
         }
     }

@@ -37,6 +37,7 @@ import royale.modules.impl.render.NoRender;
 import royale.modules.impl.render.Particles;
 import royale.modules.impl.render.SwingAnimation;
 import royale.modules.impl.render.TargetESP;
+import royale.modules.impl.render.Trajectories;
 import royale.modules.impl.render.ViewModel;
 import royale.modules.impl.render.WorldParticles;
 import royale.util.mods.ModsRuntimeManager;
@@ -59,6 +60,7 @@ public class ModuleRepository {
         builder()
                 .add(new Hud())
                 .add(new CropTimer())
+                .add(new Trajectories())
                 .add(new CustomBar())
                 .add(new HitEffect())
                 .add(new Esp())

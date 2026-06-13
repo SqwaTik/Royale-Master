@@ -10,6 +10,7 @@ import royale.events.api.EventHandler;
 import royale.events.api.events.Event;
 import royale.events.api.events.EventStoppable;
 import royale.events.api.types.Priority;
+import royale.modules.module.ModuleStructure;
 
 public final class EventManager {
     private static final Map<Class<? extends Event>, List<MethodData>> REGISTRY_MAP = new HashMap<Class<? extends Event>, List<MethodData>>();
@@ -116,6 +117,10 @@ public final class EventManager {
     }
 
     private static void invoke(MethodData data, Event argument) {
+        if (data.source() instanceof ModuleStructure module && !module.isState()) {
+            return;
+        }
+
         try {
             data.target().invoke(data.source(), argument);
         }

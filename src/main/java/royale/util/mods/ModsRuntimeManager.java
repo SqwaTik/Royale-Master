@@ -28,6 +28,7 @@ public final class ModsRuntimeManager {
 
     private static final String JAR_EXTENSION = ".jar";
     private static final String DISABLED_SUFFIX = ".disabled";
+    private static final long SCAN_CACHE_TTL_MS = 1500L;
 
     private static final Pattern ID_PATTERN = Pattern.compile("\"id\"\\s*:\\s*\"([^\"]+)\"");
     private static final Pattern NAME_PATTERN = Pattern.compile("\"name\"\\s*:\\s*\"([^\"]+)\"");
@@ -36,6 +37,8 @@ public final class ModsRuntimeManager {
 
     private final Map<String, Boolean> runtimeEnabledStates = new HashMap<>();
     private ScanResult lastResult = ScanResult.empty(Path.of("mods"));
+    private long lastScanRequestMs;
+    private String lastDirectorySignature = "";
 
     private ModsRuntimeManager() {
     }
@@ -57,6 +60,14 @@ public final class ModsRuntimeManager {
             this.lastResult = ScanResult.empty(modsDirectory);
             return this.lastResult;
         }
+
+        long now = System.currentTimeMillis();
+        String signature = buildDirectorySignature(modsDirectory);
+        if (now - this.lastScanRequestMs < SCAN_CACHE_TTL_MS && signature.equals(this.lastDirectorySignature)) {
+            return this.lastResult;
+        }
+        this.lastScanRequestMs = now;
+        this.lastDirectorySignature = signature;
 
         List<ScannedMod> scannedMods = new ArrayList<>();
         try (Stream<Path> stream = Files.list(modsDirectory)) {
@@ -80,6 +91,28 @@ public final class ModsRuntimeManager {
 
     public synchronized ScanResult getLastResult() {
         return this.lastResult;
+    }
+
+    private String buildDirectorySignature(Path modsDirectory) {
+        try (Stream<Path> stream = Files.list(modsDirectory)) {
+            StringBuilder builder = new StringBuilder();
+            stream
+                    .filter(Files::isRegularFile)
+                    .filter(this::isSupportedModFile)
+                    .sorted(Comparator.comparing(path -> path.getFileName().toString().toLowerCase(Locale.ROOT)))
+                    .forEach(path -> builder
+                            .append(path.getFileName()).append(':')
+                            .append(safeLastModified(path)).append(':')
+                            .append(safeSize(path)).append(';'));
+            return builder.toString();
+        } catch (IOException ignored) {
+            return "unreadable:" + System.nanoTime();
+        }
+    }
+
+    private void invalidateScanCache() {
+        this.lastScanRequestMs = 0L;
+        this.lastDirectorySignature = "";
     }
 
     public synchronized ScannedMod findByLogicalFileName(String logicalFileName) {
@@ -121,6 +154,7 @@ public final class ModsRuntimeManager {
         if (enabled) {
             if (enabledOnDisk) {
                 this.runtimeEnabledStates.put(normalizeStateKey(logicalName), true);
+                invalidateScanCache();
                 scanNow();
                 return new ToggleResult(true, "already enabled");
             }
@@ -129,6 +163,7 @@ public final class ModsRuntimeManager {
             try {
                 moveFile(source, target);
                 this.runtimeEnabledStates.put(normalizeStateKey(logicalName), true);
+                invalidateScanCache();
                 scanNow();
                 return new ToggleResult(true, "enabled");
             } catch (IOException exception) {
@@ -138,6 +173,7 @@ public final class ModsRuntimeManager {
 
         if (disabledOnDisk) {
             this.runtimeEnabledStates.put(normalizeStateKey(logicalName), false);
+            invalidateScanCache();
             scanNow();
             return new ToggleResult(true, "already disabled");
         }
@@ -146,11 +182,13 @@ public final class ModsRuntimeManager {
         try {
             moveFile(source, target);
             this.runtimeEnabledStates.put(normalizeStateKey(logicalName), false);
+            invalidateScanCache();
             scanNow();
             return new ToggleResult(true, "disabled");
         } catch (IOException exception) {
             if (isLikelyFileLock(exception)) {
                 this.runtimeEnabledStates.put(normalizeStateKey(logicalName), false);
+                invalidateScanCache();
                 scanNow();
                 return new ToggleResult(true, "runtime disabled (file lock): " + ioMessage(exception));
             }

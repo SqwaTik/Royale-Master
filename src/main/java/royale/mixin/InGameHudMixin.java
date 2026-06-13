@@ -24,6 +24,7 @@ import royale.Initialization;
 import royale.events.api.EventManager;
 import royale.events.impl.DrawEvent;
 import royale.events.impl.HotbarItemRenderEvent;
+import royale.modules.impl.misc.Debug;
 import royale.modules.impl.render.CustomBar;
 import royale.modules.impl.render.Hud;
 import royale.modules.impl.render.NoRender;
@@ -201,8 +202,9 @@ public abstract class InGameHudMixin implements IMinecraft {
                     int mouseY = (int) this.client.mouse.getScaledY(this.client.getWindow());
                     float tickDelta = tickCounter.getTickProgress(false);
                     Hud hud = Hud.getInstance();
-                    if (hud != null
-                            && hud.isState()
+                    Debug debug = Debug.getInstance();
+                    boolean renderHudManager = (hud != null && hud.isState()) || (debug != null && debug.isState());
+                    if (renderHudManager
                             && Initialization.getInstance() != null
                             && Initialization.getInstance().getManager() != null
                             && Initialization.getInstance().getManager().getHudManager() != null) {
