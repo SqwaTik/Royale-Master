@@ -1360,22 +1360,24 @@ royale.modules.impl.combat.Gazan67 -> royale.modules.impl.a.b:
 # {"fileName":"Gazan67.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SliderSettings volume -> b
     royale.modules.module.setting.implement.SliderSettings speed -> c
+    royale.modules.module.setting.implement.SliderSettings rightX -> d
+    royale.modules.module.setting.implement.SliderSettings leftX -> e
     long startTime -> a
     net.minecraft.class_1113 loopSound -> a
-    20:34:void <init>() -> <init>
-    37:37:royale.modules.impl.combat.Gazan67 getInstance() -> a
-    42:45:void activate() -> activate
-    49:51:void deactivate() -> deactivate
-    55:63:void onTick(royale.events.impl.TickEvent) -> a
-    67:73:void onHandAnimation(royale.events.impl.HandAnimationEvent) -> a
-    76:93:void applyArmAnimation(net.minecraft.class_4587,net.minecraft.class_1268) -> a
-    96:105:float getLift(net.minecraft.class_1268) -> a
-    109:110:float smoothLift(float) -> a
-    114:118:void stopLoopSound() -> o
+    20:42:void <init>() -> <init>
+    45:45:royale.modules.impl.combat.Gazan67 getInstance() -> a
+    50:53:void activate() -> activate
+    57:59:void deactivate() -> deactivate
+    63:71:void onTick(royale.events.impl.TickEvent) -> a
+    75:81:void onHandAnimation(royale.events.impl.HandAnimationEvent) -> a
+    84:100:void applyArmAnimation(net.minecraft.class_4587,net.minecraft.class_1268) -> a
+    103:112:float getLift(net.minecraft.class_1268) -> a
+    116:117:float smoothLift(float) -> a
+    121:125:void stopLoopSound() -> o
 royale.modules.impl.combat.HitSound -> royale.modules.impl.a.c:
 # {"fileName":"HitSound.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SelectSetting soundType -> a
-    royale.modules.module.setting.implement.SliderSettings volume -> d
+    royale.modules.module.setting.implement.SliderSettings volume -> f
     19:19:royale.modules.impl.combat.HitSound getInstance() -> a
     15:25:void <init>() -> <init>
     29:36:void onAttack(royale.events.impl.AttackEvent) -> a
@@ -1391,7 +1393,7 @@ royale.modules.impl.combat.ShiftAnim -> royale.modules.impl.a.d:
 royale.modules.impl.combat.TapeMouse -> royale.modules.impl.a.e:
 # {"fileName":"TapeMouse.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SelectSetting modeClick -> b
-    royale.modules.module.setting.implement.SliderSettings delayForClick -> e
+    royale.modules.module.setting.implement.SliderSettings delayForClick -> g
     royale.modules.module.setting.implement.BooleanSetting saveItems -> a
     royale.util.timer.StopWatch delay -> a
     17:25:void <init>() -> <init>
@@ -1452,7 +1454,7 @@ royale.modules.impl.misc.ChatHistory -> royale.modules.impl.b.c:
     royale.modules.module.setting.implement.BooleanSetting writeToFile -> d
     royale.modules.module.setting.implement.BooleanSetting enableSearch -> e
     royale.modules.module.setting.implement.BooleanSetting optimizedSearch -> f
-    royale.modules.module.setting.implement.SliderSettings searchResultLimit -> f
+    royale.modules.module.setting.implement.SliderSettings searchResultLimit -> h
     13:36:void <init>() -> <init>
     39:39:royale.modules.impl.misc.ChatHistory getInstance() -> a
     44:46:void activate() -> activate
@@ -1467,7 +1469,7 @@ royale.modules.impl.misc.Client -> royale.modules.impl.b.d:
 royale.modules.impl.misc.ClientSounds -> royale.modules.impl.b.e:
 # {"fileName":"ClientSounds.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SelectSetting soundType -> e
-    royale.modules.module.setting.implement.SliderSettings volume -> g
+    royale.modules.module.setting.implement.SliderSettings volume -> i
     14:14:royale.modules.impl.misc.ClientSounds getInstance() -> a
     16:25:void <init>() -> <init>
     28:32:void onModuleToggle(royale.events.impl.ModuleToggleEvent) -> a
@@ -1507,8 +1509,8 @@ royale.modules.impl.misc.GifManager -> royale.modules.impl.b.g:
     royale.modules.module.setting.implement.SelectSetting backgroundSet -> g
     royale.modules.module.setting.implement.SelectSetting avatarStyle -> h
     royale.modules.module.setting.implement.SelectSetting backgroundStyle -> i
-    royale.modules.module.setting.implement.SliderSettings avatarSpeed -> h
-    royale.modules.module.setting.implement.SliderSettings backgroundSpeed -> i
+    royale.modules.module.setting.implement.SliderSettings avatarSpeed -> j
+    royale.modules.module.setting.implement.SliderSettings backgroundSpeed -> k
     royale.modules.module.setting.implement.ButtonSetting openAvatarFolder -> a
     royale.modules.module.setting.implement.ButtonSetting openBackgroundFolder -> b
     21:76:void <init>() -> <init>
@@ -1631,7 +1633,7 @@ royale.modules.impl.player.FreeLook -> royale.modules.impl.e.b:
 royale.modules.impl.player.ItemScroller -> royale.modules.impl.e.c:
 # {"fileName":"ItemScroller.java","id":"sourceFile"}
     royale.util.timer.StopWatch stopWatch -> b
-    royale.modules.module.setting.implement.SliderSettings scrollerSetting -> j
+    royale.modules.module.setting.implement.SliderSettings scrollerSetting -> l
     19:27:void <init>() -> <init>
     31:45:void onHandledScreen(royale.events.impl.HandledScreenEvent) -> a
     49:66:void onClickSlot(royale.events.impl.ClickSlotEvent) -> a
@@ -1651,10 +1653,10 @@ royale.modules.impl.player.NameProtect -> royale.modules.impl.e.d:
 royale.modules.impl.player.Zoom -> royale.modules.impl.e.e:
 # {"fileName":"Zoom.java","id":"sourceFile"}
     royale.modules.module.setting.implement.BindSetting zoomKey -> b
-    royale.modules.module.setting.implement.SliderSettings baseFov -> k
+    royale.modules.module.setting.implement.SliderSettings baseFov -> m
     royale.modules.module.setting.implement.BooleanSetting smooth -> m
-    royale.modules.module.setting.implement.SliderSettings smoothSpeed -> l
-    royale.modules.module.setting.implement.SliderSettings wheelStep -> m
+    royale.modules.module.setting.implement.SliderSettings smoothSpeed -> n
+    royale.modules.module.setting.implement.SliderSettings wheelStep -> o
     float zoomFov -> y
     float smoothFov -> z
     long lastFovUpdateNs -> h
@@ -1670,7 +1672,7 @@ royale.modules.impl.player.Zoom -> royale.modules.impl.e.e:
     25:25:java.lang.Boolean lambda$new$0() -> b
 royale.modules.impl.render.Ambience -> royale.modules.impl.render.a:
 # {"fileName":"Ambience.java","id":"sourceFile"}
-    royale.modules.module.setting.implement.SliderSettings time -> n
+    royale.modules.module.setting.implement.SliderSettings time -> p
     double animatedTime -> f
     14:14:royale.modules.impl.render.Ambience getInstance() -> a
     16:23:void <init>() -> <init>
@@ -1681,7 +1683,7 @@ royale.modules.impl.render.Ambience -> royale.modules.impl.render.a:
 royale.modules.impl.render.Arrows -> royale.modules.impl.render.b:
 # {"fileName":"Arrows.java","id":"sourceFile"}
     net.minecraft.class_2960 ARROW_TEXTURE -> a
-    royale.modules.module.setting.implement.SliderSettings arrowsDistance -> o
+    royale.modules.module.setting.implement.SliderSettings arrowsDistance -> q
     royale.modules.module.setting.implement.ColorSetting arrowColor -> c
     royale.util.animations.SmoothAnimation animationStep -> a
     royale.util.animations.SmoothAnimation animatedYaw -> b
@@ -1741,7 +1743,7 @@ royale.modules.impl.render.ChinaHat -> royale.modules.impl.render.d:
 royale.modules.impl.render.ChunkAnimator -> royale.modules.impl.render.e:
 # {"fileName":"ChunkAnimator.java","id":"sourceFile"}
     royale.modules.impl.render.ChunkAnimator instance -> a
-    royale.modules.module.setting.implement.SliderSettings speed -> p
+    royale.modules.module.setting.implement.SliderSettings speed -> r
     8:13:void <init>() -> <init>
     15:15:royale.modules.impl.render.ChunkAnimator getInstance() -> a
     18:18:float getSpeed() -> l
@@ -1763,7 +1765,7 @@ royale.modules.impl.render.Esp -> royale.modules.impl.render.f:
     royale.modules.module.setting.implement.ColorSetting boxColor -> g
     royale.modules.module.setting.implement.ColorSetting friendColor -> h
     royale.modules.module.setting.implement.BooleanSetting flatBoxOutline -> n
-    royale.modules.module.setting.implement.SliderSettings boxAlpha -> q
+    royale.modules.module.setting.implement.SliderSettings boxAlpha -> s
     float DISTANCE -> C
     int GRAY_COLOR -> K
     int WHITE_COLOR -> L
@@ -1811,14 +1813,14 @@ royale.modules.impl.render.FullBright -> royale.modules.impl.render.g:
 royale.modules.impl.render.GlassHands -> royale.modules.impl.render.h:
 # {"fileName":"GlassHands.java","id":"sourceFile"}
     royale.modules.impl.render.GlassHands instance -> a
-    royale.modules.module.setting.implement.SliderSettings blurRadius -> r
-    royale.modules.module.setting.implement.SliderSettings blurIterations -> s
-    royale.modules.module.setting.implement.SliderSettings saturation -> t
+    royale.modules.module.setting.implement.SliderSettings blurRadius -> t
+    royale.modules.module.setting.implement.SliderSettings blurIterations -> u
+    royale.modules.module.setting.implement.SliderSettings saturation -> v
     royale.modules.module.setting.implement.BooleanSetting enableTint -> o
-    royale.modules.module.setting.implement.SliderSettings tintIntensity -> u
+    royale.modules.module.setting.implement.SliderSettings tintIntensity -> w
     royale.modules.module.setting.implement.ColorSetting tintColor -> i
     royale.modules.module.setting.implement.BooleanSetting enableEdgeGlow -> p
-    royale.modules.module.setting.implement.SliderSettings edgeGlowIntensity -> v
+    royale.modules.module.setting.implement.SliderSettings edgeGlowIntensity -> x
     18:18:royale.modules.module.setting.implement.SliderSettings getBlurRadius() -> b
     20:20:royale.modules.module.setting.implement.SliderSettings getBlurIterations() -> c
     22:22:royale.modules.module.setting.implement.SliderSettings getSaturation() -> d
@@ -1877,8 +1879,8 @@ royale.modules.impl.render.JumpCircle -> royale.modules.impl.render.l:
     java.util.List circles -> l
     net.minecraft.class_2960 circleTexture -> c
     net.minecraft.class_2960 glowTexture -> d
-    royale.modules.module.setting.implement.SliderSettings maxSize -> w
-    royale.modules.module.setting.implement.SliderSettings speed -> x
+    royale.modules.module.setting.implement.SliderSettings maxSize -> y
+    royale.modules.module.setting.implement.SliderSettings speed -> z
     royale.modules.module.setting.implement.BooleanSetting glow -> s
     royale.modules.module.setting.implement.ColorSetting color1 -> k
     royale.modules.module.setting.implement.ColorSetting color2 -> l
@@ -1951,12 +1953,12 @@ royale.modules.impl.render.Particles -> royale.modules.impl.render.n:
     royale.modules.module.setting.implement.SelectSetting mode -> mode
     royale.modules.module.setting.implement.SelectSetting glowMode -> o
     royale.modules.module.setting.implement.MultiSelectSetting triggers -> f
-    royale.modules.module.setting.implement.SliderSettings amount -> y
-    royale.modules.module.setting.implement.SliderSettings walkAmount -> z
-    royale.modules.module.setting.implement.SliderSettings spread -> A
+    royale.modules.module.setting.implement.SliderSettings amount -> A
+    royale.modules.module.setting.implement.SliderSettings walkAmount -> B
+    royale.modules.module.setting.implement.SliderSettings spread -> C
     royale.modules.module.setting.implement.SliderSettings speed -> c
-    royale.modules.module.setting.implement.SliderSettings lifeTime -> B
-    royale.modules.module.setting.implement.SliderSettings size -> C
+    royale.modules.module.setting.implement.SliderSettings lifeTime -> D
+    royale.modules.module.setting.implement.SliderSettings size -> E
     royale.modules.module.setting.implement.BooleanSetting randomColor -> t
     royale.modules.module.setting.implement.ColorSetting color -> m
     float walkParticleAccumulator -> E
@@ -1986,9 +1988,9 @@ royale.modules.impl.render.Particles -> royale.modules.impl.render.n:
 royale.modules.impl.render.SwingAnimation -> royale.modules.impl.render.o:
 # {"fileName":"SwingAnimation.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SelectSetting swingType -> p
-    royale.modules.module.setting.implement.SliderSettings hitStrengthSetting -> D
+    royale.modules.module.setting.implement.SliderSettings hitStrengthSetting -> F
     float spinAngle -> F
-    royale.modules.module.setting.implement.SliderSettings swingSpeedSetting -> E
+    royale.modules.module.setting.implement.SliderSettings swingSpeedSetting -> G
     float spinBackTimer -> G
     boolean wasSwinging -> r
     royale.modules.module.setting.implement.BooleanSetting onlySwing -> u
@@ -2003,7 +2005,7 @@ royale.modules.impl.render.TargetESP -> royale.modules.impl.render.p:
     royale.util.animations.Animation espAnim -> c
     royale.modules.module.setting.implement.SelectSetting mode -> mode
     royale.modules.module.setting.implement.SliderSettings speed -> c
-    royale.modules.module.setting.implement.SliderSettings crystalRotationSpeed -> F
+    royale.modules.module.setting.implement.SliderSettings crystalRotationSpeed -> H
     royale.modules.module.setting.implement.ColorSetting color1 -> e
     royale.modules.module.setting.implement.ColorSetting color2 -> f
     royale.modules.module.setting.implement.ColorSetting color3 -> n
@@ -2061,12 +2063,12 @@ royale.modules.impl.render.TargetESP$Transformation -> royale.modules.impl.rende
     net.minecraft.class_243 make(double,double) -> make
 royale.modules.impl.render.ViewModel -> royale.modules.impl.render.q:
 # {"fileName":"ViewModel.java","id":"sourceFile"}
-    royale.modules.module.setting.implement.SliderSettings mainHandXSetting -> G
-    royale.modules.module.setting.implement.SliderSettings mainHandYSetting -> H
-    royale.modules.module.setting.implement.SliderSettings mainHandZSetting -> I
-    royale.modules.module.setting.implement.SliderSettings offHandXSetting -> J
-    royale.modules.module.setting.implement.SliderSettings offHandYSetting -> K
-    royale.modules.module.setting.implement.SliderSettings offHandZSetting -> L
+    royale.modules.module.setting.implement.SliderSettings mainHandXSetting -> I
+    royale.modules.module.setting.implement.SliderSettings mainHandYSetting -> J
+    royale.modules.module.setting.implement.SliderSettings mainHandZSetting -> K
+    royale.modules.module.setting.implement.SliderSettings offHandXSetting -> L
+    royale.modules.module.setting.implement.SliderSettings offHandYSetting -> M
+    royale.modules.module.setting.implement.SliderSettings offHandZSetting -> N
     13:28:void <init>() -> <init>
     31:40:void onHandOffset(royale.events.impl.HandOffsetEvent) -> a
 royale.modules.impl.render.WorldParticles -> royale.modules.impl.render.r:
@@ -2093,10 +2095,10 @@ royale.modules.impl.render.WorldParticles -> royale.modules.impl.render.r:
     net.minecraft.class_243 playerVelocity -> l
     double playerSpeed -> o
     royale.modules.module.setting.implement.SelectSetting mode -> mode
-    royale.modules.module.setting.implement.SliderSettings cubeCount -> M
-    royale.modules.module.setting.implement.SliderSettings lifeTime -> B
-    royale.modules.module.setting.implement.SliderSettings size -> C
-    royale.modules.module.setting.implement.SliderSettings glowSize -> N
+    royale.modules.module.setting.implement.SliderSettings cubeCount -> O
+    royale.modules.module.setting.implement.SliderSettings lifeTime -> D
+    royale.modules.module.setting.implement.SliderSettings size -> E
+    royale.modules.module.setting.implement.SliderSettings glowSize -> P
     royale.modules.module.setting.implement.BooleanSetting physics -> v
     royale.modules.module.setting.implement.BooleanSetting randomColor -> t
     royale.modules.module.setting.implement.BooleanSetting whiteOnSpawn -> w
@@ -3665,7 +3667,7 @@ royale.screens.clickgui.impl.settingsrender.SelectComponent -> royale.e.b.a.d.f:
     291:293:float getTotalHeight() -> an
 royale.screens.clickgui.impl.settingsrender.SliderComponent -> royale.e.b.a.d.g:
 # {"fileName":"SliderComponent.java","id":"sourceFile"}
-    royale.modules.module.setting.implement.SliderSettings sliderSettings -> O
+    royale.modules.module.setting.implement.SliderSettings sliderSettings -> Q
     boolean dragging -> B
     float animatedPercentage -> db
     float knobAnimation -> dc

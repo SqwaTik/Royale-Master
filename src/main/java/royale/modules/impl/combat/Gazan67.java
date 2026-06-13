@@ -25,12 +25,20 @@ public class Gazan67 extends ModuleStructure {
         .range(0.4F, 2.5F)
         .setValue(1.0F);
 
+    private final SliderSettings rightX = (new SliderSettings("Правая X", "Позиция правой руки по горизонтали"))
+        .range(-1.0F, 1.0F)
+        .setValue(-0.06F);
+
+    private final SliderSettings leftX = (new SliderSettings("Левая X", "Позиция левой руки по горизонтали"))
+        .range(-1.0F, 1.0F)
+        .setValue(0.42F);
+
     private long startTime;
     private SoundInstance loopSound;
 
     public Gazan67() {
         super("67", "Проигрывает песню 67 на повторе и по очереди поднимает руки", ModuleCategory.COMBAT);
-        settings(new Setting[]{this.volume, this.speed});
+        settings(new Setting[]{this.volume, this.speed, this.rightX, this.leftX});
     }
 
     public static Gazan67 getInstance() {
@@ -76,8 +84,7 @@ public class Gazan67 extends ModuleStructure {
         float lift = getLift(hand);
         float rest = lift > 0.0F ? 0.0F : 0.04F;
         int side = hand == Hand.MAIN_HAND ? 1 : -1;
-        float baseX = hand == Hand.MAIN_HAND ? -0.34F : -0.22F;
-        float x = baseX + lift * 0.02F;
+        float x = (hand == Hand.MAIN_HAND ? this.rightX.getValue() : this.leftX.getValue()) + lift * 0.02F;
         float y = -0.36F + lift * 0.46F + rest;
         float z = -0.38F + lift * 0.02F;
         float yaw = 20.0F - lift * 5.0F;
