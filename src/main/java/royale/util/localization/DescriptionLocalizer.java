@@ -12,26 +12,49 @@ import java.util.regex.Pattern;
 
 public final class DescriptionLocalizer {
     private static final Map<String, String> MODULE_FALLBACKS = Map.ofEntries(
-            Map.entry("hud", "Рисует HUD клиента"),
-            Map.entry("custombar", "Меняет хотбар и полосы"),
-            Map.entry("boxes", "Подсвечивает игроков и предметы"),
-            Map.entry("blockoverlay", "Подсвечивает блок под прицелом"),
-            Map.entry("fullbright", "Осветляет темные зоны"),
-            Map.entry("rpc", "Показывает статус в Discord"),
-            Map.entry("brand", "Меняет brand клиента"),
-            Map.entry("client", "Меняет цвет клиента"),
-            Map.entry("targetesp", "Выделяет текущую цель"),
-            Map.entry("zoom", "Приближает камеру"),
-            Map.entry("freelook", "Позволяет осматриваться отдельно"),
+            Map.entry("67", "Проигрывает мем 67 и делает анимацию руками"),
+            Map.entry("67 meme", "Проигрывает мем 67 и делает анимацию руками"),
+            Map.entry("arrows", "Показывает стрелки к игрокам за экраном"),
+            Map.entry("autoeat", "Автоматически ест при низком здоровье или голоде"),
             Map.entry("autorespawn", "Автоматически возрождает после смерти"),
-            Map.entry("hitsound", "Проигрывает звук при ударе по цели"),
-            Map.entry("gifmanager", "Настраивает анимации меню"),
-            Map.entry("hiteffect", "Добавляет визуальный эффект при ударе"),
-            Map.entry("norender", "Отключает лишние визуальные эффекты"),
-            Map.entry("trajectories", "Показывает дуги бросков и время падения"),
+            Map.entry("autosprint", "Автоматически включает бег"),
+            Map.entry("blockoverlay", "Подсвечивает блок под прицелом"),
+            Map.entry("brand", "Меняет brand клиента при подключении к серверу"),
+            Map.entry("chathistory", "Сохраняет и показывает историю чата"),
+            Map.entry("chathelper", "Добавляет полезные действия и подсказки для чата"),
+            Map.entry("chinahat", "Рисует китайскую шляпу над игроком"),
+            Map.entry("chunkanimator", "Плавно анимирует появление чанков"),
+            Map.entry("client", "Настраивает цвета и внешний вид клиента"),
+            Map.entry("clientsounds", "Проигрывает звуки при включении и выключении функций"),
             Map.entry("croptimer", "Показывает рост растений и время до созревания"),
-            Map.entry("worldparticles", "Добавляет декоративные частицы в мире"),
+            Map.entry("custombar", "Меняет хотбар и полосы здоровья с едой"),
+            Map.entry("debug", "Показывает полезную отладочную информацию"),
+            Map.entry("esp", "Подсвечивает игроков и объекты через стены"),
+            Map.entry("boxes", "Подсвечивает игроков и предметы"),
+            Map.entry("freelook", "Позволяет осматриваться отдельно от движения"),
+            Map.entry("fullbright", "Осветляет темные зоны"),
+            Map.entry("gifmanager", "Настраивает анимации и GIF в меню"),
+            Map.entry("glasshands", "Делает руки прозрачными или стеклянными"),
+            Map.entry("hiteffect", "Добавляет визуальный эффект при ударе"),
+            Map.entry("hitsound", "Проигрывает звук при ударе по цели"),
+            Map.entry("hud", "Рисует HUD клиента"),
+            Map.entry("itemphysic", "Добавляет физику предметам на земле"),
+            Map.entry("itemscroller", "Ускоряет перемещение предметов в инвентаре"),
+            Map.entry("jumpcircle", "Рисует круг при прыжке"),
+            Map.entry("nameprotect", "Скрывает ник игрока в интерфейсе"),
+            Map.entry("norender", "Отключает лишние визуальные эффекты"),
             Map.entry("particles", "Добавляет декоративные частицы"),
+            Map.entry("rpc", "Показывает статус клиента в Discord"),
+            Map.entry("serverrp", "Принимает и кэширует серверные ресурспаки без фризов"),
+            Map.entry("srpoff", "Пропускает серверный ресурспак без скачивания"),
+            Map.entry("shiftanim", "Меняет анимацию приседания"),
+            Map.entry("swinganimation", "Меняет анимацию удара рукой"),
+            Map.entry("tapemouse", "Помогает удерживать клики мыши"),
+            Map.entry("targetesp", "Выделяет текущую цель"),
+            Map.entry("trajectories", "Показывает дуги бросков и время падения"),
+            Map.entry("viewmodel", "Настраивает положение предметов в руках"),
+            Map.entry("worldparticles", "Добавляет декоративные частицы в мире"),
+            Map.entry("zoom", "Приближает камеру"),
             Map.entry("cheststealer", "Автоматизирует работу с контейнерами")
     );
 
@@ -68,7 +91,13 @@ public final class DescriptionLocalizer {
     }
 
     public static String localizeModule(String moduleName, String description) {
-        return localize(description, buildModuleFallback(moduleName));
+        String fallback = buildModuleFallback(moduleName);
+        String value = normalizeSpaces(description);
+        String defaultDescription = "Управляет " + safeName(moduleName);
+        if (normalizeKey(value).equals(normalizeKey(defaultDescription))) {
+            return fallback;
+        }
+        return localize(description, fallback);
     }
 
     public static String localizeSetting(String settingName, String description) {

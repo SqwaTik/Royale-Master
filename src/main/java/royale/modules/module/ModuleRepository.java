@@ -60,6 +60,7 @@ public class ModuleRepository {
 
         builder()
                 .add(new Hud())
+                .add(new Gazan67())
                 .add(new CropTimer())
                 .add(new Trajectories())
                 .add(new CustomBar())
@@ -77,7 +78,6 @@ public class ModuleRepository {
                 .add(new Client())
                 .add(new Brand())
                 .add(new Debug())
-                .add(new Gazan67())
                 .add(new GifManager())
                 .add(new ChatHelper())
                 .add(new TargetESP())
