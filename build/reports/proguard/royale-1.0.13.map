@@ -1271,15 +1271,6 @@ royale.mixin.PlayerEntityMixin -> royale.mixin.PlayerEntityMixin:
     55:63:void onTravelPre(net.minecraft.class_243,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onTravelPre
     71:73:net.minecraft.class_243 travelHook(net.minecraft.class_243) -> travelHook
     78:83:void onTravelPost(net.minecraft.class_243,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onTravelPost
-royale.mixin.PlayerEntityModelMixin -> royale.mixin.PlayerEntityModelMixin:
-# {"fileName":"PlayerEntityModelMixin.java","id":"sourceFile"}
-    net.minecraft.class_630 field_3401 -> field_3401
-    net.minecraft.class_630 field_27433 -> field_27433
-    net.minecraft.class_630 field_3486 -> field_3486
-    net.minecraft.class_630 field_3484 -> field_3484
-    17:17:void <init>() -> <init>
-    25:32:void royale$applyGazan67ThirdPerson(net.minecraft.class_10055,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> royale$applyGazan67ThirdPerson
-    35:45:void applyArm(net.minecraft.class_630,net.minecraft.class_630,float,boolean) -> applyArm
 royale.mixin.PlayerListHudMixin -> royale.mixin.PlayerListHudMixin:
 # {"fileName":"PlayerListHudMixin.java","id":"sourceFile"}
     net.minecraft.class_310 field_2155 -> field_2155
