@@ -7,7 +7,6 @@ import royale.events.impl.PacketEvent;
 import royale.modules.impl.misc.Debug;
 import royale.modules.impl.render.Hud;
 import royale.screens.hud.CoolDowns;
-import royale.screens.hud.CropTimerOverlay;
 import royale.screens.hud.DebugOverlay;
 import royale.screens.hud.HotKeys;
 import royale.screens.hud.Info;
@@ -31,7 +30,6 @@ public class HudManager {
 
         this.register(new Watermark());
         this.register(new DebugOverlay());
-        this.register(new CropTimerOverlay());
 
         this.register(new HotKeys());
         this.register(new Notifications());

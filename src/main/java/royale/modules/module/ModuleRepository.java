@@ -1,6 +1,7 @@
 package royale.modules.module;
 
 import royale.modules.impl.combat.AutoEat;
+import royale.modules.impl.combat.Gazan67;
 import royale.modules.impl.combat.HitSound;
 import royale.modules.impl.combat.ShiftAnim;
 import royale.modules.impl.combat.TapeMouse;
@@ -9,7 +10,6 @@ import royale.modules.impl.misc.Client;
 import royale.modules.impl.misc.ClientSounds;
 import royale.modules.impl.misc.ChatHelper;
 import royale.modules.impl.misc.Debug;
-import royale.modules.impl.misc.Gazan67;
 import royale.modules.impl.misc.GifManager;
 import royale.modules.impl.misc.Rpc;
 import royale.modules.impl.misc.ServerRP;
@@ -25,7 +25,6 @@ import royale.modules.impl.render.Arrows;
 import royale.modules.impl.render.BlockOverlay;
 import royale.modules.impl.render.ChinaHat;
 import royale.modules.impl.render.ChunkAnimator;
-import royale.modules.impl.render.CropTimer;
 import royale.modules.impl.render.CustomBar;
 import royale.modules.impl.render.Esp;
 import royale.modules.impl.render.FullBright;
@@ -38,7 +37,6 @@ import royale.modules.impl.render.NoRender;
 import royale.modules.impl.render.Particles;
 import royale.modules.impl.render.SwingAnimation;
 import royale.modules.impl.render.TargetESP;
-import royale.modules.impl.render.Trajectories;
 import royale.modules.impl.render.ViewModel;
 import royale.modules.impl.render.WorldParticles;
 import royale.util.mods.ModsRuntimeManager;
@@ -61,8 +59,6 @@ public class ModuleRepository {
         builder()
                 .add(new Hud())
                 .add(new Gazan67())
-                .add(new CropTimer())
-                .add(new Trajectories())
                 .add(new CustomBar())
                 .add(new HitEffect())
                 .add(new Esp())

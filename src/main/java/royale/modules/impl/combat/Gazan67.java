@@ -1,4 +1,4 @@
-package royale.modules.impl.misc;
+package royale.modules.impl.combat;
 
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Hand;
@@ -27,7 +27,7 @@ public class Gazan67 extends ModuleStructure {
     private long lastSwingTime;
 
     public Gazan67() {
-        super("67 Meme", "Проигрывает мем 67 и делает анимацию руками", ModuleCategory.RENDER);
+        super("67", "Проигрывает мем 67 и делает анимацию руками", ModuleCategory.COMBAT);
         settings(new Setting[]{this.volume, this.duration});
     }
 
