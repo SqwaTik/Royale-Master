@@ -1356,24 +1356,26 @@ royale.modules.impl.combat.AutoEat -> royale.modules.impl.a.a:
 royale.modules.impl.combat.Gazan67 -> royale.modules.impl.a.b:
 # {"fileName":"Gazan67.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SliderSettings volume -> b
-    royale.modules.module.setting.implement.SliderSettings duration -> c
     long startTime -> a
     long lastSwingTime -> b
-    19:33:void <init>() -> <init>
-    36:36:royale.modules.impl.combat.Gazan67 getInstance() -> a
-    41:45:void activate() -> activate
-    49:51:void deactivate() -> deactivate
-    55:68:void onTick(royale.events.impl.TickEvent) -> a
-    72:89:void onHandAnimation(royale.events.impl.HandAnimationEvent) -> a
-    92:97:void swingHands() -> o
+    net.minecraft.class_1113 loopSound -> a
+    23:34:void <init>() -> <init>
+    37:37:royale.modules.impl.combat.Gazan67 getInstance() -> a
+    42:47:void activate() -> activate
+    51:54:void deactivate() -> deactivate
+    58:70:void onTick(royale.events.impl.TickEvent) -> a
+    74:77:void onHeldItemUpdate(royale.events.impl.HeldItemUpdateEvent) -> a
+    81:103:void onHandAnimation(royale.events.impl.HandAnimationEvent) -> a
+    106:111:void swingHands() -> o
+    114:118:void stopLoopSound() -> p
 royale.modules.impl.combat.HitSound -> royale.modules.impl.a.c:
 # {"fileName":"HitSound.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SelectSetting soundType -> a
-    royale.modules.module.setting.implement.SliderSettings volume -> d
+    royale.modules.module.setting.implement.SliderSettings volume -> c
     19:19:royale.modules.impl.combat.HitSound getInstance() -> a
     15:25:void <init>() -> <init>
     29:36:void onAttack(royale.events.impl.AttackEvent) -> a
-    38:48:void playSelectedSound() -> p
+    38:48:void playSelectedSound() -> q
     51:69:void playRandomMoan(float,float) -> a
 royale.modules.impl.combat.ShiftAnim -> royale.modules.impl.a.d:
 # {"fileName":"ShiftAnim.java","id":"sourceFile"}
@@ -1385,15 +1387,15 @@ royale.modules.impl.combat.ShiftAnim -> royale.modules.impl.a.d:
 royale.modules.impl.combat.TapeMouse -> royale.modules.impl.a.e:
 # {"fileName":"TapeMouse.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SelectSetting modeClick -> b
-    royale.modules.module.setting.implement.SliderSettings delayForClick -> e
+    royale.modules.module.setting.implement.SliderSettings delayForClick -> d
     royale.modules.module.setting.implement.BooleanSetting saveItems -> a
     royale.util.timer.StopWatch delay -> a
     17:25:void <init>() -> <init>
     29:46:void onTick(royale.events.impl.TickEvent) -> a
     49:54:boolean shouldProtectCurrentItem() -> p
-    57:62:void performClick() -> q
-    64:73:void leftClick() -> r
-    75:79:void rightClick() -> s
+    57:62:void performClick() -> r
+    64:73:void leftClick() -> s
+    75:79:void rightClick() -> t
     82:82:royale.modules.module.setting.implement.SelectSetting getModeClick() -> a
     86:86:royale.modules.module.setting.implement.SliderSettings getDelayForClick() -> a
     90:90:royale.modules.module.setting.implement.BooleanSetting getSaveItems() -> a
@@ -1412,7 +1414,7 @@ royale.modules.impl.misc.Brand -> royale.modules.impl.b.a:
     48:48:royale.modules.impl.misc.Brand getInstance() -> a
     53:54:void activate() -> activate
     58:59:void deactivate() -> deactivate
-    62:63:void prepareConnection() -> t
+    62:63:void prepareConnection() -> u
     67:77:void onPacket(royale.events.impl.PacketEvent) -> a
     81:82:void onWorldChange(royale.events.impl.WorldChangeEvent) -> a
     86:87:void onGameLeft(royale.events.impl.GameLeftEvent) -> a
@@ -1446,7 +1448,7 @@ royale.modules.impl.misc.ChatHistory -> royale.modules.impl.b.c:
     royale.modules.module.setting.implement.BooleanSetting writeToFile -> d
     royale.modules.module.setting.implement.BooleanSetting enableSearch -> e
     royale.modules.module.setting.implement.BooleanSetting optimizedSearch -> f
-    royale.modules.module.setting.implement.SliderSettings searchResultLimit -> f
+    royale.modules.module.setting.implement.SliderSettings searchResultLimit -> e
     13:36:void <init>() -> <init>
     39:39:royale.modules.impl.misc.ChatHistory getInstance() -> a
     44:46:void activate() -> activate
@@ -1461,7 +1463,7 @@ royale.modules.impl.misc.Client -> royale.modules.impl.b.d:
 royale.modules.impl.misc.ClientSounds -> royale.modules.impl.b.e:
 # {"fileName":"ClientSounds.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SelectSetting soundType -> e
-    royale.modules.module.setting.implement.SliderSettings volume -> g
+    royale.modules.module.setting.implement.SliderSettings volume -> f
     14:14:royale.modules.impl.misc.ClientSounds getInstance() -> a
     16:25:void <init>() -> <init>
     28:32:void onModuleToggle(royale.events.impl.ModuleToggleEvent) -> a
@@ -1501,8 +1503,8 @@ royale.modules.impl.misc.GifManager -> royale.modules.impl.b.g:
     royale.modules.module.setting.implement.SelectSetting backgroundSet -> g
     royale.modules.module.setting.implement.SelectSetting avatarStyle -> h
     royale.modules.module.setting.implement.SelectSetting backgroundStyle -> i
-    royale.modules.module.setting.implement.SliderSettings avatarSpeed -> h
-    royale.modules.module.setting.implement.SliderSettings backgroundSpeed -> i
+    royale.modules.module.setting.implement.SliderSettings avatarSpeed -> g
+    royale.modules.module.setting.implement.SliderSettings backgroundSpeed -> h
     royale.modules.module.setting.implement.ButtonSetting openAvatarFolder -> a
     royale.modules.module.setting.implement.ButtonSetting openBackgroundFolder -> b
     21:76:void <init>() -> <init>
@@ -1513,11 +1515,11 @@ royale.modules.impl.misc.GifManager -> royale.modules.impl.b.g:
     110:120:int getBackgroundTint() -> z
     125:125:long getAvatarFrameDelay() -> a
     129:129:long getBackgroundFrameDelay() -> b
-    133:136:void refreshAvailableSets() -> u
+    133:136:void refreshAvailableSets() -> v
     139:146:void refreshAvailableSetsIfNeeded(boolean) -> h
     149:156:java.util.List buildAvailableOptions(boolean) -> a
-    160:161:void openAvatarFolder() -> v
-    164:165:void openBackgroundFolder() -> w
+    160:161:void openAvatarFolder() -> w
+    164:165:void openBackgroundFolder() -> x
     168:168:java.nio.file.Path resolveCustomRootDirectory(boolean) -> a
     173:192:void openFolder(java.nio.file.Path) -> a
     195:196:long resolveDelay(long,float) -> a
@@ -1541,7 +1543,7 @@ royale.modules.impl.misc.Rpc -> royale.modules.impl.b.h:
     151:180:void updateCombatState(royale.util.rpc.DiscordRpcService) -> b
     183:192:boolean isAttackedByValidPlayer() -> q
     196:213:boolean isValidPvpPlayer(net.minecraft.class_1657) -> a
-    217:221:void resetRuntimeState() -> x
+    217:221:void resetRuntimeState() -> y
     224:228:boolean isClientClosing() -> r
     233:236:void safeStop(royale.util.rpc.DiscordRpcService) -> c
 royale.modules.impl.misc.ServerRP -> royale.modules.impl.b.i:
@@ -1598,9 +1600,9 @@ royale.modules.impl.movement.AutoSprint -> royale.modules.impl.d.a:
     16:17:void <init>() -> <init>
     21:40:void onPacket(royale.events.impl.PacketEvent) -> a
     42:42:boolean isServerSprinting() -> t
-    45:46:void resetServerState() -> y
+    45:46:void resetServerState() -> z
     49:53:void onTick(royale.events.impl.TickEvent) -> a
-    55:64:void processSprint() -> z
+    55:64:void processSprint() -> A
     66:67:void deactivate() -> deactivate
     14:14:void <clinit>() -> <clinit>
 royale.modules.impl.player.AutoRespawn -> royale.modules.impl.e.a:
@@ -1617,15 +1619,15 @@ royale.modules.impl.player.FreeLook -> royale.modules.impl.e.b:
     23:26:void <init>() -> <init>
     29:35:void onKey(royale.events.impl.KeyEvent) -> a
     38:43:void onFov(royale.events.impl.FovEvent) -> a
-    45:49:void handleFreeLookActivation() -> A
-    51:54:void handleFreeLookDeactivation() -> B
+    45:49:void handleFreeLookActivation() -> B
+    51:54:void handleFreeLookDeactivation() -> C
     57:67:void onMouseRotation(royale.events.impl.MouseRotationEvent) -> a
     70:74:void onCamera(royale.events.impl.CameraEvent) -> a
     21:21:void <clinit>() -> <clinit>
 royale.modules.impl.player.ItemScroller -> royale.modules.impl.e.c:
 # {"fileName":"ItemScroller.java","id":"sourceFile"}
     royale.util.timer.StopWatch stopWatch -> b
-    royale.modules.module.setting.implement.SliderSettings scrollerSetting -> j
+    royale.modules.module.setting.implement.SliderSettings scrollerSetting -> i
     19:27:void <init>() -> <init>
     31:45:void onHandledScreen(royale.events.impl.HandledScreenEvent) -> a
     49:66:void onClickSlot(royale.events.impl.ClickSlotEvent) -> a
@@ -1645,10 +1647,10 @@ royale.modules.impl.player.NameProtect -> royale.modules.impl.e.d:
 royale.modules.impl.player.Zoom -> royale.modules.impl.e.e:
 # {"fileName":"Zoom.java","id":"sourceFile"}
     royale.modules.module.setting.implement.BindSetting zoomKey -> b
-    royale.modules.module.setting.implement.SliderSettings baseFov -> k
+    royale.modules.module.setting.implement.SliderSettings baseFov -> j
     royale.modules.module.setting.implement.BooleanSetting smooth -> m
-    royale.modules.module.setting.implement.SliderSettings smoothSpeed -> l
-    royale.modules.module.setting.implement.SliderSettings wheelStep -> m
+    royale.modules.module.setting.implement.SliderSettings smoothSpeed -> k
+    royale.modules.module.setting.implement.SliderSettings wheelStep -> l
     float zoomFov -> y
     float smoothFov -> z
     long lastFovUpdateNs -> i
@@ -1664,7 +1666,7 @@ royale.modules.impl.player.Zoom -> royale.modules.impl.e.e:
     25:25:java.lang.Boolean lambda$new$0() -> b
 royale.modules.impl.render.Ambience -> royale.modules.impl.render.a:
 # {"fileName":"Ambience.java","id":"sourceFile"}
-    royale.modules.module.setting.implement.SliderSettings time -> n
+    royale.modules.module.setting.implement.SliderSettings time -> m
     double animatedTime -> f
     14:14:royale.modules.impl.render.Ambience getInstance() -> a
     16:23:void <init>() -> <init>
@@ -1675,7 +1677,7 @@ royale.modules.impl.render.Ambience -> royale.modules.impl.render.a:
 royale.modules.impl.render.Arrows -> royale.modules.impl.render.b:
 # {"fileName":"Arrows.java","id":"sourceFile"}
     net.minecraft.class_2960 ARROW_TEXTURE -> a
-    royale.modules.module.setting.implement.SliderSettings arrowsDistance -> o
+    royale.modules.module.setting.implement.SliderSettings arrowsDistance -> n
     royale.modules.module.setting.implement.ColorSetting arrowColor -> c
     royale.util.animations.SmoothAnimation animationStep -> a
     royale.util.animations.SmoothAnimation animatedYaw -> b
@@ -1705,7 +1707,7 @@ royale.modules.impl.render.Arrows$Arrow -> royale.modules.impl.render.b$a:
     float cachedAlpha -> A
     long lastAlphaUpdate -> j
     168:174:void <init>(net.minecraft.class_1657,royale.util.animations.Animation) -> <init>
-    177:182:void updateAlpha() -> C
+    177:182:void updateAlpha() -> D
     185:185:float getAlpha() -> p
     189:189:boolean isDead() -> v
 royale.modules.impl.render.BlockOverlay -> royale.modules.impl.render.c:
@@ -1735,7 +1737,7 @@ royale.modules.impl.render.ChinaHat -> royale.modules.impl.render.d:
 royale.modules.impl.render.ChunkAnimator -> royale.modules.impl.render.e:
 # {"fileName":"ChunkAnimator.java","id":"sourceFile"}
     royale.modules.impl.render.ChunkAnimator instance -> a
-    royale.modules.module.setting.implement.SliderSettings speed -> p
+    royale.modules.module.setting.implement.SliderSettings speed -> o
     8:13:void <init>() -> <init>
     15:15:royale.modules.impl.render.ChunkAnimator getInstance() -> a
     18:18:float getSpeed() -> l
@@ -1757,7 +1759,7 @@ royale.modules.impl.render.Esp -> royale.modules.impl.render.f:
     royale.modules.module.setting.implement.ColorSetting boxColor -> g
     royale.modules.module.setting.implement.ColorSetting friendColor -> h
     royale.modules.module.setting.implement.BooleanSetting flatBoxOutline -> n
-    royale.modules.module.setting.implement.SliderSettings boxAlpha -> q
+    royale.modules.module.setting.implement.SliderSettings boxAlpha -> p
     float DISTANCE -> C
     int GRAY_COLOR -> K
     int WHITE_COLOR -> L
@@ -1805,14 +1807,14 @@ royale.modules.impl.render.FullBright -> royale.modules.impl.render.g:
 royale.modules.impl.render.GlassHands -> royale.modules.impl.render.h:
 # {"fileName":"GlassHands.java","id":"sourceFile"}
     royale.modules.impl.render.GlassHands instance -> a
-    royale.modules.module.setting.implement.SliderSettings blurRadius -> r
-    royale.modules.module.setting.implement.SliderSettings blurIterations -> s
-    royale.modules.module.setting.implement.SliderSettings saturation -> t
+    royale.modules.module.setting.implement.SliderSettings blurRadius -> q
+    royale.modules.module.setting.implement.SliderSettings blurIterations -> r
+    royale.modules.module.setting.implement.SliderSettings saturation -> s
     royale.modules.module.setting.implement.BooleanSetting enableTint -> o
-    royale.modules.module.setting.implement.SliderSettings tintIntensity -> u
+    royale.modules.module.setting.implement.SliderSettings tintIntensity -> t
     royale.modules.module.setting.implement.ColorSetting tintColor -> i
     royale.modules.module.setting.implement.BooleanSetting enableEdgeGlow -> p
-    royale.modules.module.setting.implement.SliderSettings edgeGlowIntensity -> v
+    royale.modules.module.setting.implement.SliderSettings edgeGlowIntensity -> u
     18:18:royale.modules.module.setting.implement.SliderSettings getBlurRadius() -> b
     20:20:royale.modules.module.setting.implement.SliderSettings getBlurIterations() -> c
     22:22:royale.modules.module.setting.implement.SliderSettings getSaturation() -> d
@@ -1827,7 +1829,7 @@ royale.modules.impl.render.GlassHands -> royale.modules.impl.render.h:
     55:59:void deactivate() -> deactivate
     62:70:void onWorldChange(royale.events.impl.WorldChangeEvent) -> a
     73:85:void onGlassHandsRender(royale.events.impl.GlassHandsRenderEvent) -> a
-    87:106:void updateRendererSettings() -> D
+    87:106:void updateRendererSettings() -> E
 royale.modules.impl.render.HitEffect -> royale.modules.impl.render.i:
 # {"fileName":"HitEffect.java","id":"sourceFile"}
     java.util.List waveEffects -> k
@@ -1849,8 +1851,8 @@ royale.modules.impl.render.HitEffect$WaveEffect -> royale.modules.impl.render.i$
     royale.modules.impl.render.HitEffect this$0 -> a
     86:94:void <init>(royale.modules.impl.render.HitEffect,net.minecraft.class_2338,long) -> <init>
     97:97:boolean isExpired() -> A
-    101:153:void calculateReachableBlocks() -> E
-    156:189:void render() -> F
+    101:153:void calculateReachableBlocks() -> F
+    156:189:void render() -> G
 royale.modules.impl.render.Hud -> royale.modules.impl.render.j:
 # {"fileName":"Hud.java","id":"sourceFile"}
     royale.modules.module.setting.implement.MultiSelectSetting interfaceSettings -> d
@@ -1871,8 +1873,8 @@ royale.modules.impl.render.JumpCircle -> royale.modules.impl.render.l:
     java.util.List circles -> l
     net.minecraft.class_2960 circleTexture -> c
     net.minecraft.class_2960 glowTexture -> d
-    royale.modules.module.setting.implement.SliderSettings maxSize -> w
-    royale.modules.module.setting.implement.SliderSettings speed -> x
+    royale.modules.module.setting.implement.SliderSettings maxSize -> v
+    royale.modules.module.setting.implement.SliderSettings speed -> w
     royale.modules.module.setting.implement.BooleanSetting glow -> s
     royale.modules.module.setting.implement.ColorSetting color1 -> k
     royale.modules.module.setting.implement.ColorSetting color2 -> l
@@ -1907,8 +1909,8 @@ royale.modules.impl.render.NoRender -> royale.modules.impl.render.m:
     15:23:void <init>() -> <init>
     26:31:void onTick(royale.events.impl.TickEvent) -> a
     33:35:void deactivate() -> deactivate
-    37:49:void applyFovEffectScaleOverride() -> G
-    51:56:void restoreFovEffectScale() -> H
+    37:49:void applyFovEffectScaleOverride() -> H
+    51:56:void restoreFovEffectScale() -> I
 royale.modules.impl.render.Particles -> royale.modules.impl.render.n:
 # {"fileName":"Particles.java","id":"sourceFile"}
     java.lang.String MODE_CUBES -> y
@@ -1945,12 +1947,12 @@ royale.modules.impl.render.Particles -> royale.modules.impl.render.n:
     royale.modules.module.setting.implement.SelectSetting mode -> mode
     royale.modules.module.setting.implement.SelectSetting glowMode -> o
     royale.modules.module.setting.implement.MultiSelectSetting triggers -> f
-    royale.modules.module.setting.implement.SliderSettings amount -> y
-    royale.modules.module.setting.implement.SliderSettings walkAmount -> z
-    royale.modules.module.setting.implement.SliderSettings spread -> A
-    royale.modules.module.setting.implement.SliderSettings speed -> p
-    royale.modules.module.setting.implement.SliderSettings lifeTime -> B
-    royale.modules.module.setting.implement.SliderSettings size -> C
+    royale.modules.module.setting.implement.SliderSettings amount -> x
+    royale.modules.module.setting.implement.SliderSettings walkAmount -> y
+    royale.modules.module.setting.implement.SliderSettings spread -> z
+    royale.modules.module.setting.implement.SliderSettings speed -> o
+    royale.modules.module.setting.implement.SliderSettings lifeTime -> A
+    royale.modules.module.setting.implement.SliderSettings size -> B
     royale.modules.module.setting.implement.BooleanSetting randomColor -> t
     royale.modules.module.setting.implement.ColorSetting color -> m
     float walkParticleAccumulator -> E
@@ -1965,13 +1967,13 @@ royale.modules.impl.render.Particles -> royale.modules.impl.render.n:
     185:189:royale.modules.impl.render.particles.Particle3D$GlowMode getGlowMode() -> a
     195:246:void onTick(royale.events.impl.TickEvent) -> a
     249:249:boolean isTriggerSelected(java.lang.String) -> e
-    253:306:void handleWalkParticles() -> I
-    309:362:void handleProjectileParticles() -> J
+    253:306:void handleWalkParticles() -> J
+    309:362:void handleProjectileParticles() -> K
     366:396:void onAttack(royale.events.impl.AttackEvent) -> a
     399:403:void onTotemPop(net.minecraft.class_1297) -> b
     406:447:void spawnTotemParticlesBurst(net.minecraft.class_1297,float) -> a
     451:468:void onRender3D(royale.events.impl.WorldRenderEvent) -> b
-    471:475:void trimParticleList() -> K
+    471:475:void trimParticleList() -> L
     478:478:int getParticleCap() -> C
     320:320:boolean lambda$handleProjectileParticles$2(net.minecraft.class_1676) -> a
     117:117:java.lang.Boolean lambda$new$1() -> a
@@ -1980,9 +1982,9 @@ royale.modules.impl.render.Particles -> royale.modules.impl.render.n:
 royale.modules.impl.render.SwingAnimation -> royale.modules.impl.render.o:
 # {"fileName":"SwingAnimation.java","id":"sourceFile"}
     royale.modules.module.setting.implement.SelectSetting swingType -> p
-    royale.modules.module.setting.implement.SliderSettings hitStrengthSetting -> D
+    royale.modules.module.setting.implement.SliderSettings hitStrengthSetting -> C
     float spinAngle -> F
-    royale.modules.module.setting.implement.SliderSettings swingSpeedSetting -> E
+    royale.modules.module.setting.implement.SliderSettings swingSpeedSetting -> D
     float spinBackTimer -> G
     boolean wasSwinging -> r
     royale.modules.module.setting.implement.BooleanSetting onlySwing -> u
@@ -1996,8 +1998,8 @@ royale.modules.impl.render.TargetESP -> royale.modules.impl.render.p:
     long HOLD_DURATION_MS -> m
     royale.util.animations.Animation espAnim -> c
     royale.modules.module.setting.implement.SelectSetting mode -> mode
-    royale.modules.module.setting.implement.SliderSettings speed -> p
-    royale.modules.module.setting.implement.SliderSettings crystalRotationSpeed -> F
+    royale.modules.module.setting.implement.SliderSettings speed -> o
+    royale.modules.module.setting.implement.SliderSettings crystalRotationSpeed -> E
     royale.modules.module.setting.implement.ColorSetting color1 -> e
     royale.modules.module.setting.implement.ColorSetting color2 -> f
     royale.modules.module.setting.implement.ColorSetting color3 -> n
@@ -2022,7 +2024,7 @@ royale.modules.impl.render.TargetESP -> royale.modules.impl.render.p:
     213:229:void renderRhomb(net.minecraft.class_4587,net.minecraft.class_4597,net.minecraft.class_1309,float) -> b
     232:237:void renderGhost(net.minecraft.class_4587,net.minecraft.class_4597,net.minecraft.class_1309,float) -> c
     240:275:void particle(net.minecraft.class_4587,net.minecraft.class_4588,royale.modules.impl.render.TargetESP$Transformation,float,int) -> a
-    278:293:void createCrystals() -> L
+    278:293:void createCrystals() -> M
     296:311:void renderCrystals(net.minecraft.class_4587,net.minecraft.class_4597,net.minecraft.class_1309,float,float) -> a
     314:318:int darkenColor(int,float) -> b
     322:326:int lightenColor(int,float) -> c
@@ -2055,12 +2057,12 @@ royale.modules.impl.render.TargetESP$Transformation -> royale.modules.impl.rende
     net.minecraft.class_243 make(double,double) -> make
 royale.modules.impl.render.ViewModel -> royale.modules.impl.render.q:
 # {"fileName":"ViewModel.java","id":"sourceFile"}
-    royale.modules.module.setting.implement.SliderSettings mainHandXSetting -> G
-    royale.modules.module.setting.implement.SliderSettings mainHandYSetting -> H
-    royale.modules.module.setting.implement.SliderSettings mainHandZSetting -> I
-    royale.modules.module.setting.implement.SliderSettings offHandXSetting -> J
-    royale.modules.module.setting.implement.SliderSettings offHandYSetting -> K
-    royale.modules.module.setting.implement.SliderSettings offHandZSetting -> L
+    royale.modules.module.setting.implement.SliderSettings mainHandXSetting -> F
+    royale.modules.module.setting.implement.SliderSettings mainHandYSetting -> G
+    royale.modules.module.setting.implement.SliderSettings mainHandZSetting -> H
+    royale.modules.module.setting.implement.SliderSettings offHandXSetting -> I
+    royale.modules.module.setting.implement.SliderSettings offHandYSetting -> J
+    royale.modules.module.setting.implement.SliderSettings offHandZSetting -> K
     13:28:void <init>() -> <init>
     31:40:void onHandOffset(royale.events.impl.HandOffsetEvent) -> a
 royale.modules.impl.render.WorldParticles -> royale.modules.impl.render.r:
@@ -2087,10 +2089,10 @@ royale.modules.impl.render.WorldParticles -> royale.modules.impl.render.r:
     net.minecraft.class_243 playerVelocity -> l
     double playerSpeed -> o
     royale.modules.module.setting.implement.SelectSetting mode -> mode
-    royale.modules.module.setting.implement.SliderSettings cubeCount -> M
-    royale.modules.module.setting.implement.SliderSettings lifeTime -> B
-    royale.modules.module.setting.implement.SliderSettings size -> C
-    royale.modules.module.setting.implement.SliderSettings glowSize -> N
+    royale.modules.module.setting.implement.SliderSettings cubeCount -> L
+    royale.modules.module.setting.implement.SliderSettings lifeTime -> A
+    royale.modules.module.setting.implement.SliderSettings size -> B
+    royale.modules.module.setting.implement.SliderSettings glowSize -> M
     royale.modules.module.setting.implement.BooleanSetting physics -> v
     royale.modules.module.setting.implement.BooleanSetting randomColor -> t
     royale.modules.module.setting.implement.BooleanSetting whiteOnSpawn -> w
@@ -2165,7 +2167,7 @@ royale.modules.impl.render.particles.Particle3D -> royale.modules.impl.render.b.
     106:107:royale.modules.impl.render.particles.Particle3D setMode(royale.modules.impl.render.particles.Particle3D$ParticleMode) -> a
     111:112:royale.modules.impl.render.particles.Particle3D setGlowMode(royale.modules.impl.render.particles.Particle3D$GlowMode) -> a
     116:117:royale.modules.impl.render.particles.Particle3D setSpinning(boolean) -> b
-    122:174:void update() -> M
+    122:174:void update() -> N
     177:181:boolean isHit(double,double,double) -> a
     185:185:boolean isDead() -> v
     189:192:double distanceSquaredTo(net.minecraft.class_243) -> a
@@ -2272,7 +2274,7 @@ royale.modules.impl.render.worldparticles.Particle -> royale.modules.impl.render
     119:132:net.minecraft.class_2960 getTextureForType(royale.modules.impl.render.worldparticles.Particle$ParticleType) -> a
     137:140:double getDistanceSquaredTo(net.minecraft.class_243) -> b
     144:146:double getHorizontalDistanceSquaredTo(net.minecraft.class_243) -> c
-    150:155:void startFadeOut() -> N
+    150:155:void startFadeOut() -> O
     159:212:void update(long) -> a
     215:215:float getAlpha() -> p
     219:223:boolean isHit(double,double,double) -> a
@@ -2347,8 +2349,8 @@ royale.modules.module.ModuleRepository -> royale.modules.a.c:
     java.util.List hiddenModules -> r
     java.util.Set registeredKeys -> c
     51:54:void <init>() -> <init>
-    57:100:void setup() -> O
-    103:117:void reloadExternalMods() -> P
+    57:100:void setup() -> P
+    103:117:void reloadExternalMods() -> Q
     120:120:royale.modules.module.ModuleBuilder builder() -> a
     124:136:void registerModule(royale.modules.module.ModuleStructure,boolean) -> a
     139:143:java.lang.String buildKey(royale.modules.module.ModuleStructure) -> a
@@ -2608,10 +2610,10 @@ royale.screens.account.AccountEntry -> royale.e.a.a:
     48:48:void setSkin(net.minecraft.class_2960) -> a
     50:50:boolean isPinned() -> H
     53:54:void setPinned(boolean) -> i
-    56:57:void togglePinned() -> Q
+    56:57:void togglePinned() -> R
     59:59:int getOriginalIndex() -> L
     62:63:void setOriginalIndex(int) -> j
-    65:66:void reloadSkin() -> R
+    65:66:void reloadSkin() -> S
 royale.screens.account.AccountRenderer -> royale.e.a.b:
 # {"fileName":"AccountRenderer.java","id":"sourceFile"}
     float BLUR_RADIUS -> Z
@@ -2641,7 +2643,7 @@ royale.screens.account.SkinManager -> royale.e.a.c:
     55:84:void loadSkinAsync(java.lang.String) -> k
     93:119:java.util.UUID fetchUUID(java.lang.String) -> a
     124:130:java.util.UUID parseUUID(java.lang.String) -> b
-    135:137:void clearCache() -> S
+    135:137:void clearCache() -> T
     140:144:void removeSkin(java.lang.String) -> l
     147:149:void reloadSkin(java.lang.String) -> m
     60:83:void lambda$loadSkinAsync$1(java.lang.String,java.lang.String) -> c
@@ -2667,13 +2669,13 @@ royale.screens.clickgui.ClickGui -> royale.e.b.a:
     float lastDelta -> ae
     34:50:void <init>() -> <init>
     52:52:boolean isClosing() -> I
-    55:73:void method_25426() -> T
-    75:87:void updateModules() -> U
-    89:94:void openGui() -> V
-    96:99:void method_25393() -> W
+    55:73:void method_25426() -> U
+    75:87:void updateModules() -> V
+    89:94:void openGui() -> W
+    96:99:void method_25393() -> X
     101:105:float[] calculateBackground(float) -> a
     108:112:boolean isAnyBindListening() -> J
-    115:129:void updateHintAnimation() -> X
+    115:129:void updateHintAnimation() -> Y
     131:131:boolean isModuleCategory(royale.modules.module.category.ModuleCategory) -> a
     134:138:void method_25394(net.minecraft.class_332,int,int,float) -> a
     140:200:void renderOverlay(net.minecraft.class_332,net.minecraft.class_9779) -> a
@@ -2684,9 +2686,9 @@ royale.screens.clickgui.ClickGui -> royale.e.b.a:
     443:459:boolean method_25400(net.minecraft.class_11905) -> a
     462:462:boolean method_25421() -> K
     465:470:int getCurrentGuiScale() -> M
-    473:487:void finishCloseImmediately() -> Y
+    473:487:void finishCloseImmediately() -> Z
     489:489:boolean method_25422() -> L
-    492:501:void method_25419() -> Z
+    492:501:void method_25419() -> aa
     32:32:void <clinit>() -> <clinit>
 royale.screens.clickgui.impl.DragHandler -> royale.e.b.a.a:
 # {"fileName":"DragHandler.java","id":"sourceFile"}
@@ -2724,8 +2726,8 @@ royale.screens.clickgui.impl.DragHandler -> royale.e.b.a.a:
     18:18:long getLastUpdateTime() -> d
     20:45:void update(double,double) -> a
     47:55:boolean startDrag(double,double,float,float,int,int) -> a
-    58:60:void reset() -> aa
-    62:63:void stopDrag() -> ab
+    58:60:void reset() -> ab
+    62:63:void stopDrag() -> ac
     65:69:boolean isResetNeeded(int,int) -> a
 royale.screens.clickgui.impl.background.BackgroundComponent -> royale.e.b.a.a.a:
 # {"fileName":"BackgroundComponent.java","id":"sourceFile"}
@@ -2853,29 +2855,29 @@ royale.screens.clickgui.impl.background.search.SearchHandler -> royale.e.b.a.a.b
     106:119:void setSearchActive(boolean) -> k
     122:152:void updateAnimations(float) -> p
     155:164:float updateAnimation(float,float,float,float) -> b
-    168:179:void updateResultAnimations() -> ac
+    168:179:void updateResultAnimations() -> ad
     182:188:void updateScrollAnimation(float) -> q
     191:191:float easeOutCubic(float) -> c
     195:195:boolean hasSearchSelection() -> N
     201:201:int getSearchSelectionStart() -> P
     205:205:int getSearchSelectionEnd() -> Q
-    209:211:void clearSearchSelection() -> ad
-    214:217:void selectAllSearchText() -> ae
-    220:230:void deleteSelectedSearchText() -> af
+    209:211:void clearSearchSelection() -> ae
+    214:217:void selectAllSearchText() -> af
+    220:230:void deleteSelectedSearchText() -> ag
     233:236:java.lang.String getSelectedSearchText() -> v
-    240:243:void copySearchToClipboard() -> ag
-    246:265:void pasteToSearch() -> ah
+    240:243:void copySearchToClipboard() -> ah
+    246:265:void pasteToSearch() -> ai
     268:270:boolean isControlDown() -> O
     274:276:boolean isShiftDown() -> P
-    280:333:void updateSearchResults() -> ai
+    280:333:void updateSearchResults() -> aj
     336:350:boolean handleSearchChar(char) -> a
     354:451:boolean handleSearchKey(int) -> c
-    457:475:void handleLeftKey() -> aj
-    478:496:void handleRightKey() -> ak
-    499:509:void handleHomeKey() -> al
-    512:523:void handleEndKey() -> am
+    457:475:void handleLeftKey() -> ak
+    478:496:void handleRightKey() -> al
+    499:509:void handleHomeKey() -> am
+    512:523:void handleEndKey() -> an
     526:532:void handleSearchScroll(double,float) -> a
-    535:536:void clampTargetScroll() -> an
+    535:536:void clampTargetScroll() -> ao
     539:542:void clampTargetScroll(float) -> r
     545:545:float getSearchResultHeight() -> O
     549:550:void setHoveredSearchIndex(int) -> k
@@ -2914,7 +2916,7 @@ royale.screens.clickgui.impl.configs.ConfigsRenderer -> royale.e.b.a.b.a:
     108:108:boolean charTyped(char,int) -> a
     110:110:void mouseReleased(double,double,int) -> a
     112:112:boolean isEditing() -> Q
-    115:116:void cancelEditing() -> ao
+    115:116:void cancelEditing() -> ap
     118:118:float clamp01(float) -> d
 royale.screens.clickgui.impl.configs.handler.ConfigAnimationHandler -> royale.e.b.a.b.a.a:
 # {"fileName":"ConfigAnimationHandler.java","id":"sourceFile"}
@@ -2941,7 +2943,7 @@ royale.screens.clickgui.impl.configs.handler.ConfigAnimationHandler -> royale.e.
     15:15:float getCursorBlink() -> S
     16:16:float getSelectedAnimation() -> T
     17:17:long getLastUpdateTime() -> d
-    19:27:void reset() -> aa
+    19:27:void reset() -> ab
     29:34:void initItemAnimations(java.util.List) -> g
     36:44:void update(boolean,java.util.List,boolean) -> a
     46:54:void updatePanelAnimations(boolean,float) -> a
@@ -2977,7 +2979,7 @@ royale.screens.clickgui.impl.configs.handler.ConfigDataHandler -> royale.e.b.a.b
     float scrollTopFade -> aP
     float scrollBottomFade -> aQ
     22:35:void <init>(royale.screens.clickgui.impl.configs.handler.ConfigAnimationHandler) -> <init>
-    38:73:void refreshConfigs() -> ap
+    38:73:void refreshConfigs() -> aq
     76:77:void updateScroll(float) -> t
     80:89:void updateScrollFades(float) -> u
     92:96:void handleScroll(double,float) -> b
@@ -2986,21 +2988,21 @@ royale.screens.clickgui.impl.configs.handler.ConfigDataHandler -> royale.e.b.a.b
     153:171:boolean refreshConfig(java.lang.String) -> n
     177:196:boolean deleteConfig(java.lang.String) -> o
     202:235:boolean renameConfig(java.lang.String,java.lang.String) -> d
-    240:245:void toggleCreating() -> aq
-    248:251:void startCreating() -> ar
+    240:245:void toggleCreating() -> ar
+    248:251:void startCreating() -> as
     254:257:void startRenaming(java.lang.String) -> n
-    260:263:void cancelEditing() -> ao
+    260:263:void cancelEditing() -> ap
     266:266:boolean isRenaming() -> S
     270:273:void appendChar(char) -> a
-    276:279:void removeLastChar() -> as
-    282:283:void clearNewConfigName() -> at
+    276:279:void removeLastChar() -> at
+    282:283:void clearNewConfigName() -> au
     286:286:boolean isAllowedChar(char) -> b
     290:297:boolean isValidName(java.lang.String) -> p
     301:301:boolean isSelectedConfig(java.lang.String) -> q
     305:312:java.lang.String findConfigIgnoreCase(java.lang.String) -> j
     316:316:java.nio.file.Path getSelectedConfigPath() -> b
     321:329:java.lang.String readPersistedSelectedConfig() -> w
-    335:347:void persistSelectedConfig() -> au
+    335:347:void persistSelectedConfig() -> av
     350:372:void migrateLegacyConfigs(java.nio.file.Path) -> b
     375:375:java.util.List getConfigs() -> i
     379:379:royale.screens.clickgui.impl.configs.handler.ConfigAnimationHandler getAnimationHandler() -> a
@@ -3033,7 +3035,7 @@ royale.screens.clickgui.impl.configs.render.ConfigCreateBoxRenderer -> royale.e.
     long lastUpdateTime -> t
     11:17:void <init>(royale.screens.clickgui.impl.configs.handler.ConfigDataHandler,royale.screens.clickgui.impl.configs.render.ConfigNotificationRenderer) -> <init>
     19:28:void render(float,float,float) -> d
-    30:39:void updateAnimations() -> av
+    30:39:void updateAnimations() -> aw
     41:45:void renderBackground(float,float,float) -> e
     47:67:void renderInput(float,float,float) -> f
     69:75:void renderCursor(float,float,float,java.lang.String,float) -> a
@@ -3041,7 +3043,7 @@ royale.screens.clickgui.impl.configs.render.ConfigCreateBoxRenderer -> royale.e.
     90:99:boolean mouseClicked(double,double,int,float,float) -> a
     102:117:boolean keyPressed(int) -> d
     120:124:boolean charTyped(char) -> c
-    127:152:void applyChanges() -> aw
+    127:152:void applyChanges() -> ax
 royale.screens.clickgui.impl.configs.render.ConfigHeaderRenderer -> royale.e.b.a.b.b.b:
 # {"fileName":"ConfigHeaderRenderer.java","id":"sourceFile"}
     royale.screens.clickgui.impl.configs.handler.ConfigDataHandler dataHandler -> c
@@ -3084,7 +3086,7 @@ royale.screens.clickgui.impl.configs.render.ConfigNotificationRenderer -> royale
     long lastUpdateTime -> t
     7:12:void <init>() -> <init>
     15:28:void render(float,float,float) -> d
-    31:44:void updateAnimation() -> ax
+    31:44:void updateAnimation() -> ay
     47:51:void show(java.lang.String,royale.screens.clickgui.impl.configs.render.ConfigNotificationRenderer$NotificationType) -> a
 royale.screens.clickgui.impl.configs.render.ConfigNotificationRenderer$NotificationType -> royale.e.b.a.b.b.d$a:
 # {"fileName":"ConfigNotificationRenderer.java","id":"sourceFile"}
@@ -3158,7 +3160,7 @@ royale.screens.clickgui.impl.module.ModuleComponent -> royale.e.b.a.c.a:
     38:38:float getLastListHeight() -> ab
     22:47:void <init>() -> <init>
     49:72:void updateModules(java.util.List,royale.modules.module.category.ModuleCategory) -> a
-    74:83:void rebuildDisplayList() -> ay
+    74:83:void rebuildDisplayList() -> az
     85:87:void toggleFavorite(royale.modules.module.ModuleStructure) -> c
     89:90:void selectModuleFromSearch(royale.modules.module.ModuleStructure) -> d
     92:100:void scrollToModuleAndHighlight(royale.modules.module.ModuleStructure) -> e
@@ -3292,22 +3294,22 @@ royale.screens.clickgui.impl.module.handler.ModuleAnimationHandler -> royale.e.b
     59:66:void prepareTransition(java.util.List,java.util.List) -> b
     68:88:void initModuleAnimations(java.util.List) -> l
     90:99:void initSettingAnimations(java.util.List) -> m
-    101:105:void clearSettingAnimations() -> az
+    101:105:void clearSettingAnimations() -> aA
     107:115:void updateAll(java.util.List,royale.modules.module.ModuleStructure,royale.modules.module.ModuleStructure,float,float,float,float,float,float,float) -> a
-    117:128:void updateCategoryTransition() -> aA
+    117:128:void updateCategoryTransition() -> aB
     130:140:void updateModuleAnimations(java.util.List) -> n
     142:150:void updateStateAnimations(java.util.List) -> o
     152:160:void updateSelectedIconAnimations(java.util.List,royale.modules.module.ModuleStructure) -> a
     162:178:void updateFavoriteAnimations(java.util.List) -> p
     180:190:void updateBindAnimations(java.util.List,royale.modules.module.ModuleStructure) -> b
     192:214:void updateHoverAnimations(java.util.List,float,float,float,float,float,float,float) -> a
-    216:231:void updateHighlightAnimation() -> aB
+    216:231:void updateHighlightAnimation() -> aC
     233:243:void updateSettingAnimations(java.util.List) -> q
     245:257:void updateVisibilityAnimations(java.util.List) -> r
     259:262:void startHighlight(royale.modules.module.ModuleStructure) -> i
     264:266:void setScrollTarget(royale.modules.module.ModuleStructure) -> j
     268:268:boolean shouldScrollToModule() -> X
-    271:273:void clearScrollTarget() -> aC
+    271:273:void clearScrollTarget() -> aD
     275:277:float animateTowards(float,float,float,float) -> c
     280:280:float easeOutCubic(float) -> c
     283:283:float easeInCubic(float) -> e
@@ -3350,8 +3352,8 @@ royale.screens.clickgui.impl.module.handler.ModuleScrollHandler -> royale.e.b.a.
     8:8:float getLastSettingsPanelHeight() -> al
     9:9:float getLastModuleListHeight() -> am
     10:10:long getLastScrollUpdateTime() -> m
-    15:16:void resetModuleScroll() -> aD
-    18:19:void resetSettingScroll() -> aE
+    15:16:void resetModuleScroll() -> aE
+    18:19:void resetSettingScroll() -> aF
     21:26:void update(float) -> G
     28:30:double smoothScroll(double,double,float) -> a
     33:43:void updateFades(int,float,float,float) -> a
@@ -3430,7 +3432,7 @@ royale.screens.clickgui.impl.settingsrender.BindComponent -> royale.e.b.a.d.a:
     167:240:java.lang.String getBindDisplayName(int,int) -> a
     243:245:boolean isBindHover(double,double) -> a
     248:258:void handleScrollBind(double) -> h
-    260:266:void handleMiddleMouseBind() -> aF
+    260:266:void handleMiddleMouseBind() -> aG
     268:287:boolean mouseClicked(double,double,int) -> a
     290:309:boolean keyPressed(int,int,int) -> a
     311:311:void tick() -> a
@@ -3527,13 +3529,13 @@ royale.screens.clickgui.impl.settingsrender.ColorComponent -> royale.e.b.a.d.d:
     135:135:int getHexSelectionStart() -> U
     138:138:int getHexSelectionEnd() -> V
     141:142:java.lang.String getHexSelectedText() -> A
-    145:147:void clearHexSelection() -> aG
-    149:152:void selectAllHexText() -> aH
-    154:161:void deleteHexSelectedText() -> aI
-    163:178:void pasteHexFromClipboard() -> aJ
-    180:185:void copyHexToClipboard() -> aK
+    145:147:void clearHexSelection() -> aH
+    149:152:void selectAllHexText() -> aI
+    154:161:void deleteHexSelectedText() -> aJ
+    163:178:void pasteHexFromClipboard() -> aK
+    180:185:void copyHexToClipboard() -> aL
     187:202:void moveHexCursor(int) -> m
-    204:212:void updateHexSelectionAfterCursorMove() -> aL
+    204:212:void updateHexSelectionAfterCursorMove() -> aM
     214:256:void render(net.minecraft.class_332,int,int,float) -> b
     258:268:void renderColorPreview(int,int) -> c
     270:292:void renderColorPicker(net.minecraft.class_332,int,int,float) -> c
@@ -3558,8 +3560,8 @@ royale.screens.clickgui.impl.settingsrender.ColorComponent -> royale.e.b.a.d.d:
     636:640:void updateHue(double) -> i
     642:646:void updateAlpha(double) -> j
     648:653:java.lang.String getHexString() -> C
-    656:658:void updateHexFromColor() -> aM
-    660:688:void applyHexInput() -> aN
+    656:658:void updateHexFromColor() -> aN
+    660:688:void applyHexInput() -> aO
     689:689:void tick() -> a
     691:691:boolean isHover(double,double) -> b
     694:696:float getTotalHeight() -> an
@@ -3659,7 +3661,7 @@ royale.screens.clickgui.impl.settingsrender.SelectComponent -> royale.e.b.a.d.f:
     291:293:float getTotalHeight() -> an
 royale.screens.clickgui.impl.settingsrender.SliderComponent -> royale.e.b.a.d.g:
 # {"fileName":"SliderComponent.java","id":"sourceFile"}
-    royale.modules.module.setting.implement.SliderSettings sliderSettings -> O
+    royale.modules.module.setting.implement.SliderSettings sliderSettings -> N
     boolean dragging -> B
     float animatedPercentage -> db
     float knobAnimation -> dc
@@ -3681,7 +3683,7 @@ royale.screens.clickgui.impl.settingsrender.SliderComponent -> royale.e.b.a.d.g:
     60:64:float lerp(float,float,float) -> a
     67:72:void updateAnimations(int,int,float) -> a
     74:129:void renderValueInput(int,int) -> d
-    131:150:void renderSlider() -> aO
+    131:150:void renderSlider() -> aP
     152:157:boolean isValueHover(double,double) -> k
     160:180:boolean mouseClicked(double,double,int) -> a
     183:185:boolean isSliderHover(double,double) -> l
@@ -3691,7 +3693,7 @@ royale.screens.clickgui.impl.settingsrender.SliderComponent -> royale.e.b.a.d.g:
     239:248:boolean charTyped(char,int) -> a
     251:251:boolean isValidInputChar(char) -> e
     254:281:boolean isValidInputFormat(java.lang.String) -> r
-    284:300:void applyInputValue() -> aP
+    284:300:void applyInputValue() -> aQ
     302:312:void updateValue(double) -> k
     313:313:void tick() -> a
     315:315:boolean isHover(double,double) -> b
@@ -3731,21 +3733,21 @@ royale.screens.clickgui.impl.settingsrender.TextComponent -> royale.e.b.a.d.h:
     183:237:boolean keyPressed(int,int,int) -> a
     240:252:boolean charTyped(char,int) -> a
     254:254:void tick() -> a
-    256:261:void applyText() -> aQ
-    263:268:void handleBackspace() -> aR
-    270:275:void handleDelete() -> aS
+    256:261:void applyText() -> aR
+    263:268:void handleBackspace() -> aS
+    270:275:void handleDelete() -> aT
     277:292:void moveCursor(int) -> n
-    294:302:void updateSelectionAfterCursorMove() -> aT
-    304:320:void pasteFromClipboard() -> aU
-    322:325:void copyToClipboard() -> aV
-    327:330:void selectAllText() -> aW
+    294:302:void updateSelectionAfterCursorMove() -> aU
+    304:320:void pasteFromClipboard() -> aV
+    322:325:void copyToClipboard() -> aW
+    327:330:void selectAllText() -> aX
     332:342:void replaceText(int,int,java.lang.String) -> a
-    344:347:void deleteSelectedText() -> aX
+    344:347:void deleteSelectedText() -> aY
     349:349:boolean hasSelection() -> ad
     352:353:java.lang.String getSelectedText() -> D
     356:356:int getStartOfSelection() -> W
     359:359:int getEndOfSelection() -> X
-    362:364:void clearSelection() -> aY
+    362:364:void clearSelection() -> aZ
     366:381:int getCursorIndexAt(double) -> b
     384:384:boolean isHover(double,double) -> b
     387:387:boolean isFocused() -> ae
@@ -3860,9 +3862,9 @@ royale.screens.hud.Notifications -> royale.e.c.f:
     38:38:float getVirtualHeight() -> ar
     43:43:boolean visible() -> a
     49:59:void tick() -> a
-    62:71:void updatePosition() -> aZ
+    62:71:void updatePosition() -> ba
     74:88:void addNotification(java.lang.String,long) -> a
-    91:98:void updateTargetPositions() -> ba
+    91:98:void updateTargetPositions() -> bb
     101:101:int clampAlpha(int) -> c
     105:105:int clampAlpha(float) -> a
     110:157:void drawDraggable(net.minecraft.class_332,int) -> a
@@ -4083,11 +4085,11 @@ royale.screens.loading.Loading -> royale.e.d.a:
     191:208:void renderLogo(net.minecraft.class_332,int,int,float) -> d
     211:239:void renderLoadingText(net.minecraft.class_332,int,int,float) -> e
     242:259:void drawLoadingLine(net.minecraft.class_332,java.lang.String,float,float,float,float) -> a
-    262:275:void markComplete() -> bb
+    262:275:void markComplete() -> bc
     278:278:boolean isReadyToClose() -> ag
     282:283:void setProgress(float) -> M
     286:286:float getProgress() -> t
-    290:315:void reset() -> aa
+    290:315:void reset() -> ab
     318:318:long getStartTime() -> n
     322:325:long getStageDisplayDuration(int) -> a
     329:329:int withAlpha(int,int) -> a
@@ -4143,11 +4145,11 @@ royale.screens.menu.MainMenuScreen -> royale.e.e.a:
     float scrollOffset -> cD
     float targetScrollOffset -> dl
     57:89:void <init>() -> <init>
-    92:93:void method_25426() -> T
+    92:93:void method_25426() -> U
     96:96:int getFixedScaledWidth() -> aa
     100:100:int getFixedScaledHeight() -> ab
     104:105:float toFixedCoord(double) -> a
-    109:114:void unlock() -> bc
+    109:114:void unlock() -> bd
     117:121:float getUnlockTextAlpha(long) -> a
     125:132:float getMenuProgress(long) -> b
     136:136:float easeOutCubic(float) -> c
@@ -4214,7 +4216,7 @@ royale.screens.pause.BackgroundPauseScreen -> royale.e.f.a:
     55:56:boolean method_25404(net.minecraft.class_11908) -> a
     61:62:boolean method_25400(net.minecraft.class_11905) -> a
     67:67:boolean method_25421() -> K
-    71:74:void closeFromInput() -> bd
+    71:74:void closeFromInput() -> be
     15:16:void <clinit>() -> <clinit>
 royale.util.ColorUtil -> royale.util.a:
 # {"fileName":"ColorUtil.java","id":"sourceFile"}
@@ -4326,7 +4328,7 @@ royale.util.ColorUtil -> royale.util.a:
     528:528:int getOutline(float) -> i
     532:532:int getOutline() -> aj
     535:536:void <init>() -> <init>
-    541:548:void lambda$static$1() -> be
+    541:548:void lambda$static$1() -> bf
     404:406:royale.util.ColorUtil$CacheEntry lambda$getColor$0(int,int,int,int,royale.util.ColorUtil$ColorKey) -> a
     20:557:void <clinit>() -> <clinit>
 royale.util.ColorUtil$1 -> royale.util.a$1:
@@ -4447,13 +4449,13 @@ royale.util.angle.AngleConnection -> royale.util.a.c:
     67:68:void rotateTo(royale.util.angle.Angle,int,royale.util.angle.AngleConfig,royale.util.math.TaskPriority,royale.modules.module.ModuleStructure) -> a
     70:71:void rotateTo(royale.util.angle.Angle,royale.util.angle.AngleConfig,royale.util.math.TaskPriority,royale.modules.module.ModuleStructure) -> a
     73:75:void rotateTo(royale.util.angle.AngleConstructor,royale.util.math.TaskPriority,royale.modules.module.ModuleStructure) -> a
-    77:113:void update() -> M
+    77:113:void update() -> N
     115:115:double computeRotationDifference(royale.util.angle.Angle,royale.util.angle.Angle) -> a
     118:118:float computeAngleDifference(float,float) -> c
     121:132:net.minecraft.class_243 fixVelocity(net.minecraft.class_243,net.minecraft.class_243,float) -> a
-    135:136:void clear() -> bf
-    137:137:void startReturning() -> bg
-    139:144:void reset() -> aa
+    135:136:void clear() -> bg
+    137:137:void startReturning() -> bh
+    139:144:void reset() -> ab
     147:151:void onPlayerVelocityStrafe(royale.events.impl.PlayerVelocityStrafeEvent) -> a
     154:157:void onTick(royale.events.impl.TickEvent) -> a
     229:229:void onPacket(royale.events.impl.PacketEvent) -> a
@@ -4519,14 +4521,14 @@ royale.util.animations.Animation -> royale.util.b.a:
     3:9:void <init>() -> <init>
     5:5:royale.util.animations.Animation setMs(int) -> a
     5:5:royale.util.animations.Animation setValue(double) -> a
-    11:12:void reset() -> aa
-    13:13:void update() -> M
+    11:12:void reset() -> ab
+    13:13:void update() -> N
     15:15:boolean isDone() -> al
     18:18:boolean isFinished(royale.util.animations.Direction) -> a
     21:21:royale.util.animations.Direction getDirection() -> a
     24:28:void setDirection(royale.util.animations.Direction) -> a
     30:30:boolean isDirection(royale.util.animations.Direction) -> b
-    33:35:void adjustTimer() -> bh
+    33:35:void adjustTimer() -> bi
     37:40:java.lang.Double getOutput() -> a
     43:45:double endValue() -> n
 royale.util.animations.AnimationCalculation -> royale.util.b.b:
@@ -4589,7 +4591,7 @@ royale.util.animations.FadeAnimation -> royale.util.b.h:
     8:18:void <init>(long,royale.util.animations.Easing) -> <init>
     20:26:void switchDirection(boolean) -> o
     28:29:void setDirection(boolean) -> p
-    31:33:void reset() -> aa
+    31:33:void reset() -> ab
     35:43:float get() -> au
     46:46:boolean isDone() -> al
     49:49:boolean isFullyHidden() -> R
@@ -4661,9 +4663,9 @@ royale.util.animations.SweepAnim -> royale.util.b.n:
     boolean active -> ar
     long startTime -> a
     9:15:void <init>(float) -> <init>
-    17:23:void start() -> bi
-    25:29:void reset() -> aa
-    31:40:void update() -> M
+    17:23:void start() -> bj
+    25:29:void reset() -> ab
+    31:40:void update() -> N
     42:42:float getProgress() -> t
     45:45:boolean isCompleted() -> aq
     48:48:boolean isActive() -> ar
@@ -4691,7 +4693,7 @@ royale.util.chat.ChatHistoryManager -> royale.util.c.a:
     boolean loaded -> as
     44:57:void <init>() -> <init>
     60:60:royale.util.chat.ChatHistoryManager getInstance() -> a
-    64:91:void ensureLoaded() -> bj
+    64:91:void ensureLoaded() -> bk
     94:98:void appendIncoming(net.minecraft.class_2561) -> d
     101:102:void appendOutgoing(java.lang.String) -> s
     105:106:void appendSystem(java.lang.String) -> t
@@ -4712,7 +4714,7 @@ royale.util.chat.ChatHistoryManager -> royale.util.c.a:
     288:301:void addLoadedLine(java.lang.String) -> u
     304:309:void addInMemory(java.lang.String,java.lang.String,java.lang.String,java.lang.String,long) -> a
     313:319:royale.util.chat.ChatHistoryManager$HistoryEntry buildHistoryEntry(java.lang.String,java.lang.String,java.lang.String,java.lang.String,long) -> a
-    331:331:void trimInMemoryIfNeeded() -> bk
+    331:331:void trimInMemoryIfNeeded() -> bl
     341:348:long parseTimestampMillis(java.lang.String) -> a
     353:390:royale.util.chat.ChatHistoryManager$SenderParseResult parseSender(java.lang.String) -> a
     394:398:boolean isValidSender(java.lang.String) -> s
@@ -4800,7 +4802,7 @@ royale.util.color.ColorAssist -> royale.util.d.a:
     210:210:int computeColor(int,int,int,int) -> e
     214:214:java.lang.String formatting(int) -> d
     217:218:void <init>() -> <init>
-    223:230:void lambda$static$1() -> be
+    223:230:void lambda$static$1() -> bf
     198:200:royale.util.color.ColorAssist$CacheEntry lambda$getColor$0(int,int,int,int,royale.util.color.ColorAssist$ColorKey) -> a
     15:231:void <clinit>() -> <clinit>
 royale.util.color.ColorAssist$CacheEntry -> royale.util.d.a$a:
@@ -4841,7 +4843,7 @@ royale.util.combat.CombatTargetPriority -> royale.util.e.a:
     28:52:net.minecraft.class_1309 resolvePreferredTarget(double) -> a
     56:60:boolean isUsableForClient(net.minecraft.class_310,net.minecraft.class_1657,double) -> a
     64:64:boolean isUsablePlayer(net.minecraft.class_1657) -> d
-    68:70:void clear() -> bf
+    68:70:void clear() -> bg
     12:13:void <clinit>() -> <clinit>
 royale.util.config.ConfigSystem -> royale.util.f.a:
 # {"fileName":"ConfigSystem.java","id":"sourceFile"}
@@ -4855,22 +4857,22 @@ royale.util.config.ConfigSystem -> royale.util.f.a:
     24:32:void <init>() -> <init>
     35:35:royale.util.config.ConfigSystem getInstance() -> b
     39:47:void init() -> init
-    50:54:void registerShutdownHook() -> bl
-    57:78:void save() -> bm
+    50:54:void registerShutdownHook() -> bm
+    57:78:void save() -> bn
     81:81:java.util.concurrent.CompletableFuture saveAsync() -> a
-    85:101:void load() -> bn
-    105:117:void migrateLegacyAutoConfig() -> bo
-    120:130:void shutdown() -> bp
-    133:135:void reload() -> bq
+    85:101:void load() -> bo
+    105:117:void migrateLegacyAutoConfig() -> bp
+    120:130:void shutdown() -> bq
+    133:135:void reload() -> br
     138:138:boolean isInitialized() -> e
     142:142:boolean isSaving() -> av
     146:146:royale.util.config.impl.autosaver.ConfigAutoSaver getAutoSaver() -> a
-    51:53:void lambda$registerShutdownHook$0() -> br
+    51:53:void lambda$registerShutdownHook$0() -> bs
 royale.util.config.impl.ConfigFileHandler -> royale.util.f.a.a:
 # {"fileName":"ConfigFileHandler.java","id":"sourceFile"}
     java.util.concurrent.locks.ReentrantReadWriteLock lock -> a
     11:13:void <init>() -> <init>
-    16:20:void createDirectories() -> bs
+    16:20:void createDirectories() -> bt
     22:34:boolean write(java.lang.String) -> u
     37:49:java.lang.String read() -> M
     52:52:boolean exists() -> aw
@@ -4913,16 +4915,16 @@ royale.util.config.impl.account.AccountConfig -> royale.util.f.a.a.a:
     java.lang.String activeAccountSkin -> bf
     22:34:void <init>() -> <init>
     36:39:royale.util.config.impl.account.AccountConfig getInstance() -> a
-    43:65:void save() -> bm
-    68:111:void load() -> bn
+    43:65:void save() -> bn
+    68:111:void load() -> bo
     113:113:java.util.List getAccounts() -> z
     116:120:java.util.List getSortedAccounts() -> A
     123:126:void addAccount(royale.screens.account.AccountEntry) -> b
     128:131:void removeAccount(royale.screens.account.AccountEntry) -> c
     133:140:void removeAccountByIndex(int) -> p
-    142:147:void clearAllAccounts() -> bt
+    142:147:void clearAllAccounts() -> bu
     149:153:royale.screens.account.AccountEntry getAccountBySortedIndex(int) -> a
-    156:165:void updateOriginalIndices() -> bu
+    156:165:void updateOriginalIndices() -> bv
     167:173:void togglePin(int) -> q
     175:175:java.lang.String getActiveAccountName() -> O
     178:178:java.lang.String getActiveAccountDate() -> P
@@ -4939,10 +4941,10 @@ royale.util.config.impl.autosaver.ConfigAutoSaver -> royale.util.f.a.b.a:
     java.util.concurrent.atomic.AtomicLong lastSaveTime -> a
     java.util.concurrent.ScheduledFuture scheduledTask -> a
     18:28:void <init>(java.lang.Runnable) -> <init>
-    30:34:void start() -> bi
-    36:45:void executeSave() -> bv
+    30:34:void start() -> bj
+    36:45:void executeSave() -> bw
     47:51:void stop() -> k
-    53:63:void shutdown() -> bp
+    53:63:void shutdown() -> bq
     65:65:long getLastSaveTime() -> s
     68:68:boolean isRunning() -> ax
     23:26:java.lang.Thread lambda$new$0(java.lang.Runnable) -> b
@@ -4957,8 +4959,8 @@ royale.util.config.impl.bind.BindConfig -> royale.util.f.a.c.a:
     29:32:royale.util.config.impl.bind.BindConfig getInstance() -> a
     35:36:void setKey(int) -> setKey
     38:40:void setKeyAndSave(int) -> r
-    43:49:void save() -> bm
-    52:64:void load() -> bn
+    43:49:void save() -> bn
+    52:64:void load() -> bo
 royale.util.config.impl.consolelogger.Logger -> royale.util.f.a.d.a:
 # {"fileName":"Logger.java","id":"sourceFile"}
     java.lang.String RESET -> bg
@@ -4978,8 +4980,8 @@ royale.util.config.impl.drag.DragConfig -> royale.util.f.a.e.a:
     java.nio.file.Path configPath -> d
     18:26:void <init>() -> <init>
     28:31:royale.util.config.impl.drag.DragConfig getInstance() -> a
-    35:52:void save() -> bm
-    55:91:void load() -> bn
+    35:52:void save() -> bn
+    55:91:void load() -> bo
     93:95:royale.client.draggables.HudManager getHudManager() -> a
 royale.util.config.impl.friend.FriendConfig -> royale.util.f.a.f.a:
 # {"fileName":"FriendConfig.java","id":"sourceFile"}
@@ -4988,8 +4990,8 @@ royale.util.config.impl.friend.FriendConfig -> royale.util.f.a.f.a:
     java.nio.file.Path configPath -> e
     18:26:void <init>() -> <init>
     28:31:royale.util.config.impl.friend.FriendConfig getInstance() -> a
-    35:43:void save() -> bm
-    46:58:void load() -> bn
+    35:43:void save() -> bn
+    46:58:void load() -> bo
     52:52:void lambda$load$0(java.util.List,com.google.gson.JsonElement) -> a
 royale.util.config.impl.macro.MacroConfig -> royale.util.f.a.g.a:
 # {"fileName":"MacroConfig.java","id":"sourceFile"}
@@ -4998,8 +5000,8 @@ royale.util.config.impl.macro.MacroConfig -> royale.util.f.a.g.a:
     java.nio.file.Path configPath -> f
     20:28:void <init>() -> <init>
     30:33:royale.util.config.impl.macro.MacroConfig getInstance() -> a
-    37:49:void save() -> bm
-    52:70:void load() -> bn
+    37:49:void save() -> bn
+    52:70:void load() -> bo
     59:64:void lambda$load$0(java.util.List,com.google.gson.JsonElement) -> a
 royale.util.config.impl.prefix.PrefixConfig -> royale.util.f.a.h.a:
 # {"fileName":"PrefixConfig.java","id":"sourceFile"}
@@ -5012,8 +5014,8 @@ royale.util.config.impl.prefix.PrefixConfig -> royale.util.f.a.h.a:
     28:31:royale.util.config.impl.prefix.PrefixConfig getInstance() -> a
     34:38:void setPrefix(java.lang.String) -> b
     40:42:void setPrefixAndSave(java.lang.String) -> z
-    45:51:void save() -> bm
-    54:69:void load() -> bn
+    45:51:void save() -> bn
+    54:69:void load() -> bo
 royale.util.config.impl.staff.StaffConfig -> royale.util.f.a.i.a:
 # {"fileName":"StaffConfig.java","id":"sourceFile"}
     com.google.gson.Gson gson -> h
@@ -5021,8 +5023,8 @@ royale.util.config.impl.staff.StaffConfig -> royale.util.f.a.i.a:
     java.nio.file.Path configPath -> h
     18:26:void <init>() -> <init>
     28:31:royale.util.config.impl.staff.StaffConfig getInstance() -> a
-    35:43:void save() -> bm
-    46:58:void load() -> bn
+    35:43:void save() -> bn
+    46:58:void load() -> bo
     52:52:void lambda$load$0(java.util.List,com.google.gson.JsonElement) -> a
 royale.util.config.impl.way.WayConfig -> royale.util.f.a.j.a:
 # {"fileName":"WayConfig.java","id":"sourceFile"}
@@ -5031,8 +5033,8 @@ royale.util.config.impl.way.WayConfig -> royale.util.f.a.j.a:
     java.nio.file.Path configPath -> i
     21:29:void <init>() -> <init>
     31:34:royale.util.config.impl.way.WayConfig getInstance() -> a
-    38:52:void save() -> bm
-    55:75:void load() -> bn
+    38:52:void save() -> bn
+    55:75:void load() -> bo
     62:69:void lambda$load$0(java.util.List,com.google.gson.JsonElement) -> a
 royale.util.interfaces.AbstractComponent -> royale.util.g.a:
 # {"fileName":"AbstractComponent.java","id":"sourceFile"}
@@ -5143,15 +5145,15 @@ royale.util.inventory.InventoryUtils -> royale.util.h.b:
     270:272:void click(int,int,net.minecraft.class_1713) -> a
     274:278:void selectSlot(int) -> u
     280:282:void selectSlotSilent(int) -> v
-    284:287:void saveSlot() -> bw
-    289:293:void restoreSlot() -> bx
-    295:299:void restoreSlotSilent() -> by
+    284:287:void saveSlot() -> bx
+    289:293:void restoreSlot() -> by
+    295:299:void restoreSlotSilent() -> bz
     301:311:void silentUseHotbarItem(int) -> w
     313:319:void silentSwapUseAndReturn(int) -> x
     321:334:void silentUseItem(net.minecraft.class_1792) -> b
     336:351:void sendUsePacket(net.minecraft.class_1268) -> b
     353:355:void use(net.minecraft.class_1268) -> c
-    357:359:void closeScreen() -> bz
+    357:359:void closeScreen() -> bA
     361:361:boolean isScreenOpen() -> aD
     364:364:int wrapSlot(int) -> n
     367:367:int currentSlot() -> aw
@@ -5181,14 +5183,14 @@ royale.util.inventory.MovementController -> royale.util.h.d:
     boolean saved -> aA
     boolean blocked -> aB
     5:21:void <init>() -> <init>
-    12:20:void saveState() -> bA
-    23:31:void block() -> bB
-    33:37:void stopSprint() -> bC
-    39:47:void restore() -> bD
-    49:56:void restoreFromCurrent() -> bE
+    12:20:void saveState() -> bB
+    23:31:void block() -> bC
+    33:37:void stopSprint() -> bD
+    39:47:void restore() -> bE
+    49:56:void restoreFromCurrent() -> bF
     58:61:boolean isPlayerStopped(double) -> a
     64:64:boolean isBlocked() -> aF
-    67:69:void reset() -> aa
+    67:69:void reset() -> ab
     71:71:boolean isKeyPressed(net.minecraft.class_304) -> a
     74:76:boolean isCurrentlyPressed(net.minecraft.class_304) -> b
     6:6:void <clinit>() -> <clinit>
@@ -5209,7 +5211,7 @@ royale.util.inventory.SwapExecutor -> royale.util.h.e:
     63:136:boolean processPhase() -> aG
     140:143:void startPhase(royale.util.inventory.SwapExecutor$Phase,int) -> a
     146:150:void cancel() -> j
-    153:157:void reset() -> aa
+    153:157:void reset() -> ab
     160:160:boolean isRunning() -> ax
     164:164:boolean isBlocking() -> aH
     168:168:royale.util.inventory.SwapExecutor$Phase getPhase() -> a
@@ -5242,7 +5244,7 @@ royale.util.inventory.SwapManager -> royale.util.h.f:
     29:34:void execute(java.lang.String,royale.util.inventory.SwapSequence) -> a
     36:40:void cancel() -> j
     42:46:void cancel(java.lang.String) -> A
-    48:51:void cancelAll() -> bF
+    48:51:void cancelAll() -> bG
     53:53:boolean isRunning() -> ax
     56:57:boolean isRunning(java.lang.String) -> v
     60:77:void swapAndUse(net.minecraft.class_1792) -> c
@@ -5252,14 +5254,14 @@ royale.util.inventory.SwapManager -> royale.util.h.f:
     106:106:void lambda$swapSlots$11(int,int) -> i
     102:102:void lambda$moveToHotbar$10(royale.util.inventory.InventoryResult,int) -> a
     93:93:void lambda$swapAndUseSilent$9(royale.util.inventory.InventoryResult,int) -> b
-    92:92:void lambda$swapAndUseSilent$8() -> bG
+    92:92:void lambda$swapAndUseSilent$8() -> bH
     91:91:void lambda$swapAndUseSilent$7(royale.util.inventory.InventoryResult,int) -> c
-    86:86:void lambda$swapAndUseSilent$6() -> bH
+    86:86:void lambda$swapAndUseSilent$6() -> bI
     85:85:void lambda$swapAndUseSilent$5(royale.util.inventory.InventoryResult) -> a
     74:74:void lambda$swapAndUse$4(royale.util.inventory.InventoryResult,int) -> d
-    73:73:void lambda$swapAndUse$3() -> bI
+    73:73:void lambda$swapAndUse$3() -> bJ
     72:72:void lambda$swapAndUse$2(royale.util.inventory.InventoryResult,int) -> e
-    67:67:void lambda$swapAndUse$1() -> bJ
+    67:67:void lambda$swapAndUse$1() -> bK
     66:66:void lambda$swapAndUse$0(royale.util.inventory.InventoryResult) -> b
     9:10:void <clinit>() -> <clinit>
 royale.util.inventory.SwapSequence -> royale.util.h.g:
@@ -5274,7 +5276,7 @@ royale.util.inventory.SwapSequence -> royale.util.h.g:
     23:26:royale.util.inventory.SwapSequence start() -> a
     30:45:void tick() -> a
     48:48:boolean isFinished() -> ap
-    52:56:void reset() -> aa
+    52:56:void reset() -> ab
     59:60:void cancel() -> j
     14:14:boolean lambda$step$0() -> aI
 royale.util.inventory.SwapSequence$SwapStep -> royale.util.h.g$a:
@@ -5347,11 +5349,11 @@ royale.util.inventory.script.Script -> royale.util.h.a.a:
     46:46:royale.util.inventory.script.Script addTickStep(int,royale.util.inventory.script.ScriptAction,java.util.function.BooleanSupplier) -> b
     50:50:royale.util.inventory.script.Script addTickStep(int,royale.util.inventory.script.ScriptAction,int) -> b
     54:56:royale.util.inventory.script.Script addTickStep(int,royale.util.inventory.script.ScriptAction,java.util.function.BooleanSupplier,int) -> b
-    60:61:void resetTime() -> bK
-    64:66:void resetStepIndex() -> bL
+    60:61:void resetTime() -> bL
+    64:66:void resetStepIndex() -> bM
     69:72:royale.util.inventory.script.Script cleanupIfFinished() -> a
     76:80:royale.util.inventory.script.Script cleanup() -> b
-    84:116:void update() -> M
+    84:116:void update() -> N
     119:120:royale.util.inventory.script.Script setLoopStrategy(royale.util.inventory.script.Script$LoopStrategy) -> a
     124:124:boolean isFinished() -> ap
     128:128:royale.util.timer.StopWatch getTime() -> c
@@ -5376,18 +5378,18 @@ royale.util.inventory.script.Script$FiniteLoopStrategy -> royale.util.h.a.a$a:
     int currentLoop -> bN
     172:174:void <init>(int) -> <init>
     178:178:boolean shouldLoop(int,int) -> b
-    183:184:void onLoop() -> bM
+    183:184:void onLoop() -> bN
     188:188:boolean isFinished() -> ap
 royale.util.inventory.script.Script$InfiniteLoopStrategy -> royale.util.h.a.a$b:
 # {"fileName":"Script.java","id":"sourceFile"}
     316:316:void <init>() -> <init>
     320:320:boolean shouldLoop(int,int) -> b
-    325:325:void onLoop() -> bM
+    325:325:void onLoop() -> bN
     329:329:boolean isFinished() -> ap
 royale.util.inventory.script.Script$LoopStrategy -> royale.util.h.a.a$c:
 # {"fileName":"Script.java","id":"sourceFile"}
     boolean shouldLoop(int,int) -> b
-    void onLoop() -> bM
+    void onLoop() -> bN
     boolean isFinished() -> ap
 royale.util.inventory.script.Script$ScriptStep -> royale.util.h.a.a$d:
 # {"fileName":"Script.java","id":"sourceFile"}
@@ -5414,7 +5416,7 @@ royale.util.inventory.script.Script$ScriptTickStep -> royale.util.h.a.a$e:
     int priority -> bP
     263:268:void <init>(int,royale.util.inventory.script.ScriptAction,java.util.function.BooleanSupplier,int) -> <init>
     272:272:int compareTo(royale.util.inventory.script.Script$ScriptTickStep) -> a
-    276:277:void decrementTicks() -> bN
+    276:277:void decrementTicks() -> bO
     280:280:int ticks() -> aH
     284:284:royale.util.inventory.script.ScriptAction action() -> a
     288:288:java.util.function.BooleanSupplier condition() -> a
@@ -5426,7 +5428,7 @@ royale.util.inventory.script.Script$ScriptTickStep -> royale.util.h.a.a$e:
     256:256:int compareTo(java.lang.Object) -> compareTo
 royale.util.inventory.script.ScriptAction -> royale.util.h.a.b:
 # {"fileName":"ScriptAction.java","id":"sourceFile"}
-    void perform() -> bO
+    void perform() -> bP
 royale.util.inventory.script.ScriptManager -> royale.util.h.a.c:
 # {"fileName":"ScriptManager.java","id":"sourceFile"}
     java.util.Map scripts -> Q
@@ -5437,11 +5439,11 @@ royale.util.inventory.script.ScriptManager -> royale.util.h.a.c:
     23:23:boolean finished(java.lang.String) -> x
     26:29:void removeScript(java.lang.String) -> B
     31:37:void cleanupScript(java.lang.String) -> C
-    39:40:void cleanupAll() -> bP
-    42:43:void clearAll() -> bQ
+    39:40:void cleanupAll() -> bQ
+    42:43:void clearAll() -> bR
     45:46:void updateScript(java.lang.String) -> D
     48:54:void updateScript(java.lang.String,java.util.function.Supplier) -> a
-    56:57:void updateAll() -> bR
+    56:57:void updateAll() -> bS
     59:59:java.util.Set getAllScriptNames() -> a
     62:62:java.util.Map getAllScripts() -> v
     65:65:boolean isNullOrEmpty(java.lang.String) -> y
@@ -5517,14 +5519,14 @@ royale.util.launcher.LauncherStatsService -> royale.util.i.a:
     java.lang.String worldType -> bx
     57:114:void <init>() -> <init>
     117:117:royale.util.launcher.LauncherStatsService getInstance() -> a
-    121:131:void register() -> bS
+    121:131:void register() -> bT
     135:149:void onAttack(royale.events.impl.AttackEvent) -> a
     152:227:void tick(net.minecraft.class_310) -> a
-    230:237:void shutdown() -> bp
+    230:237:void shutdown() -> bq
     240:261:void ensureLoaded(net.minecraft.class_310) -> b
     264:284:void resetSession(long) -> m
-    287:326:void loadFromDisk() -> bT
-    329:386:void saveNow() -> bU
+    287:326:void loadFromDisk() -> bU
+    329:386:void saveNow() -> bV
     389:404:java.nio.file.Path selectReadableStatsPath() -> g
     408:425:com.google.gson.JsonObject readStatsRoot(java.nio.file.Path) -> a
     430:442:void writeStatsRoot(java.nio.file.Path,com.google.gson.JsonObject) -> a
@@ -5589,7 +5591,7 @@ royale.util.math.FrameRateCounter -> royale.util.k.a:
     java.util.Deque records -> a
     int fps -> bU
     6:10:void <init>() -> <init>
-    13:22:void recordFrame() -> bV
+    13:22:void recordFrame() -> bW
     25:25:int getFps() -> aI
     7:7:void <clinit>() -> <clinit>
 royale.util.math.MathUtils -> royale.util.k.b:
@@ -5721,7 +5723,7 @@ royale.util.mods.ModsRuntimeManager -> royale.util.mods.a:
     51:89:royale.util.mods.ModsRuntimeManager$ScanResult scanNow() -> a
     93:93:royale.util.mods.ModsRuntimeManager$ScanResult getLastResult() -> b
     97:109:java.lang.String buildDirectorySignature(java.nio.file.Path) -> a
-    114:116:void invalidateScanCache() -> bW
+    114:116:void invalidateScanCache() -> bX
     119:130:royale.util.mods.ModsRuntimeManager$ScannedMod findByLogicalFileName(java.lang.String) -> a
     134:195:royale.util.mods.ModsRuntimeManager$ToggleResult setEnabled(royale.util.mods.ModsRuntimeManager$ScannedMod,boolean) -> a
     201:217:java.nio.file.Path resolveCurrentPath(royale.util.mods.ModsRuntimeManager$ScannedMod) -> a
@@ -5822,14 +5824,14 @@ royale.util.mods.config.wave.HeartbeatManager -> royale.util.mods.config.wave.a:
     38:41:java.lang.String g4() -> Y
     44:47:java.lang.String g5() -> Z
     50:60:void start(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
-    63:72:void register() -> bS
-    75:87:void heartbeat() -> bX
-    90:97:void offline() -> bY
+    63:72:void register() -> bT
+    75:87:void heartbeat() -> bY
+    90:97:void offline() -> bZ
     100:124:java.lang.String sendPost(java.lang.String,java.lang.String) -> e
     127:128:java.lang.String escape(java.lang.String) -> C
-    132:136:void shutdown() -> bp
+    132:136:void shutdown() -> bq
     139:141:java.lang.String d(java.lang.String) -> D
-    55:58:void lambda$start$0() -> bZ
+    55:58:void lambda$start$0() -> ca
 royale.util.mods.config.wave.WaveCapesConfigOverride -> royale.util.mods.config.wave.WaveCapesConfigOverride:
 # {"fileName":"WaveCapesConfigOverride.java","id":"sourceFile"}
     java.lang.String CONFIG_CONTENT -> CONFIG_CONTENT
@@ -5889,7 +5891,7 @@ royale.util.network.ConnectionCompatController -> royale.util.n.a:
 # {"fileName":"ConnectionCompatController.java","id":"sourceFile"}
     6:7:void <init>() -> <init>
     10:19:void prepareConnection(net.minecraft.class_642) -> a
-    22:23:void resetAfterDisconnect() -> ca
+    22:23:void resetAfterDisconnect() -> cb
 royale.util.network.Network -> royale.util.n.b:
 # {"fileName":"Network.java","id":"sourceFile"}
     royale.util.timer.StopWatch PVP_WATCH -> f
@@ -5932,8 +5934,8 @@ royale.util.network.NetworkUtility -> royale.util.n.c:
     int received -> bZ
     long lastReceive -> bb
     royale.util.timer.TimerUtil tpsTimer -> d
-    35:36:void pauseEvents() -> cb
-    39:40:void resumeEvents() -> cc
+    35:36:void pauseEvents() -> cc
+    39:40:void resumeEvents() -> cd
     43:43:boolean shouldTriggerEvent() -> bk
     47:48:void updateServerSprint(boolean) -> r
     51:51:boolean serverSprinting() -> bl
@@ -5983,7 +5985,7 @@ royale.util.network.ViaFabricPlusBridge -> royale.util.n.e:
     24:29:boolean setTargetVersion(java.lang.String,boolean) -> a
     33:49:boolean setTargetVersionForServer(net.minecraft.class_642,boolean) -> a
     53:58:boolean enableAutoDetectTargetVersion(boolean) -> b
-    62:66:void resetTargetVersion() -> cd
+    62:66:void resetTargetVersion() -> ce
     69:83:void injectPreviousVersionReset(io.netty.channel.Channel) -> a
     87:99:boolean setTargetVersion(java.lang.Object,boolean) -> a
     105:120:java.lang.Object resolveServerProtocolVersion(net.minecraft.class_642) -> a
@@ -6054,8 +6056,8 @@ royale.util.player.PlayerSimulation -> royale.util.p.a:
     324:324:float getMovementSpeed() -> aA
     327:351:void move(net.minecraft.class_243) -> g
     354:381:net.minecraft.class_243 adjustMovementForCollisions(net.minecraft.class_243) -> b
-    384:385:void onLanding() -> ce
-    387:392:void jump() -> cf
+    384:385:void onLanding() -> cf
+    387:392:void jump() -> cg
     394:404:net.minecraft.class_243 applyClimbingSpeed(net.minecraft.class_243) -> c
     407:411:boolean isClimbing() -> br
     414:418:boolean canEnterTrapdoor(net.minecraft.class_2338,net.minecraft.class_2680) -> a
@@ -6073,9 +6075,9 @@ royale.util.player.PlayerSimulation -> royale.util.p.a:
     502:502:double getSwimHeight() -> C
     505:505:boolean isTouchingWater() -> bv
     508:508:boolean isInLava() -> bw
-    511:523:void checkWaterState() -> cg
-    525:531:void updateSwimming() -> ch
-    533:549:void updateSubmergedInWaterState() -> ci
+    511:523:void checkWaterState() -> ch
+    525:531:void updateSwimming() -> ci
+    533:549:void updateSubmergedInWaterState() -> cj
     551:551:double getEyeY() -> D
     554:554:boolean isSubmergedInWater() -> bx
     557:557:double getFluidHeight(net.minecraft.class_6862) -> a
@@ -6098,7 +6100,7 @@ royale.util.player.PlayerSimulation$SimulatedPlayerInput -> royale.util.p.a$a:
     net.minecraft.class_10185 playerInput -> b
     double MAX_WALKING_SPEED -> ak
     657:664:void <init>(net.minecraft.class_10185) -> <init>
-    666:680:void update() -> M
+    666:680:void update() -> N
     682:684:java.lang.String toString() -> toString
     687:687:royale.util.player.PlayerSimulation$SimulatedPlayerInput fromClientPlayer(net.minecraft.class_10185) -> a
     690:698:royale.util.player.PlayerSimulation$SimulatedPlayerInput guessInput(net.minecraft.class_1657) -> a
@@ -6129,13 +6131,13 @@ royale.util.render.Render2D -> royale.util.q.b:
     31:32:int getFixedScaledHeight() -> ab
     35:35:float getFixedGuiScale() -> aE
     38:40:float getScaleMultiplier() -> aF
-    43:51:void beginOverlay() -> cj
-    53:65:void endOverlay() -> ck
-    67:71:void clearDepth() -> cl
-    73:75:void enableBlend() -> cm
-    77:78:void disableBlend() -> cn
-    80:81:void enableDepthTest() -> co
-    83:84:void disableDepthTest() -> cp
+    43:51:void beginOverlay() -> ck
+    53:65:void endOverlay() -> cl
+    67:71:void clearDepth() -> cm
+    73:75:void enableBlend() -> cn
+    77:78:void disableBlend() -> co
+    80:81:void enableDepthTest() -> cp
+    83:84:void disableDepthTest() -> cq
     86:87:void depthMask(boolean) -> t
     89:90:void backgroundImage(float) -> S
     92:101:void backgroundImage(float,float) -> d
@@ -6181,9 +6183,9 @@ royale.util.render.Render2D -> royale.util.q.b:
     302:303:void arcOutline(float,float,float,float,float,float,float,int,int) -> a
     305:311:void arcOutline(net.minecraft.class_332,float,float,float,float,float,float,float,int,int,boolean) -> a
     313:314:void arcOutline(org.joml.Matrix4f,float,float,float,float,float,float,float,int,int) -> a
-    316:320:void flushOverrideTasks() -> cq
+    316:320:void flushOverrideTasks() -> cr
     322:322:boolean isInOverlayMode() -> bz
-    325:328:void cleanup() -> cr
+    325:328:void cleanup() -> cs
     307:307:void lambda$arcOutline$2(org.joml.Matrix4f,float,float,float,float,float,float,float,int,int) -> b
     290:290:void lambda$arc$1(org.joml.Matrix4f,float,float,float,float,float,float,int[]) -> a
     283:283:void lambda$arc$0(org.joml.Matrix4f,float,float,float,float,float,float,int) -> a
@@ -6213,7 +6215,7 @@ royale.util.render.Render3D -> royale.util.q.c:
     double smoothY -> al
     double smoothY2 -> am
     55:65:void updateTargetEsp(float) -> T
-    68:69:void updateTargetEsp() -> cs
+    68:69:void updateTargetEsp() -> ct
     72:72:float getEspValue() -> aG
     76:76:float getPrevEspValue() -> aH
     80:80:float getCircleStep() -> aI
@@ -6247,7 +6249,7 @@ royale.util.render.Render3D -> royale.util.q.c:
     596:602:void drawLine(net.minecraft.class_4587$class_4665,net.minecraft.class_243,net.minecraft.class_243,int,int,float,boolean) -> a
     605:606:void drawQuad(net.minecraft.class_243,net.minecraft.class_243,net.minecraft.class_243,net.minecraft.class_243,int,boolean) -> a
     609:615:void drawQuad(net.minecraft.class_4587$class_4665,net.minecraft.class_243,net.minecraft.class_243,net.minecraft.class_243,net.minecraft.class_243,int,boolean) -> a
-    618:620:void resetCircleSmoothing() -> ct
+    618:620:void resetCircleSmoothing() -> cu
     622:623:void <init>() -> <init>
     627:628:void setLastWorldSpaceEntry(net.minecraft.class_4587$class_4665) -> a
     631:632:void setLastTickDelta(float) -> U
@@ -6421,11 +6423,11 @@ royale.util.render.font.FontAtlas -> royale.util.q.d.b:
     long lastFailedLoadAttempt -> bi
     boolean missingResourceWarningShown -> bm
     25:38:void <init>(net.minecraft.class_2960,net.minecraft.class_2960) -> <init>
-    40:46:void forceLoad() -> cu
-    48:54:void ensureLoaded() -> bj
-    56:77:void doLoad() -> cv
+    40:46:void forceLoad() -> cv
+    48:54:void ensureLoaded() -> bk
+    56:77:void doLoad() -> cw
     79:82:boolean canAttemptLoad() -> bA
-    85:86:void markFailedLoad() -> cw
+    85:86:void markFailedLoad() -> cx
     88:116:void parseJson(com.google.gson.JsonObject) -> a
     118:171:void parseMsdfGlyph(com.google.gson.JsonObject,float) -> a
     173:173:float getFloat(com.google.gson.JsonObject,java.lang.String,float) -> a
@@ -6446,7 +6448,7 @@ royale.util.render.font.FontInitializer -> royale.util.q.d.c:
     boolean registered -> aH
     boolean initialized -> c
     7:7:void <init>() -> <init>
-    13:29:void register() -> bS
+    13:29:void register() -> bT
     31:31:boolean isInitialized() -> e
     16:28:void lambda$register$0(net.minecraft.class_310) -> c
     9:11:void <clinit>() -> <clinit>
@@ -6474,16 +6476,16 @@ royale.util.render.font.FontPipeline -> royale.util.q.d.d:
     33:70:void <init>() -> <init>
     96:98:int getFixedScaledWidth() -> aa
     101:103:int getFixedScaledHeight() -> ab
-    106:115:void ensureInitialized() -> cx
+    106:115:void ensureInitialized() -> cy
     117:118:void drawText(royale.util.render.font.FontAtlas,java.lang.String,float,float,float,int) -> a
     120:204:void drawText(royale.util.render.font.FontAtlas,java.lang.String,float,float,float,int,float,int,float) -> a
     206:285:void drawTextRotatedAroundPoint(royale.util.render.font.FontAtlas,java.lang.String,float,float,float,int,float,int,float,float,float) -> a
-    287:342:void flush() -> cy
+    287:342:void flush() -> cz
     344:391:void prepareUniformData(net.minecraft.class_310,royale.util.render.font.FontAtlas,float,int) -> a
     393:432:float getTextWidth(royale.util.render.font.FontAtlas,java.lang.String,float) -> a
     435:441:float getTextHeight(royale.util.render.font.FontAtlas,java.lang.String,float) -> b
-    444:459:void close() -> cz
-    462:464:void clearBatch() -> cA
+    444:459:void close() -> cA
+    462:464:void clearBatch() -> cB
     324:324:java.lang.String lambda$flush$2() -> ae
     317:317:java.lang.String lambda$flush$1() -> af
     112:112:java.lang.String lambda$ensureInitialized$0() -> ag
@@ -6513,7 +6515,7 @@ royale.util.render.font.FontRenderer -> royale.util.q.d.e:
     12:16:void <init>() -> <init>
     18:23:void loadFont(java.lang.String,java.lang.String) -> e
     25:28:void loadAllFonts(java.util.Map) -> q
-    30:38:void initialize() -> cB
+    30:38:void initialize() -> cC
     40:40:boolean isInitialized() -> e
     43:43:royale.util.render.font.FontAtlas getFont(java.lang.String) -> a
     46:49:void drawText(java.lang.String,java.lang.String,float,float,float,int) -> a
@@ -6524,7 +6526,7 @@ royale.util.render.font.FontRenderer -> royale.util.q.d.e:
     72:79:void drawCenteredText(java.lang.String,java.lang.String,float,float,float,int,float) -> b
     81:83:float getTextWidth(java.lang.String,java.lang.String,float) -> a
     86:88:float getLineHeight(java.lang.String,float) -> c
-    91:94:void close() -> cz
+    91:94:void close() -> cA
     9:9:void <clinit>() -> <clinit>
 royale.util.render.font.Fonts -> royale.util.q.d.f:
 # {"fileName":"Fonts.java","id":"sourceFile"}
@@ -6604,20 +6606,20 @@ royale.util.render.gif.GifRender -> royale.util.q.e.a:
     122:133:void drawAvatar(float,float,float,float,float,int) -> d
     136:137:void drawBackground(float,float,float,float,int) -> d
     140:151:void drawBackground(float,float,float,float,float,int) -> e
-    154:156:void resetAvatar() -> cC
-    159:161:void resetBackground() -> cD
-    164:166:void reset() -> aa
+    154:156:void resetAvatar() -> cD
+    159:161:void resetBackground() -> cE
+    164:166:void reset() -> ab
     169:173:java.nio.file.Path getCustomGifRoot() -> k
     177:178:java.util.List getAvailableAvatarSources() -> F
     182:183:java.util.List getAvailableBackgroundSources() -> G
-    187:188:void refreshCustomEntriesNow() -> cE
+    187:188:void refreshCustomEntriesNow() -> cF
     191:192:java.util.List getAvatarFrames(java.lang.String) -> a
     196:197:java.util.List getBackgroundFrames(java.lang.String) -> b
     201:202:java.lang.String resolveAvatarSourceKey() -> ah
     206:207:java.lang.String resolveBackgroundSourceKey() -> ai
     211:212:long getAvatarDelay() -> w
     216:217:long getBackgroundDelay() -> x
-    221:222:void ensureCustomEntries() -> cF
+    221:222:void ensureCustomEntries() -> cG
     225:233:void ensureCustomEntries(boolean) -> u
     237:270:void syncCustomRoot(java.nio.file.Path,java.lang.String,java.util.Map,java.util.List) -> a
     273:301:java.util.List discoverEntries(java.nio.file.Path) -> b
@@ -6684,7 +6686,7 @@ royale.util.render.item.ItemRender -> royale.util.q.f.a:
     123:140:net.minecraft.class_1058 getSpriteForStack(net.minecraft.class_1799) -> a
     144:144:java.lang.String getCacheKey(net.minecraft.class_1799) -> b
     148:149:int applyAlpha(int,float) -> a
-    153:154:void clearCache() -> S
+    153:154:void clearCache() -> T
     20:22:void <clinit>() -> <clinit>
 royale.util.render.item.ItemRender$CachedSprite -> royale.util.q.f.a$a:
 # {"fileName":"ItemRender.java","id":"sourceFile"}
@@ -6704,7 +6706,7 @@ royale.util.render.pipeline.Arc2D -> royale.util.q.g.a:
     26:37:void init() -> init
     39:91:void draw(org.joml.Matrix4f,float,float,float,float,float,float,float,int[]) -> a
     91:101:int[] normalizeColors(int[]) -> a
-    103:108:void shutdown() -> bp
+    103:108:void shutdown() -> bq
     79:79:java.lang.String lambda$draw$1() -> al
     31:31:java.lang.String lambda$init$0() -> am
 royale.util.render.pipeline.ArcOutline2D -> royale.util.q.g.b:
@@ -6716,7 +6718,7 @@ royale.util.render.pipeline.ArcOutline2D -> royale.util.q.g.b:
     19:19:void <init>() -> <init>
     26:36:void init() -> init
     38:83:void draw(org.joml.Matrix4f,float,float,float,float,float,float,float,int,int,float) -> a
-    83:87:void shutdown() -> bp
+    83:87:void shutdown() -> bq
     71:71:java.lang.String lambda$draw$1() -> al
     31:31:java.lang.String lambda$init$0() -> am
 royale.util.render.pipeline.BlurPipeline -> royale.util.q.g.c:
@@ -6741,11 +6743,11 @@ royale.util.render.pipeline.BlurPipeline -> royale.util.q.g.c:
     31:60:void <init>() -> <init>
     62:64:int getFixedScaledWidth() -> aa
     67:69:int getFixedScaledHeight() -> ab
-    72:81:void ensureInitialized() -> cx
+    72:81:void ensureInitialized() -> cy
     83:97:void ensureCopyTexture(int,int) -> j
     99:137:void drawBlur(float,float,float,float,float,float[],int) -> a
     137:169:void prepareUniformData(float,float,float,float,float,float,int,int,float,float,float[],int) -> a
-    171:194:void close() -> cz
+    171:194:void close() -> cA
     168:168:java.lang.String lambda$prepareUniformData$3() -> an
     116:116:java.lang.String lambda$drawBlur$2() -> ao
     92:92:java.lang.String lambda$ensureCopyTexture$1() -> ap
@@ -6767,10 +6769,10 @@ royale.util.render.pipeline.GlassCompositePipeline -> royale.util.q.g.d:
     java.nio.ByteBuffer dataBuffer -> a
     boolean initialized -> c
     29:56:void <init>() -> <init>
-    58:67:void ensureInitialized() -> cx
+    58:67:void ensureInitialized() -> cy
     69:97:void composite(com.mojang.blaze3d.textures.GpuTextureView,com.mojang.blaze3d.textures.GpuTextureView,com.mojang.blaze3d.textures.GpuTextureView,com.mojang.blaze3d.textures.GpuTextureView,int,int,float,boolean,int,float,float) -> a
     97:114:void prepareUniformData(int,int,float,boolean,int,float,float) -> a
-    116:129:void close() -> cz
+    116:129:void close() -> cA
     80:80:java.lang.String lambda$composite$2() -> aq
     74:74:java.lang.String lambda$composite$1() -> ar
     64:64:java.lang.String lambda$ensureInitialized$0() -> ag
@@ -6791,11 +6793,11 @@ royale.util.render.pipeline.GlowOutlinePipeline -> royale.util.q.g.e:
     java.nio.ByteBuffer dataBuffer -> a
     boolean initialized -> c
     26:50:void <init>() -> <init>
-    52:61:void ensureInitialized() -> cx
+    52:61:void ensureInitialized() -> cy
     63:73:void drawGlowOutline(float,float,float,float,int,float,float[],float,float) -> a
     75:101:void prepareUniformData(float,float,float,float,float,float,float,int,float,float[],float,float) -> a
     103:128:void uploadAndDraw(net.minecraft.class_310) -> e
-    128:140:void close() -> cz
+    128:140:void close() -> cA
     113:113:java.lang.String lambda$uploadAndDraw$2() -> as
     108:108:java.lang.String lambda$uploadAndDraw$1() -> at
     58:58:java.lang.String lambda$ensureInitialized$0() -> ag
@@ -6832,12 +6834,12 @@ royale.util.render.pipeline.KawaseBlurPipeline -> royale.util.q.g.f:
     int lastHeight -> cA
     boolean initialized -> c
     29:82:void <init>() -> <init>
-    84:101:void ensureInitialized() -> cx
+    84:101:void ensureInitialized() -> cy
     103:127:void ensureFramebuffers(int,int) -> k
-    129:157:void cleanupFramebuffers() -> cG
+    129:157:void cleanupFramebuffers() -> cH
     159:231:com.mojang.blaze3d.textures.GpuTextureView blur(com.mojang.blaze3d.textures.GpuTexture,com.mojang.blaze3d.textures.GpuTextureView,int,int,int,float) -> a
     234:240:void prepareUniformData(int,int,float) -> b
-    242:256:void close() -> cz
+    242:256:void close() -> cA
     220:220:java.lang.String lambda$blur$7() -> au
     202:202:java.lang.String lambda$blur$6(int) -> e
     182:182:java.lang.String lambda$blur$5(int) -> f
@@ -6863,10 +6865,10 @@ royale.util.render.pipeline.MaskDiffPipeline -> royale.util.q.g.g:
     java.nio.ByteBuffer dataBuffer -> a
     boolean initialized -> c
     29:57:void <init>() -> <init>
-    59:68:void ensureInitialized() -> cx
+    59:68:void ensureInitialized() -> cy
     70:98:void createMask(com.mojang.blaze3d.textures.GpuTextureView,com.mojang.blaze3d.textures.GpuTextureView,com.mojang.blaze3d.textures.GpuTextureView,com.mojang.blaze3d.textures.GpuTextureView,com.mojang.blaze3d.textures.GpuTextureView,int,int) -> a
     98:103:void prepareUniformData(int,int) -> l
-    105:118:void close() -> cz
+    105:118:void close() -> cA
     82:82:java.lang.String lambda$createMask$2() -> ax
     78:78:java.lang.String lambda$createMask$1() -> ay
     65:65:java.lang.String lambda$ensureInitialized$0() -> ag
@@ -6887,11 +6889,11 @@ royale.util.render.pipeline.OutlinePipeline -> royale.util.q.g.h:
     java.nio.ByteBuffer dataBuffer -> a
     boolean initialized -> c
     26:50:void <init>() -> <init>
-    52:61:void ensureInitialized() -> cx
+    52:61:void ensureInitialized() -> cy
     63:73:void drawOutline(float,float,float,float,int[],float[],float[],float) -> a
     75:105:void prepareUniformData(float,float,float,float,float,float,float,int[],float[],float[],float) -> a
     107:132:void uploadAndDraw(net.minecraft.class_310) -> e
-    132:144:void close() -> cz
+    132:144:void close() -> cA
     117:117:java.lang.String lambda$uploadAndDraw$2() -> as
     112:112:java.lang.String lambda$uploadAndDraw$1() -> at
     58:58:java.lang.String lambda$ensureInitialized$0() -> ag
@@ -6912,14 +6914,14 @@ royale.util.render.pipeline.RectPipeline -> royale.util.q.g.i:
     java.nio.ByteBuffer dataBuffer -> a
     boolean initialized -> c
     26:50:void <init>() -> <init>
-    52:61:void ensureInitialized() -> cx
+    52:61:void ensureInitialized() -> cy
     63:64:void drawRect(float,float,float,float,int[],float[]) -> a
     66:77:void drawRect(float,float,float,float,int[],float[],float) -> a
     79:101:int[] convertTo9Colors(int[]) -> b
     104:112:int blendColors(int[]) -> a
     115:140:void prepareUniformData(float,float,float,float,float,float,float,float,int[],float[]) -> a
     142:167:void uploadAndDraw(net.minecraft.class_310) -> e
-    167:179:void close() -> cz
+    167:179:void close() -> cA
     152:152:java.lang.String lambda$uploadAndDraw$2() -> as
     147:147:java.lang.String lambda$uploadAndDraw$1() -> at
     58:58:java.lang.String lambda$ensureInitialized$0() -> ag
@@ -6941,15 +6943,15 @@ royale.util.render.pipeline.TexturePipeline -> royale.util.q.g.j:
     boolean initialized -> c
     boolean failed -> bn
     34:48:void <init>() -> <init>
-    51:61:void ensureInitialized() -> cx
+    51:61:void ensureInitialized() -> cy
     64:65:void drawTexture(net.minecraft.class_2960,float,float,float,float,float,float,float,float,int[],float[],float) -> a
     68:104:void drawTexture(net.minecraft.class_2960,float,float,float,float,float,float,float,float,int[],float[],float,float) -> a
     107:128:void drawFramebufferTexture(int,float,float,float,float,int[],float[],float) -> a
     131:165:void prepareUniformData(float,float,float,float,float,float,float,float,float,float,float,int[],float[],float,float) -> a
     168:189:void uploadAndDraw(net.minecraft.class_310,int) -> a
     193:216:int getTextureGlId(com.mojang.blaze3d.textures.GpuTexture) -> a
-    222:222:void flush() -> cy
-    225:239:void close() -> cz
+    222:222:void flush() -> cz
+    225:239:void close() -> cA
     180:180:java.lang.String lambda$uploadAndDraw$2() -> as
     173:173:java.lang.String lambda$uploadAndDraw$1() -> at
     58:58:java.lang.String lambda$ensureInitialized$0() -> ag
@@ -6985,8 +6987,8 @@ royale.util.render.shader.GlassHandsRenderer -> royale.util.q.h.a:
     float edgeGlowIntensity -> fL
     29:44:void <init>() -> <init>
     46:49:royale.util.render.shader.GlassHandsRenderer getInstance() -> a
-    52:56:void resetInstance() -> cH
-    58:69:void ensureInitialized() -> cx
+    52:56:void resetInstance() -> cI
+    58:69:void ensureInitialized() -> cy
     71:75:void setEnabled(boolean) -> a
     77:77:boolean isEnabled() -> c
     80:81:void setBlurRadius(float) -> V
@@ -6997,13 +6999,13 @@ royale.util.render.shader.GlassHandsRenderer -> royale.util.q.h.a:
     95:96:void setTintIntensity(float) -> X
     98:99:void setEdgeGlowIntensity(float) -> Y
     101:116:void ensureTextures(int,int) -> m
-    118:158:void cleanupTextures() -> cI
-    160:177:void captureSceneBeforeHands() -> cJ
-    179:191:void captureSceneAfterHands() -> cK
-    193:209:void renderGlassEffect() -> cL
+    118:158:void cleanupTextures() -> cJ
+    160:177:void captureSceneBeforeHands() -> cK
+    179:191:void captureSceneAfterHands() -> cL
+    193:209:void renderGlassEffect() -> cM
     211:211:boolean isCapturing() -> bD
-    214:225:void invalidate() -> cM
-    227:243:void close() -> cz
+    214:225:void invalidate() -> cN
+    227:243:void close() -> cA
     112:112:java.lang.String lambda$ensureTextures$4() -> az
     110:110:java.lang.String lambda$ensureTextures$3() -> aA
     108:108:java.lang.String lambda$ensureTextures$2() -> aB
@@ -7025,14 +7027,14 @@ royale.util.render.shader.RenderCore -> royale.util.q.h.b:
     boolean arcInitialized -> bs
     boolean arcOutlineInitialized -> bt
     24:36:void <init>() -> <init>
-    38:41:void ensureFontsLoaded() -> cN
-    43:46:void ensureArcInitialized() -> cO
-    48:51:void ensureArcOutlineInitialized() -> cP
-    53:57:void setupOverlayState() -> cQ
-    59:61:void restoreState() -> cR
-    63:64:void clearDepthBuffer() -> cS
-    66:67:void initArc() -> cT
-    69:70:void initArcOutline() -> cU
+    38:41:void ensureFontsLoaded() -> cO
+    43:46:void ensureArcInitialized() -> cP
+    48:51:void ensureArcOutlineInitialized() -> cQ
+    53:57:void setupOverlayState() -> cR
+    59:61:void restoreState() -> cS
+    63:64:void clearDepthBuffer() -> cT
+    66:67:void initArc() -> cU
+    69:70:void initArcOutline() -> cV
     72:72:royale.util.render.pipeline.RectPipeline getRectPipeline() -> a
     75:75:royale.util.render.pipeline.OutlinePipeline getOutlinePipeline() -> a
     78:78:royale.util.render.pipeline.GlowOutlinePipeline getGlowOutlinePipeline() -> a
@@ -7044,18 +7046,18 @@ royale.util.render.shader.RenderCore -> royale.util.q.h.b:
     96:97:royale.util.render.font.FontRenderer getFontRenderer() -> a
     100:100:royale.util.render.pipeline.MaskDiffPipeline getMaskDiffPipeline() -> a
     103:103:net.minecraft.class_310 getClient() -> a
-    106:133:void close() -> cz
+    106:133:void close() -> cA
     136:140:void runSafely(java.lang.Runnable) -> b
-    115:115:void lambda$close$9() -> cV
-    114:114:void lambda$close$8() -> cW
-    113:113:void lambda$close$7() -> cX
-    112:112:void lambda$close$6() -> cY
-    111:111:void lambda$close$5() -> cZ
-    110:110:void lambda$close$4() -> da
-    109:109:void lambda$close$3() -> db
-    108:108:void lambda$close$2() -> dc
-    107:107:void lambda$close$1() -> dd
-    106:106:void lambda$close$0() -> de
+    115:115:void lambda$close$9() -> cW
+    114:114:void lambda$close$8() -> cX
+    113:113:void lambda$close$7() -> cY
+    112:112:void lambda$close$6() -> cZ
+    111:111:void lambda$close$5() -> da
+    110:110:void lambda$close$4() -> db
+    109:109:void lambda$close$3() -> dc
+    108:108:void lambda$close$2() -> dd
+    107:107:void lambda$close$1() -> de
+    106:106:void lambda$close$0() -> df
 royale.util.render.shader.Scissor -> royale.util.q.h.c:
 # {"fileName":"Scissor.java","id":"sourceFile"}
     net.minecraft.class_310 mc -> k
@@ -7063,8 +7065,8 @@ royale.util.render.shader.Scissor -> royale.util.q.h.c:
     7:7:void <init>() -> <init>
     12:39:void enable(float,float,float,float,float) -> h
     41:44:void enable(float,float,float,float) -> f
-    46:55:void disable() -> df
-    57:59:void reset() -> aa
+    46:55:void disable() -> dg
+    57:59:void reset() -> ab
     9:10:void <clinit>() -> <clinit>
 royale.util.repository.friend.Friend -> royale.util.r.a.a:
 # {"fileName":"Friend.java","id":"sourceFile"}
@@ -7085,8 +7087,8 @@ royale.util.repository.friend.FriendUtils -> royale.util.r.a.b:
     33:35:void removeFriendAndSave(java.lang.String) -> H
     37:39:boolean isFriend(net.minecraft.class_1297) -> b
     42:42:boolean isFriend(java.lang.String) -> G
-    45:46:void clear() -> bf
-    48:50:void clearAndSave() -> dg
+    45:46:void clear() -> bg
+    48:50:void clearAndSave() -> dh
     52:52:java.util.List getFriendNames() -> I
     55:55:int size() -> ba
     58:61:void setFriends(java.util.List) -> t
@@ -7121,8 +7123,8 @@ royale.util.repository.macro.MacroRepository -> royale.util.r.b.b:
     41:43:java.util.Optional getMacro(java.lang.String) -> b
     46:47:void deleteMacro(java.lang.String) -> I
     49:51:void deleteMacroAndSave(java.lang.String) -> J
-    53:54:void clearList() -> dh
-    56:58:void clearListAndSave() -> di
+    53:54:void clearList() -> di
+    56:58:void clearListAndSave() -> dj
     60:60:int size() -> ba
     63:63:java.util.List getMacroNames() -> K
     66:68:void setMacros(java.util.List) -> u
@@ -7153,8 +7155,8 @@ royale.util.repository.staff.StaffUtils -> royale.util.r.c.b:
     27:29:void removeStaffAndSave(java.lang.String) -> N
     31:33:boolean isStaff(net.minecraft.class_1297) -> c
     36:36:boolean isStaff(java.lang.String) -> I
-    39:40:void clear() -> bf
-    42:44:void clearAndSave() -> dg
+    39:40:void clear() -> bg
+    42:44:void clearAndSave() -> dh
     46:46:java.util.List getStaffNames() -> M
     49:49:int size() -> ba
     52:55:void setStaff(java.util.List) -> v
@@ -7188,8 +7190,8 @@ royale.util.repository.way.WayRepository -> royale.util.r.d.b:
     50:52:java.util.Optional getWay(java.lang.String) -> c
     55:56:void deleteWay(java.lang.String) -> O
     58:60:void deleteWayAndSave(java.lang.String) -> P
-    62:63:void clearList() -> dh
-    65:67:void clearListAndSave() -> di
+    62:63:void clearList() -> di
+    65:67:void clearListAndSave() -> dj
     69:69:int size() -> ba
     72:72:java.util.List getWayNames() -> O
     75:78:java.util.List getWayNamesForServer(java.lang.String) -> c
@@ -7254,15 +7256,15 @@ royale.util.rpc.DiscordRpcService -> royale.util.s.a:
     java.lang.String pendingServerAddress -> cp
     68:101:void <init>() -> <init>
     104:104:royale.util.rpc.DiscordRpcService getInstance() -> a
-    109:150:void start() -> bi
-    153:155:void restart() -> dj
+    109:150:void start() -> bj
+    153:155:void restart() -> dk
     158:160:boolean isRunning() -> ax
     164:223:void stop() -> k
-    226:229:void markCombat() -> dk
-    232:235:void markActivity() -> dl
-    238:244:void forceRefresh() -> dm
+    226:229:void markCombat() -> dl
+    232:235:void markActivity() -> dm
+    238:244:void forceRefresh() -> dn
     247:252:void setPendingServerAddress(java.lang.String) -> Q
-    255:260:void clearPendingServerAddress() -> dn
+    255:260:void clearPendingServerAddress() -> do
     263:331:void tick() -> a
     334:352:royale.util.rpc.DiscordRpcService$RpcAutoConfig resolveAutoConfig() -> a
     355:359:java.lang.String normalizeApplicationId(java.lang.String) -> H
@@ -7272,7 +7274,7 @@ royale.util.rpc.DiscordRpcService -> royale.util.s.a:
     417:458:boolean tryStartGameSdk(java.lang.String,java.lang.String,java.lang.String) -> a
     463:538:boolean connectGameSdk() -> bG
     550:603:boolean stopGameSdkIfActive() -> bH
-    607:764:void tickGameSdk() -> do
+    607:764:void tickGameSdk() -> dp
     767:779:void closeGameSdkHandles(de.jcm.discordgamesdk.Core,de.jcm.discordgamesdk.CreateParams) -> a
     782:807:void clearGameSdkPresence(de.jcm.discordgamesdk.ActivityManager,de.jcm.discordgamesdk.Core) -> a
     810:824:void drainGameSdkCallbacks(de.jcm.discordgamesdk.Core,java.util.concurrent.CountDownLatch,long) -> a
@@ -7299,7 +7301,7 @@ royale.util.rpc.DiscordRpcService -> royale.util.s.a:
     1131:1132:java.lang.String normalizeImageKey(java.lang.String) -> K
     1136:1136:java.lang.String normalizeImageText(java.lang.String) -> L
     1140:1143:java.lang.String limit(java.lang.String,int) -> b
-    1147:1150:void closePipe() -> dp
+    1147:1150:void closePipe() -> dq
     1153:1162:void closePipeQuietly(java.io.RandomAccessFile) -> b
     1165:1174:void clearPresenceOnCurrentPipe(java.io.RandomAccessFile) -> c
     1177:1193:void quickClearPreviousPresence(java.lang.String) -> R
@@ -7308,11 +7310,11 @@ royale.util.rpc.DiscordRpcService -> royale.util.s.a:
     1231:1259:boolean clearPresenceOnPipe(int,java.lang.String,java.lang.String,boolean) -> a
     1263:1284:java.util.List collectClearClientIds(java.lang.String) -> e
     1288:1321:java.util.List discoverClientIdsFromConfig() -> P
-    1325:1339:void registerShutdownHookIfNeeded() -> dq
+    1325:1339:void registerShutdownHookIfNeeded() -> dr
     1342:1350:void sleepSilently(long) -> o
     1353:1364:java.lang.String firstNonBlank(java.lang.String[]) -> a
     1368:1379:boolean shouldUseGameSdk() -> bI
-    1332:1335:void lambda$registerShutdownHookIfNeeded$8() -> dr
+    1332:1335:void lambda$registerShutdownHookIfNeeded$8() -> ds
     1303:1317:void lambda$discoverClientIdsFromConfig$7(java.util.LinkedHashSet,java.nio.file.Path) -> a
     1298:1299:boolean lambda$discoverClientIdsFromConfig$6(java.nio.file.Path) -> l
     1296:1296:boolean lambda$discoverClientIdsFromConfig$5(java.nio.file.Path) -> m
@@ -7374,6 +7376,8 @@ royale.util.sounds.SoundManager -> royale.util.u.a:
     46:47:void playSound(net.minecraft.class_3414) -> a
     49:52:void playSound(net.minecraft.class_3414,float,float) -> a
     54:55:void playSoundDirect(net.minecraft.class_3414,float,float) -> b
+    57:59:net.minecraft.class_1113 playLoopingDirect(net.minecraft.class_3414,float,float) -> a
+    62:65:void stopSound(net.minecraft.class_1113) -> a
     17:29:void <clinit>() -> <clinit>
 royale.util.string.KeyHelper -> royale.util.v.a:
 # {"fileName":"KeyHelper.java","id":"sourceFile"}
@@ -7392,11 +7396,11 @@ royale.util.string.PlayerInteractionHelper -> royale.util.v.b:
     42:43:void interactItem(net.minecraft.class_1268) -> e
     45:46:void interactItem(net.minecraft.class_1268,royale.util.angle.Angle) -> b
     48:50:void interactEntity(net.minecraft.class_1297) -> d
-    52:54:void startFallFlying() -> ds
+    52:54:void startFallFlying() -> dt
     56:57:void sendPacketWithOutEvent(net.minecraft.class_2596) -> g
     59:60:void grimSuperBypass$$$(double,royale.util.angle.Angle) -> a
     62:62:java.lang.String getHealthString(float) -> a
-    65:70:void jump() -> cf
+    65:70:void jump() -> cg
     72:72:java.util.List getCube(net.minecraft.class_2338,float) -> a
     75:75:java.util.List getCube(net.minecraft.class_2338,float,float) -> a
     78:90:java.util.List getCube(net.minecraft.class_2338,float,float,boolean) -> a
@@ -7500,7 +7504,7 @@ royale.util.timer.StopWatch -> royale.util.x.a:
     8:10:void <init>() -> <init>
     12:12:boolean finished(double) -> d
     15:17:boolean every(double) -> e
-    20:21:void reset() -> aa
+    20:21:void reset() -> ab
     23:23:long elapsedTime() -> y
     26:27:royale.util.timer.StopWatch setMs(long) -> a
 royale.util.timer.TimerUtil -> royale.util.x.b:
@@ -7509,10 +7513,10 @@ royale.util.timer.TimerUtil -> royale.util.x.b:
     long lastMS -> by
     6:6:long getLastMS() -> z
     7:7:long getStartTime() -> n
-    10:11:void reset() -> aa
+    10:11:void reset() -> ab
     6:14:void <init>() -> <init>
     16:16:royale.util.timer.TimerUtil create() -> a
-    19:20:void resetCounter() -> dt
+    19:20:void resetCounter() -> du
     22:22:boolean isReached(long) -> b
     25:26:void setLastMS(long) -> p
     28:29:void setTime(long) -> q
@@ -7533,7 +7537,7 @@ royale.util.tps.TPSCalculate -> royale.util.y.a:
     10:17:void <init>() -> <init>
     19:19:royale.util.tps.TPSCalculate getInstance() -> b
     23:26:void onPacket(royale.events.impl.PacketEvent) -> a
-    28:35:void updateTPS() -> du
+    28:35:void updateTPS() -> dv
     37:37:double round(double) -> n
     40:40:float getTpsRounded() -> aS
 royale.util.window.WindowStyle -> royale.util.z.a:

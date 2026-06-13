@@ -1,11 +1,11 @@
 package royale.util.sounds;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.entity.Entity;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.registry.Registries;
 import royale.IMinecraft;
 import royale.util.string.PlayerInteractionHelper;
@@ -52,6 +52,16 @@ mc.world.playSound((Entity)mc.player, mc.player.getBlockPos(), sound, SoundCateg
 }
 public static void playSoundDirect(SoundEvent sound, float volume, float pitch) {
 mc.getSoundManager().play((SoundInstance)PositionedSoundInstance.ui(sound, pitch, volume));
+}
+public static SoundInstance playLoopingDirect(SoundEvent sound, float volume, float pitch) {
+SoundInstance instance = new PositionedSoundInstance(sound.id(), SoundCategory.MASTER, volume, pitch, SoundInstance.createRandom(), true, 0, SoundInstance.AttenuationType.NONE, 0.0D, 0.0D, 0.0D, true);
+mc.getSoundManager().play(instance);
+return instance;
+}
+public static void stopSound(SoundInstance sound) {
+if (sound != null) {
+mc.getSoundManager().stop(sound);
+}
 }
 }
 
