@@ -1,13 +1,9 @@
 package royale.mixin;
 import io.netty.buffer.PooledByteBufAllocator;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.WriteBufferWaterMark;
-import io.netty.handler.proxy.Socks4ProxyHandler;
-import io.netty.handler.proxy.Socks5ProxyHandler;
-import java.net.InetSocketAddress;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.NetworkSide;
 import net.minecraft.network.handler.PacketSizeLogger;
@@ -21,9 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import royale.events.api.EventManager;
 import royale.events.api.events.Event;
 import royale.events.impl.PacketEvent;
-import royale.util.config.impl.proxy.ProxyConfig;
 import royale.util.network.ViaFabricPlusBridge;
-import royale.util.proxy.Proxy;
 @Mixin({ClientConnection.class})
 public class ClientConnectionMixin {
 @Unique
@@ -58,17 +52,6 @@ if (!local) {
 applyLowLatencyChannelOptions(pipeline);
 ViaFabricPlusBridge.injectPreviousVersionReset(pipeline.channel());
 }
-ProxyConfig config = ProxyConfig.getInstance();
-Proxy proxy = config.getDefaultProxy();
-if (proxy != null && config.isProxyEnabled() && !proxy.isEmpty() && side == NetworkSide.CLIENTBOUND && !local) {
-InetSocketAddress proxyAddress = new InetSocketAddress(proxy.getIp(), proxy.getPort());
-if (proxy.type == Proxy.ProxyType.SOCKS4) {
-pipeline.addFirst("rich_socks4_proxy", (ChannelHandler)new Socks4ProxyHandler(proxyAddress, proxy.username));
-} else {
-pipeline.addFirst("rich_socks5_proxy", (ChannelHandler)new Socks5ProxyHandler(proxyAddress, proxy.username, proxy.password));
-} 
-config.setLastUsedProxy(new Proxy(proxy));
-} 
 }
 private static void applyLowLatencyChannelOptions(ChannelPipeline pipeline) {
 if (pipeline == null || pipeline.channel() == null) {

@@ -10,7 +10,6 @@ import royale.util.config.impl.bind.BindConfig;
 import royale.util.config.impl.drag.DragConfig;
 import royale.util.config.impl.friend.FriendConfig;
 import royale.util.config.impl.prefix.PrefixConfig;
-import royale.util.config.impl.proxy.ProxyConfig;
 import royale.util.config.impl.staff.StaffConfig;
 import royale.util.modules.ModuleProvider;
 import royale.util.modules.ModuleSwitcher;
@@ -41,7 +40,6 @@ public class Manager {
         FriendConfig.getInstance().load();
         PrefixConfig.getInstance().load();
         StaffConfig.getInstance().load();
-        ProxyConfig.getInstance().load();
         DragConfig.getInstance().load();
         BindConfig.getInstance();
         FontInitializer.register();

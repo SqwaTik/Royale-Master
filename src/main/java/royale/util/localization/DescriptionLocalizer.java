@@ -24,7 +24,16 @@ public final class DescriptionLocalizer {
             Map.entry("targetesp", "Выделяет текущую цель"),
             Map.entry("zoom", "Приближает камеру"),
             Map.entry("freelook", "Позволяет осматриваться отдельно"),
-            Map.entry("autorespawn", "Возрождает после смерти")
+            Map.entry("autorespawn", "Автоматически возрождает после смерти"),
+            Map.entry("hitsound", "Проигрывает звук при ударе по цели"),
+            Map.entry("gifmanager", "Настраивает анимации меню"),
+            Map.entry("hiteffect", "Добавляет визуальный эффект при ударе"),
+            Map.entry("norender", "Отключает лишние визуальные эффекты"),
+            Map.entry("trajectories", "Показывает дуги бросков и время падения"),
+            Map.entry("croptimer", "Показывает рост растений и время до созревания"),
+            Map.entry("worldparticles", "Добавляет декоративные частицы в мире"),
+            Map.entry("particles", "Добавляет декоративные частицы"),
+            Map.entry("cheststealer", "Автоматизирует работу с контейнерами")
     );
 
     private static final Map<String, String> SETTING_FALLBACKS = Map.ofEntries(
@@ -40,7 +49,12 @@ public final class DescriptionLocalizer {
             Map.entry("показывать хотбар", "Включает кастомный хотбар"),
             Map.entry("показывать hp bar", "Включает блок здоровья"),
             Map.entry("показывать food bar", "Включает блок сытости"),
-            Map.entry("кастомный бренд", "Задает свое значение brand")
+            Map.entry("кастомный бренд", "Задает свое значение brand"),
+            Map.entry("тип звука", "Выбирает звук при ударе"),
+            Map.entry("громкость", "Меняет громкость звука"),
+            Map.entry("длина", "Меняет длину просчета"),
+            Map.entry("толщина", "Меняет толщину линии"),
+            Map.entry("радиус игроков", "Меняет дистанцию поиска игроков")
     );
 
     private static final Charset WINDOWS_1251 = Charset.forName("windows-1251");
@@ -69,7 +83,7 @@ public final class DescriptionLocalizer {
         }
 
         String repaired = tryFixMojibake(value);
-        if (repaired.isEmpty() || looksLikeMojibake(repaired)) {
+        if (repaired.isEmpty() || looksLikeMojibake(repaired) || looksMostlyEnglish(repaired)) {
             return fallback;
         }
         return repaired;
@@ -107,6 +121,24 @@ public final class DescriptionLocalizer {
         } catch (Exception ignored) {
             return value;
         }
+    }
+
+    private static boolean looksMostlyEnglish(String value) {
+        if (value == null || value.isBlank()) {
+            return false;
+        }
+
+        int cyrillic = 0;
+        int latin = 0;
+        for (int i = 0; i < value.length(); i++) {
+            char ch = value.charAt(i);
+            if (ch >= '\u0400' && ch <= '\u04FF') {
+                cyrillic++;
+            } else if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) {
+                latin++;
+            }
+        }
+        return latin >= 4 && cyrillic == 0;
     }
 
     private static boolean looksLikeMojibake(String value) {

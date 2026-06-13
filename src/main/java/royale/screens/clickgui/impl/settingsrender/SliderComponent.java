@@ -42,10 +42,8 @@ float deltaTime = getDeltaTime();
 updateAnimations(mouseX, mouseY, deltaTime);
 float range = this.sliderSettings.getMax() - this.sliderSettings.getMin();
 float targetPercentage = (range > 0.0F) ? ((this.sliderSettings.getValue() - this.sliderSettings.getMin()) / range) : 0.0F;
-this.animatedPercentage += (targetPercentage - this.animatedPercentage) * 0.25F;
-float knobTarget = this.dragging ? 1.0F : 0.0F;
-this.knobAnimation += (knobTarget - this.knobAnimation) * 0.25F;
-this.knobAnimation = Math.max(0.0F, Math.min(1.0F, this.knobAnimation));
+this.animatedPercentage = targetPercentage;
+this.knobAnimation = 0.0F;
 int iconAlpha = (int)(200.0F * this.alphaMultiplier);
 Fonts.GUI_ICONS.draw("H", this.x - 0.5F, this.y + 0.5F, 9.0F, (new Color(210, 210, 210, iconAlpha)).getRGB());
 Fonts.BOLD.draw(this.sliderSettings.getName(), this.x + 9.5F, this.y + 1.0F, 6.0F, applyAlpha(new Color(210, 210, 220, 200)).getRGB());
@@ -66,22 +64,16 @@ return target;
 return current + diff * Math.min(speed, 1.0F);
 }
 private void updateAnimations(int mouseX, int mouseY, float deltaTime) {
-float inputTarget = this.inputMode ? 1.0F : 0.0F;
-this.inputAnimation = lerp(this.inputAnimation, inputTarget, deltaTime * 12.0F);
-boolean isHovered = (isValueHover(mouseX, mouseY) && !this.inputMode);
-float hoverTarget = isHovered ? 1.0F : 0.0F;
-this.hoverAnimation = lerp(this.hoverAnimation, hoverTarget, deltaTime * 8.0F);
-float unitsTarget = this.inputMode ? 0.0F : 1.0F;
-this.unitsAlpha = lerp(this.unitsAlpha, unitsTarget, deltaTime * 8.0F);
-float offsetTarget = this.inputMode ? 1.0F : 0.0F;
-this.valueOffsetX = lerp(this.valueOffsetX, offsetTarget, deltaTime * 8.0F);
-float bgTarget = this.inputMode ? 1.0F : 0.0F;
-this.backgroundAlpha = lerp(this.backgroundAlpha, bgTarget, deltaTime * 8.0F);
+this.inputAnimation = this.inputMode ? 1.0F : 0.0F;
+this.hoverAnimation = 0.0F;
+this.unitsAlpha = this.inputMode ? 0.0F : 1.0F;
+this.valueOffsetX = this.inputMode ? 1.0F : 0.0F;
+this.backgroundAlpha = this.inputMode ? 1.0F : 0.0F;
 }
 private void renderValueInput(int mouseX, int mouseY) {
 String valueText = this.sliderSettings.isInteger() ? String.valueOf((int)this.sliderSettings.getValue()) : String.format("%.1f", new Object[] { Float.valueOf(this.sliderSettings.getValue()) });
-String unitsText = " units";
-String fullText = valueText + valueText;
+String unitsText = "";
+String fullText = valueText;
 float fullTextWidth = Fonts.BOLD.getWidth(fullText, 5.0F);
 float valueTextWidth = Fonts.BOLD.getWidth(valueText, 5.0F);
 float unitsTextWidth = Fonts.BOLD.getWidth(unitsText, 5.0F);
@@ -148,7 +140,7 @@ Render2D.rect(this.x + sliderPadding, sliderY, filledWidth, sliderHeight,
 applyAlpha(new Color(130, 130, 135, 230)).getRGB(), 2.0F);
 }
 float knobBaseSize = 5.0F;
-float knobSize = knobBaseSize + this.knobAnimation * 1.0F;
+float knobSize = knobBaseSize;
 float knobX = this.x + sliderPadding + sliderTrackWidth * this.animatedPercentage - knobSize / 2.0F;
 float knobY = sliderY + sliderHeight / 2.0F - knobSize / 2.0F;
 knobX = Math.max(this.x + sliderPadding - knobSize / 2.0F, 

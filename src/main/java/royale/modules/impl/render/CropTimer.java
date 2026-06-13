@@ -33,7 +33,10 @@ import royale.util.render.font.Fonts;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class CropTimer extends ModuleStructure {
     private static final long DEFAULT_STAGE_TIME_MS = 8L * 60L * 1000L;
@@ -66,17 +69,18 @@ public class CropTimer extends ModuleStructure {
 
     public final SliderSettings scanRadius = (new SliderSettings(
             "Радиус", "Радиус поиска растений"
-    )).setValue(16.0F).range(4, 48);
+    )).setValue(12.0F).range(4, 32);
 
     public final SliderSettings maxLabels = (new SliderSettings(
             "Лимит", "Максимум подписей на экране"
-    )).setValue(80.0F).range(10, 200);
+    )).setValue(45.0F).range(10, 120);
 
     public final SliderSettings updateInterval = (new SliderSettings(
             "Обновление", "Задержка обновления (мс)"
-    )).setValue(350.0F).range(100, 2000);
+    )).setValue(900.0F).range(250, 3000);
 
     private final List<CropInfo> cachedCrops = new ArrayList<>();
+    private final Map<BlockPos, StageStamp> stageStamps = new HashMap<>();
     private long lastScanMs;
     private BlockPos lastScanCenter = BlockPos.ORIGIN;
 
@@ -92,11 +96,13 @@ public class CropTimer extends ModuleStructure {
     @Override
     public void deactivate() {
         cachedCrops.clear();
+        stageStamps.clear();
     }
 
     @EventHandler
     public void onWorldLoad(WorldLoadEvent event) {
         cachedCrops.clear();
+        stageStamps.clear();
         lastScanMs = 0L;
     }
 
@@ -144,6 +150,7 @@ public class CropTimer extends ModuleStructure {
         }
 
         cachedCrops.clear();
+        cleanupStageStamps(now);
         lastScanMs = now;
         lastScanCenter = center;
 
@@ -201,11 +208,17 @@ public class CropTimer extends ModuleStructure {
             currentStage = state.get(Properties.AGE_2);
             stageTime = FAST_STAGE_TIME_MS;
         } else if (block instanceof SugarCaneBlock || block instanceof CactusBlock) {
+            if (mc.world.getBlockState(pos.up()).getBlock() == block) {
+                return null;
+            }
             name = block instanceof SugarCaneBlock ? "Сахарный тростник" : "Кактус";
-            currentStage = countStackHeight(pos, block);
+            currentStage = Math.min(countStackHeight(pos, block), 3);
             maxStage = 3;
             stageTime = VERTICAL_STAGE_TIME_MS;
         } else if (block instanceof BambooBlock) {
+            if (mc.world.getBlockState(pos.up()).getBlock() instanceof BambooBlock) {
+                return null;
+            }
             name = "Бамбук";
             currentStage = Math.min(countStackHeight(pos, block), 16);
             maxStage = 16;
@@ -235,9 +248,37 @@ public class CropTimer extends ModuleStructure {
         currentStage = Math.min(currentStage, maxStage);
         double percent = maxStage <= 0 ? 100.0D : (currentStage * 100.0D / maxStage);
         boolean ready = currentStage >= maxStage;
-        long etaMs = ready ? 0L : Math.max(1, maxStage - currentStage) * stageTime;
+        long etaMs = ready ? 0L : resolveEta(pos, currentStage, maxStage, stageTime);
         Vec3d labelPos = Vec3d.ofCenter(pos).add(0.0D, getVisualHeight(state, pos) + 0.35D, 0.0D);
         return new CropInfo(pos, labelPos, name, currentStage, maxStage, percent, etaMs, ready);
+    }
+
+    private long resolveEta(BlockPos pos, int currentStage, int maxStage, long stageTime) {
+        long now = System.currentTimeMillis();
+        StageStamp stamp = stageStamps.get(pos);
+        if (stamp == null || stamp.stage() != currentStage) {
+            stamp = new StageStamp(currentStage, now, now);
+            stageStamps.put(pos, stamp);
+        } else {
+            stamp = new StageStamp(currentStage, stamp.startedAt(), now);
+            stageStamps.put(pos, stamp);
+        }
+
+        long elapsedCurrentStage = Math.max(0L, now - stamp.startedAt());
+        long total = Math.max(1, maxStage - currentStage) * stageTime;
+        return Math.max(0L, total - Math.min(stageTime - 1L, elapsedCurrentStage));
+    }
+
+    private void cleanupStageStamps(long now) {
+        if (stageStamps.size() < 512) {
+            return;
+        }
+        Iterator<Map.Entry<BlockPos, StageStamp>> iterator = stageStamps.entrySet().iterator();
+        while (iterator.hasNext()) {
+            if (now - iterator.next().getValue().lastSeenAt() > 120_000L) {
+                iterator.remove();
+            }
+        }
     }
 
     private int countStackHeight(BlockPos pos, Block block) {
@@ -333,5 +374,8 @@ public class CropTimer extends ModuleStructure {
     }
 
     public record CropInfo(BlockPos pos, Vec3d labelPos, String name, int currentStage, int maxStage, double percent, long etaMs, boolean ready) {
+    }
+
+    private record StageStamp(int stage, long startedAt, long lastSeenAt) {
     }
 }

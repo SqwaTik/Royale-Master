@@ -3,10 +3,7 @@ package royale.mixin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.gui.Element;
-import net.minecraft.client.gui.Selectable;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerServerListWidget;
@@ -20,9 +17,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import royale.util.config.impl.proxy.ProxyConfig;
-import royale.util.proxy.GuiProxy;
-import royale.util.proxy.ProxyServer;
 
 @Mixin(MultiplayerScreen.class)
 public abstract class MultiplayerScreenOpenMixin {
@@ -57,23 +51,7 @@ public abstract class MultiplayerScreenOpenMixin {
 
     @Inject(method = "init", at = @At("TAIL"), require = 0)
     public void multiplayerGuiOpen(CallbackInfo ci) {
-        MultiplayerScreen screen = (MultiplayerScreen) (Object) this;
         ensurePinnedServer();
-
-        ProxyConfig config = ProxyConfig.getInstance();
-        String buttonText = config.isProxyEnabled() && !config.getDefaultProxy().isEmpty()
-                ? "\u00a7a\u041f\u0440\u043e\u043a\u0441\u0438: \u0410\u043a\u0442\u0438\u0432\u0435\u043d"
-                : "\u00a77Proxy";
-
-        ProxyServer.proxyMenuButton = ButtonWidget
-                .builder(Text.literal(buttonText), button -> MinecraftClient.getInstance().setScreen(new GuiProxy(screen)))
-                .dimensions(5, 5, 100, 20)
-                .build();
-
-        IScreen access = (IScreen) screen;
-        access.getDrawables().add((Drawable) ProxyServer.proxyMenuButton);
-        access.getSelectables().add((Selectable) ProxyServer.proxyMenuButton);
-        access.getChildren().add((Element) ProxyServer.proxyMenuButton);
     }
 
     @Inject(method = "tick", at = @At("TAIL"), require = 0)
