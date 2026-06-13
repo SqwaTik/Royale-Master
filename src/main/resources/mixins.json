@@ -37,6 +37,7 @@
     "MultiplayerScreenOpenMixin",
     "PinnedServerEntryMixin",
     "PlayerListHudMixin",
+    "PlayerEntityModelMixin",
     "ScreenMixin",
     "ShaderLoaderCacheMixin",
     "SplashOverlayMixin",

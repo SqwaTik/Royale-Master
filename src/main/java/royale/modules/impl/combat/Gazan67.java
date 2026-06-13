@@ -21,13 +21,17 @@ public class Gazan67 extends ModuleStructure {
         .range(0.1F, 2.0F)
         .setValue(1.0F);
 
+    private final SliderSettings speed = (new SliderSettings("Скорость", "Скорость поочередного подъема рук"))
+        .range(0.4F, 2.5F)
+        .setValue(1.0F);
+
     private long startTime;
     private long lastSwingTime;
     private SoundInstance loopSound;
 
     public Gazan67() {
         super("67", "Проигрывает песню 67 на повторе и по очереди поднимает руки", ModuleCategory.COMBAT);
-        settings(new Setting[]{this.volume});
+        settings(new Setting[]{this.volume, this.speed});
     }
 
     public static Gazan67 getInstance() {
@@ -61,7 +65,8 @@ public class Gazan67 extends ModuleStructure {
             this.loopSound = SoundManager.playLoopingDirect(SoundManager.GAZAN67, this.volume.getValue(), 1.0F);
         }
 
-        if (now - this.lastSwingTime >= 450L) {
+        long swingDelay = Math.max(160L, (long) (450.0F / this.speed.getValue()));
+        if (now - this.lastSwingTime >= swingDelay) {
             swingHands();
         }
     }
@@ -77,22 +82,29 @@ public class Gazan67 extends ModuleStructure {
     }
 
     public void applyArmAnimation(MatrixStack matrices, Hand hand) {
+        float lift = getLift(hand);
+        float rest = lift > 0.0F ? 0.0F : 0.04F;
+        int side = hand == Hand.MAIN_HAND ? 1 : -1;
+
+        matrices.translate(side * (0.22F - lift * 0.02F), -0.36F + lift * 0.46F + rest, -0.38F + lift * 0.02F);
+        matrices.scale(1.12F, 1.12F, 1.12F);
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * (24.0F - lift * 6.0F)));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(side * (4.0F + lift * 66.0F)));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_X.rotationDegrees(-42.0F + lift * 82.0F));
+        matrices.translate(0.0F, -0.08F, 0.02F);
+    }
+
+    public float getLift(Hand hand) {
+        if (this.startTime == 0L) {
+            return 0.0F;
+        }
         float elapsed = (System.currentTimeMillis() - this.startTime) / 1000.0F;
-        float cycle = 0.86F;
+        float cycle = 0.86F / Math.max(0.1F, this.speed.getValue());
         float progress = (elapsed % cycle) / cycle;
         boolean mainTurn = progress < 0.5F;
         float local = mainTurn ? progress * 2.0F : (progress - 0.5F) * 2.0F;
         boolean activeHand = hand == (mainTurn ? Hand.MAIN_HAND : Hand.OFF_HAND);
-        float lift = activeHand ? smoothLift(local) : 0.0F;
-        float rest = activeHand ? 0.0F : 0.05F;
-        int side = hand == Hand.MAIN_HAND ? 1 : -1;
-
-        matrices.translate(side * (0.42F - lift * 0.05F), -0.54F + lift * 0.54F + rest, -0.56F + lift * 0.06F);
-        matrices.scale(1.08F, 1.08F, 1.08F);
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * (38.0F - lift * 12.0F)));
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(side * (8.0F + lift * 74.0F)));
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_X.rotationDegrees(-62.0F + lift * 88.0F));
-        matrices.translate(0.0F, -0.10F, 0.04F);
+        return activeHand ? smoothLift(local) : 0.0F;
     }
 
     private float smoothLift(float progress) {
