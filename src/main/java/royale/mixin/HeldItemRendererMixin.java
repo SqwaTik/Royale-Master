@@ -13,6 +13,7 @@ import net.minecraft.client.render.item.HeldItemRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -23,6 +24,7 @@ import royale.events.impl.HandAnimationEvent;
 import royale.events.impl.HandOffsetEvent;
 import royale.events.impl.HeldItemUpdateEvent;
 import royale.events.impl.ItemRendererEvent;
+import royale.modules.impl.combat.Gazan67;
 import royale.modules.impl.render.GlassHands;
 @Mixin({HeldItemRenderer.class})
 public abstract class HeldItemRendererMixin
@@ -33,6 +35,8 @@ private ItemStack mainHand;
 private ItemStack offHand;
 @Unique
 private boolean richCustomAnimation = false;
+@Invoker("renderArm")
+protected abstract void invokeRenderArm(MatrixStack matrices, OrderedRenderCommandQueue orderedRenderCommandQueue, int light, Arm arm);
 @Inject(method = {"updateHeldItems"}, at = {@At("TAIL")})
 private void onUpdateHeldItems(CallbackInfo ci) {
 HeldItemUpdateEvent event = new HeldItemUpdateEvent(this.mainHand, this.offHand);
@@ -58,7 +62,14 @@ GlassHands glassHands = GlassHands.getInstance();
 if (glassHands != null && glassHands.isState()) {
 GlassHandsRenderEvent event = new GlassHandsRenderEvent(GlassHandsRenderEvent.Phase.POST, matrices, tickProgress);
 EventManager.callEvent((Event)event);
-} 
+}
+Gazan67 gazan67 = Gazan67.getInstance();
+if (gazan67 != null && gazan67.isState() && player.getOffHandStack().isEmpty()) {
+matrices.push();
+gazan67.applyArmAnimation(matrices, Hand.OFF_HAND);
+invokeRenderArm(matrices, orderedRenderCommandQueue, light, player.getMainArm().getOpposite());
+matrices.pop();
+}
 }
 @WrapOperation(method = {"renderItem(FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/network/ClientPlayerEntity;I)V"}, at = {@At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/HeldItemRenderer;renderFirstPersonItem(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/util/Hand;FLnet/minecraft/item/ItemStack;FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;I)V")})
 private void itemRenderHook(HeldItemRenderer instance, AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, OrderedRenderCommandQueue orderedRenderCommandQueue, int light, Operation<Void> original) {

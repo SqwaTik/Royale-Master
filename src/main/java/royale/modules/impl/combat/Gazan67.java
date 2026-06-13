@@ -2,15 +2,12 @@ package royale.modules.impl.combat;
 
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Quaternionfc;
 import royale.events.api.EventHandler;
 import royale.events.api.types.Priority;
 import royale.events.impl.HandAnimationEvent;
-import royale.events.impl.HeldItemUpdateEvent;
 import royale.events.impl.TickEvent;
 import royale.modules.module.ModuleStructure;
 import royale.modules.module.category.ModuleCategory;
@@ -69,37 +66,37 @@ public class Gazan67 extends ModuleStructure {
         }
     }
 
-    @EventHandler(Priority.HIGHEST)
-    public void onHeldItemUpdate(HeldItemUpdateEvent event) {
-        if (event.getOffHand().isEmpty()) {
-            event.setOffHand(new ItemStack(Items.STICK));
-        }
-    }
-
     @EventHandler(Priority.LOWEST)
     public void onHandAnimation(HandAnimationEvent event) {
         if (mc.player == null || this.startTime == 0L) {
             return;
         }
 
+        applyArmAnimation(event.getMatrices(), event.getHand());
+        event.cancel();
+    }
+
+    public void applyArmAnimation(MatrixStack matrices, Hand hand) {
         float elapsed = (System.currentTimeMillis() - this.startTime) / 1000.0F;
-        float cycle = 0.92F;
+        float cycle = 0.86F;
         float progress = (elapsed % cycle) / cycle;
         boolean mainTurn = progress < 0.5F;
         float local = mainTurn ? progress * 2.0F : (progress - 0.5F) * 2.0F;
-        float lift = event.getHand() == (mainTurn ? Hand.MAIN_HAND : Hand.OFF_HAND)
-            ? (float) Math.sin(local * Math.PI)
-            : 0.0F;
+        boolean activeHand = hand == (mainTurn ? Hand.MAIN_HAND : Hand.OFF_HAND);
+        float lift = activeHand ? smoothLift(local) : 0.0F;
+        float rest = activeHand ? 0.0F : 0.05F;
+        int side = hand == Hand.MAIN_HAND ? 1 : -1;
 
-        int side = event.getHand() == Hand.MAIN_HAND ? 1 : -1;
-        MatrixStack matrices = event.getMatrices();
+        matrices.translate(side * (0.46F - lift * 0.04F), -0.68F + lift * 0.72F + rest, -0.82F + lift * 0.18F);
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * (46.0F - lift * 18.0F)));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(side * (14.0F + lift * 92.0F)));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_X.rotationDegrees(-78.0F + lift * 112.0F));
+        matrices.translate(0.0F, -0.14F, 0.08F);
+    }
 
-        matrices.translate(side * 0.50F, -0.72F + lift * 0.62F, -0.78F + lift * 0.12F);
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * (50.0F - lift * 10.0F)));
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(side * (16.0F + lift * 58.0F)));
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_X.rotationDegrees(-72.0F + lift * 68.0F));
-        matrices.translate(0.0F, -0.12F, 0.10F);
-        event.cancel();
+    private float smoothLift(float progress) {
+        float clamped = Math.max(0.0F, Math.min(1.0F, progress));
+        return (float) Math.sin(clamped * Math.PI);
     }
 
     private void swingHands() {
