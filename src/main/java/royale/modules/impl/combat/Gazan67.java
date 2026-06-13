@@ -26,7 +26,6 @@ public class Gazan67 extends ModuleStructure {
         .setValue(1.0F);
 
     private long startTime;
-    private long lastSwingTime;
     private SoundInstance loopSound;
 
     public Gazan67() {
@@ -41,17 +40,14 @@ public class Gazan67 extends ModuleStructure {
     @Override
     public void activate() {
         this.startTime = System.currentTimeMillis();
-        this.lastSwingTime = 0L;
         stopLoopSound();
         this.loopSound = SoundManager.playLoopingDirect(SoundManager.GAZAN67, this.volume.getValue(), 1.0F);
-        swingHands();
     }
 
     @Override
     public void deactivate() {
         stopLoopSound();
         this.startTime = 0L;
-        this.lastSwingTime = 0L;
     }
 
     @EventHandler
@@ -63,11 +59,6 @@ public class Gazan67 extends ModuleStructure {
 
         if (this.loopSound == null || !mc.getSoundManager().isPlaying(this.loopSound)) {
             this.loopSound = SoundManager.playLoopingDirect(SoundManager.GAZAN67, this.volume.getValue(), 1.0F);
-        }
-
-        long swingDelay = Math.max(160L, (long) (450.0F / this.speed.getValue()));
-        if (now - this.lastSwingTime >= swingDelay) {
-            swingHands();
         }
     }
 
@@ -85,10 +76,11 @@ public class Gazan67 extends ModuleStructure {
         float lift = getLift(hand);
         float rest = lift > 0.0F ? 0.0F : 0.04F;
         int side = hand == Hand.MAIN_HAND ? 1 : -1;
+        float x = hand == Hand.MAIN_HAND ? -0.16F + lift * 0.02F : -0.22F + lift * 0.02F;
 
-        matrices.translate(side * (0.22F - lift * 0.02F), -0.36F + lift * 0.46F + rest, -0.38F + lift * 0.02F);
+        matrices.translate(x, -0.36F + lift * 0.46F + rest, -0.38F + lift * 0.02F);
         matrices.scale(1.12F, 1.12F, 1.12F);
-        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * (24.0F - lift * 6.0F)));
+        matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Y.rotationDegrees(side * (20.0F - lift * 5.0F)));
         matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_Z.rotationDegrees(side * (4.0F + lift * 66.0F)));
         matrices.multiply((Quaternionfc) RotationAxis.POSITIVE_X.rotationDegrees(-42.0F + lift * 82.0F));
         matrices.translate(0.0F, -0.08F, 0.02F);
@@ -110,14 +102,6 @@ public class Gazan67 extends ModuleStructure {
     private float smoothLift(float progress) {
         float clamped = Math.max(0.0F, Math.min(1.0F, progress));
         return (float) Math.sin(clamped * Math.PI);
-    }
-
-    private void swingHands() {
-        this.lastSwingTime = System.currentTimeMillis();
-        if (mc.player != null) {
-            mc.player.swingHand(Hand.MAIN_HAND);
-            mc.player.swingHand(Hand.OFF_HAND);
-        }
     }
 
     private void stopLoopSound() {
