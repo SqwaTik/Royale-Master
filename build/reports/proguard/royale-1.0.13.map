@@ -1058,15 +1058,17 @@ royale.mixin.HeldItemRendererMixin -> royale.mixin.HeldItemRendererMixin:
     net.minecraft.class_1799 field_4047 -> field_4047
     net.minecraft.class_1799 field_4048 -> field_4048
     boolean richCustomAnimation -> richCustomAnimation
-    30:36:void <init>() -> <init>
+    boolean gazan67RenderedFrame -> gazan67RenderedFrame
+    30:38:void <init>() -> <init>
     void invokeRenderArm(net.minecraft.class_4587,net.minecraft.class_11659,int,net.minecraft.class_1306) -> invokeRenderArm
-    42:50:void onUpdateHeldItems(org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onUpdateHeldItems
-    53:71:void onRenderItemPre(float,net.minecraft.class_4587,net.minecraft.class_11659,net.minecraft.class_746,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onRenderItemPre
-    74:79:void onRenderItemPost(float,net.minecraft.class_4587,net.minecraft.class_11659,net.minecraft.class_746,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onRenderItemPost
-    82:85:void itemRenderHook(net.minecraft.class_759,net.minecraft.class_742,float,float,net.minecraft.class_1268,float,net.minecraft.class_1799,float,net.minecraft.class_4587,net.minecraft.class_11659,int,com.llamalad7.mixinextras.injector.wrapoperation.Operation) -> itemRenderHook
-    88:94:void renderFirstPersonItemHook(net.minecraft.class_742,float,float,net.minecraft.class_1268,float,net.minecraft.class_1799,float,net.minecraft.class_4587,net.minecraft.class_11659,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> renderFirstPersonItemHook
-    97:111:void wrapApplyEquipOffset(net.minecraft.class_759,net.minecraft.class_4587,net.minecraft.class_1306,float,com.llamalad7.mixinextras.injector.wrapoperation.Operation,net.minecraft.class_742,net.minecraft.class_1268,float,net.minecraft.class_1799) -> wrapApplyEquipOffset
-    114:118:void wrapSwingArm(net.minecraft.class_759,float,net.minecraft.class_4587,int,net.minecraft.class_1306,com.llamalad7.mixinextras.injector.wrapoperation.Operation) -> wrapSwingArm
+    44:52:void onUpdateHeldItems(org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onUpdateHeldItems
+    55:65:void onRenderItemPre(float,net.minecraft.class_4587,net.minecraft.class_11659,net.minecraft.class_746,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onRenderItemPre
+    68:73:void onRenderItemPost(float,net.minecraft.class_4587,net.minecraft.class_11659,net.minecraft.class_746,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> onRenderItemPost
+    76:87:void itemRenderHook(net.minecraft.class_759,net.minecraft.class_742,float,float,net.minecraft.class_1268,float,net.minecraft.class_1799,float,net.minecraft.class_4587,net.minecraft.class_11659,int,com.llamalad7.mixinextras.injector.wrapoperation.Operation) -> itemRenderHook
+    90:98:void renderGazan67Hands(royale.modules.impl.combat.Gazan67,net.minecraft.class_4587,net.minecraft.class_11659,int) -> renderGazan67Hands
+    101:107:void renderFirstPersonItemHook(net.minecraft.class_742,float,float,net.minecraft.class_1268,float,net.minecraft.class_1799,float,net.minecraft.class_4587,net.minecraft.class_11659,int,org.spongepowered.asm.mixin.injection.callback.CallbackInfo) -> renderFirstPersonItemHook
+    110:124:void wrapApplyEquipOffset(net.minecraft.class_759,net.minecraft.class_4587,net.minecraft.class_1306,float,com.llamalad7.mixinextras.injector.wrapoperation.Operation,net.minecraft.class_742,net.minecraft.class_1268,float,net.minecraft.class_1799) -> wrapApplyEquipOffset
+    127:131:void wrapSwingArm(net.minecraft.class_759,float,net.minecraft.class_4587,int,net.minecraft.class_1306,com.llamalad7.mixinextras.injector.wrapoperation.Operation) -> wrapSwingArm
 royale.mixin.IClientWorld -> royale.mixin.IClientWorld:
 # {"fileName":"IClientWorld.java","id":"sourceFile"}
     net.minecraft.class_7202 client$pending() -> client$pending

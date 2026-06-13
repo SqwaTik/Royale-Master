@@ -35,6 +35,8 @@ private ItemStack mainHand;
 private ItemStack offHand;
 @Unique
 private boolean richCustomAnimation = false;
+@Unique
+private boolean gazan67RenderedFrame = false;
 @Invoker("renderArm")
 protected abstract void invokeRenderArm(MatrixStack matrices, OrderedRenderCommandQueue orderedRenderCommandQueue, int light, Arm arm);
 @Inject(method = {"updateHeldItems"}, at = {@At("TAIL")})
@@ -48,19 +50,11 @@ if (event.getOffHand() != this.offHand) {
 this.offHand = event.getOffHand();
 }
 }
-@Inject(method = {"renderItem(FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/network/ClientPlayerEntity;I)V"}, at = {@At("HEAD")}, cancellable = true)
+@Inject(method = {"renderItem(FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/network/ClientPlayerEntity;I)V"}, at = {@At("HEAD")})
 private void onRenderItemPre(float tickProgress, MatrixStack matrices, OrderedRenderCommandQueue orderedRenderCommandQueue, ClientPlayerEntity player, int light, CallbackInfo ci) {
+this.gazan67RenderedFrame = false;
 Gazan67 gazan67 = Gazan67.getInstance();
 if (gazan67 != null && gazan67.isState()) {
-matrices.push();
-gazan67.applyArmAnimation(matrices, Hand.MAIN_HAND);
-invokeRenderArm(matrices, orderedRenderCommandQueue, light, player.getMainArm());
-matrices.pop();
-matrices.push();
-gazan67.applyArmAnimation(matrices, Hand.OFF_HAND);
-invokeRenderArm(matrices, orderedRenderCommandQueue, light, player.getMainArm().getOpposite());
-matrices.pop();
-ci.cancel();
 return;
 }
 GlassHands glassHands = GlassHands.getInstance();
@@ -79,9 +73,28 @@ EventManager.callEvent((Event)event);
 }
 @WrapOperation(method = {"renderItem(FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;Lnet/minecraft/client/network/ClientPlayerEntity;I)V"}, at = {@At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/HeldItemRenderer;renderFirstPersonItem(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/util/Hand;FLnet/minecraft/item/ItemStack;FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/command/OrderedRenderCommandQueue;I)V")})
 private void itemRenderHook(HeldItemRenderer instance, AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, OrderedRenderCommandQueue orderedRenderCommandQueue, int light, Operation<Void> original) {
+Gazan67 gazan67 = Gazan67.getInstance();
+if (gazan67 != null && gazan67.isState()) {
+if (!this.gazan67RenderedFrame) {
+renderGazan67Hands(gazan67, matrices, orderedRenderCommandQueue, light);
+this.gazan67RenderedFrame = true;
+}
+return;
+}
 ItemRendererEvent event = new ItemRendererEvent(player, item, hand);
 EventManager.callEvent((Event)event);
 original.call(new Object[] { instance, event.getPlayer(), Float.valueOf(tickDelta), Float.valueOf(pitch), event.getHand(), Float.valueOf(swingProgress), event.getStack(), Float.valueOf(equipProgress), matrices, orderedRenderCommandQueue, Integer.valueOf(light) });
+}
+@Unique
+private void renderGazan67Hands(Gazan67 gazan67, MatrixStack matrices, OrderedRenderCommandQueue orderedRenderCommandQueue, int light) {
+matrices.push();
+gazan67.applyArmAnimation(matrices, Hand.MAIN_HAND);
+invokeRenderArm(matrices, orderedRenderCommandQueue, light, Arm.RIGHT);
+matrices.pop();
+matrices.push();
+gazan67.applyArmAnimation(matrices, Hand.OFF_HAND);
+invokeRenderArm(matrices, orderedRenderCommandQueue, light, Arm.LEFT);
+matrices.pop();
 }
 @Inject(method = {"renderFirstPersonItem"}, at = {@At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;push()V", shift = At.Shift.AFTER)})
 private void renderFirstPersonItemHook(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack stack, float equipProgress, MatrixStack matrices, OrderedRenderCommandQueue orderedRenderCommandQueue, int light, CallbackInfo ci) {
